@@ -1,0 +1,686 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-theme="sanctuary-green">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, height=device-height, viewport-fit=cover">
+<title>Create Account &middot; Yoga &amp; Meditation Studio</title>
+<link rel="icon" type="image/png" href="images/logo-dark.png">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'gift-slate': 'rgba(var(--color-rgb-primary), <alpha-value>)',
+        'gift-slate-light': 'rgba(var(--color-rgb-light), <alpha-value>)',
+        'gift-slate-dark': 'rgba(var(--color-rgb-dark), <alpha-value>)',
+        'gift-slate-bright': 'rgba(var(--color-rgb-bright), <alpha-value>)',
+        'gift-accent': 'rgba(var(--color-rgb-accent), <alpha-value>)',
+        'bg-warm': 'var(--color-bg-warm)',
+        'neutral-dark': 'rgba(26, 36, 28, <alpha-value>)',
+        'neutral-light': '#EBF2EC',
+        'dark-bg': '#111712',
+        'dark-card': '#18221B',
+        'dark-surface': '#202D24',
+      },
+      fontFamily: {
+        'sans': ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'serif': ['Cormorant Garamond', 'serif'],
+        'display': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'premium': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'alt': ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      animation: {
+        'fade-in': 'fadeIn 0.4s ease-out',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
+        'slide-up': 'slideUp 0.5s ease-out',
+      },
+      keyframes: {
+        fadeIn: { '0%': { opacity: '0', transform: 'translateY(12px)' }, '100%': { opacity: '1', transform: 'translateY(0)' } },
+        floatSlow: { '0%,100%': { transform: 'translateY(0)' }, '50%': { transform: 'translateY(-6px)' } },
+        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+      }
+    }
+  }
+};
+</script>
+<script>
+if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+if (localStorage.getItem('dir') === 'rtl') { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }
+</script>
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+:root, [data-theme="sanctuary-green"] {
+  --color-primary: #2A5C3E;
+  --color-primary-light: #3E7B54;
+  --color-primary-dark: #1B3D28;
+  --color-primary-bright: #7F9F7C;
+  --color-accent: #D4A373;
+  --color-bg-warm: #FCFBF8;
+  --color-text-dark: #1A241C;
+  --color-rgb-primary: 42, 92, 62;
+  --color-rgb-light: 62, 123, 84;
+  --color-rgb-dark: 27, 61, 40;
+  --color-rgb-bright: 127, 159, 124;
+  --color-rgb-accent: 212, 163, 115;
+}
+html, body {
+  min-height: 100%;
+  overflow-x: hidden;
+  margin: 0;
+  padding: 0;
+}
+body {
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-dark);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  position: relative;
+  font-family: 'Plus Jakarta Sans', system-ui, sans-serif;
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.dark body {
+  background-color: #111712;
+  color: #EAEFEA;
+}
+.dark .text-neutral-dark { color: #EAEFEA; }
+.dark input, .dark select, .dark textarea { color: #FFFFFF !important; }
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-bright) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .gold-gradient-text {
+  background: linear-gradient(135deg, #B5D4B2 0%, #7F9F7C 50%, #527A50 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+/* Theme toggles â€” top-right */
+.theme-toggle-wrapper {
+  position: fixed;
+  top: 16px;
+  right: 16px;
+  z-index: 1000;
+  display: flex;
+  gap: 8px;
+}
+[dir="rtl"] .theme-toggle-wrapper {
+  right: auto;
+  left: 16px;
+}
+.toggle-btn {
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(var(--color-rgb-primary), 0.10);
+  color: var(--color-primary);
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--color-rgb-primary), 0.2);
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+.dark .toggle-btn {
+  background: rgba(var(--color-rgb-bright), 0.15);
+  color: var(--color-primary-bright);
+  border-color: rgba(var(--color-rgb-bright), 0.25);
+}
+.toggle-btn:hover {
+  transform: scale(1.08);
+  background: var(--color-primary);
+  color: #FFFFFF;
+}
+.dark .toggle-btn:hover {
+  background: var(--color-primary-bright);
+  color: #111712;
+}
+/* Card */
+.signup-card {
+  background: #FFFFFF;
+  border-radius: 36px;
+  padding: 2.2rem 2.2rem 2rem;
+  box-shadow: 0 25px 50px rgba(var(--color-rgb-primary), 0.08);
+  border: 1px solid rgba(var(--color-rgb-primary), 0.15);
+  width: 100%;
+  max-width: 480px;
+  margin: 1.5rem auto;
+  transition: background-color 0.4s ease, border-color 0.4s ease;
+}
+.dark .signup-card {
+  background: #18221B;
+  border-color: rgba(var(--color-rgb-bright), 0.2);
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.5);
+}
+/* Inputs */
+.signup-input {
+  width: 100%;
+  padding: 0.82rem 1.2rem 0.82rem 2.85rem;
+  border-radius: 50px;
+  border: 1.5px solid rgba(var(--color-rgb-primary), 0.18);
+  background: #FFFFFF;
+  font-size: 0.92rem;
+  transition: all 0.3s ease;
+  color: var(--color-text-dark);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dark .signup-input {
+  background: #111712;
+  border-color: rgba(var(--color-rgb-bright), 0.25);
+  color: #EAEFEA;
+}
+.signup-input:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 4px rgba(var(--color-rgb-primary), 0.15);
+}
+.dark .signup-input:focus {
+  border-color: var(--color-primary-bright);
+  box-shadow: 0 0 0 4px rgba(var(--color-rgb-bright), 0.18);
+}
+.signup-input::placeholder {
+  color: rgba(26, 36, 28, 0.45);
+}
+.dark .signup-input::placeholder {
+  color: rgba(234, 239, 234, 0.35);
+}
+.password-wrapper {
+  position: relative;
+  width: 100%;
+}
+.password-wrapper .signup-input {
+  padding-right: 3rem;
+}
+.toggle-password {
+  position: absolute;
+  right: 1rem;
+  top: 50%;
+  transform: translateY(-50%);
+  cursor: pointer;
+  color: var(--color-primary);
+  font-size: 1rem;
+  transition: color 0.2s;
+  background: transparent;
+  border: none;
+  z-index: 5;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.dark .toggle-password {
+  color: var(--color-primary-bright);
+}
+.toggle-password:hover {
+  color: var(--color-primary-dark);
+}
+[dir="rtl"] .toggle-password {
+  right: auto;
+  left: 1rem;
+}
+[dir="rtl"] .password-wrapper .signup-input {
+  padding-right: 1.2rem;
+  padding-left: 3rem;
+}
+[dir="rtl"] .input-icon {
+  left: auto;
+  right: 1.1rem;
+}
+/* Primary button */
+.btn-sanctuary {
+  background: linear-gradient(135deg, var(--color-primary-light) 0%, var(--color-primary) 100%);
+  color: #FFFFFF;
+  font-weight: 700;
+  padding: 0.88rem 1.8rem;
+  border-radius: 50px;
+  transition: all 0.3s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  font-size: 1rem;
+  border: none;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  box-shadow: 0 4px 15px rgba(var(--color-rgb-primary), 0.28);
+}
+.dark .btn-sanctuary {
+  background: linear-gradient(135deg, var(--color-primary-bright) 0%, var(--color-primary) 100%);
+  color: #111712;
+  box-shadow: 0 4px 15px rgba(var(--color-rgb-bright), 0.25);
+}
+.btn-sanctuary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 10px 25px rgba(var(--color-rgb-primary), 0.35);
+}
+.dark .btn-sanctuary:hover {
+  box-shadow: 0 10px 25px rgba(var(--color-rgb-bright), 0.35);
+}
+/* Social login buttons */
+.social-btn {
+  flex: 1;
+  padding: 0.75rem 0.5rem;
+  border-radius: 50px;
+  border: 1.5px solid rgba(var(--color-rgb-primary), 0.18);
+  background: #FFFFFF;
+  color: var(--color-text-dark);
+  font-weight: 600;
+  font-size: 0.9rem;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.25s ease;
+  gap: 0.5rem;
+  white-space: nowrap;
+  cursor: pointer;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dark .social-btn {
+  background: #111712;
+  border-color: rgba(var(--color-rgb-bright), 0.25);
+  color: #EAEFEA;
+}
+.social-btn:hover {
+  background: var(--color-bg-warm);
+  border-color: var(--color-primary);
+  transform: translateY(-2px);
+}
+.dark .social-btn:hover {
+  background: rgba(var(--color-rgb-bright), 0.1);
+  border-color: var(--color-primary-bright);
+}
+.social-btn i {
+  font-size: 1.05rem;
+  color: var(--color-primary);
+}
+.dark .social-btn i {
+  color: var(--color-primary-bright);
+}
+/* Logo container */
+.logo-center {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1.25rem;
+}
+.brand-logo {
+  background: linear-gradient(135deg, var(--color-primary-light), var(--color-primary));
+  width: 48px;
+  height: 48px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 15px rgba(var(--color-rgb-primary), 0.25);
+  transition: all 0.3s ease;
+  overflow: hidden;
+}
+.brand-logo:hover {
+  transform: scale(1.05) rotate(-3deg);
+}
+.dark .brand-logo {
+  background: linear-gradient(135deg, var(--color-primary-bright), var(--color-primary));
+}
+.brand-logo i {
+  font-size: 1.4rem;
+  color: #FFFFFF;
+}
+.dark .brand-logo i {
+  color: #111712;
+}
+.welcome-title {
+  font-family: 'Cormorant Garamond', 'Outfit', serif;
+  font-size: 2.1rem;
+  font-weight: 700;
+  color: var(--color-text-dark);
+  margin-top: 1.1rem;
+  margin-bottom: 0.2rem;
+  text-align: center;
+  line-height: 1.1;
+  letter-spacing: -0.015em;
+}
+.dark .welcome-title {
+  color: #EAEFEA;
+}
+.welcome-subtitle {
+  font-size: 0.9rem;
+  color: var(--color-text-dark);
+  text-align: center;
+  margin-bottom: 0.35rem;
+  font-weight: 400;
+  opacity: 0.75;
+}
+.dark .welcome-subtitle {
+  color: #EAEFEA;
+}
+.flourish-divider {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  margin: 0.65rem 0 0.25rem;
+  color: var(--color-primary);
+  opacity: 0.65;
+}
+.dark .flourish-divider {
+  color: var(--color-primary-bright);
+}
+.flourish-divider .line {
+  width: 32px;
+  height: 1.5px;
+  background: currentColor;
+  border-radius: 2px;
+}
+.flourish-divider i {
+  font-size: 0.75rem;
+}
+[dir="rtl"] .signup-input {
+  padding: 0.82rem 2.85rem 0.82rem 1.2rem;
+}
+[dir="rtl"] .input-icon {
+  left: auto;
+  right: 1.1rem;
+}
+.container-tight {
+  max-width: 490px;
+  width: 100%;
+  padding: 0 1.25rem;
+}
+.custom-checkbox {
+  accent-color: var(--color-primary);
+}
+.dark .custom-checkbox {
+  accent-color: var(--color-primary-bright);
+}
+.terms-text {
+  font-size: 0.78rem;
+  color: rgba(26, 36, 28, 0.75);
+  line-height: 1.4;
+}
+.dark .terms-text {
+  color: rgba(234, 239, 234, 0.75);
+}
+.terms-link {
+  color: var(--color-primary);
+  font-weight: 600;
+  text-decoration: underline;
+}
+.dark .terms-link {
+  color: var(--color-primary-bright);
+}
+.bg-glow {
+  position: fixed;
+  top: -30%;
+  right: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(var(--color-rgb-primary), 0.08) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.dark .bg-glow {
+  background: radial-gradient(circle, rgba(var(--color-rgb-bright), 0.06) 0%, transparent 70%);
+}
+.bg-glow-left {
+  position: fixed;
+  bottom: -30%;
+  left: -20%;
+  width: 60%;
+  height: 80%;
+  background: radial-gradient(circle, rgba(var(--color-rgb-primary), 0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+.dark .bg-glow-left {
+  background: radial-gradient(circle, rgba(var(--color-rgb-bright), 0.05) 0%, transparent 70%);
+}
+</style>
+</head>
+<body>
+<!-- Background Glows -->
+<div class="bg-glow"></div>
+<div class="bg-glow-left"></div>
+
+<!-- ===== THEME TOGGLES - TOP-RIGHT ===== -->
+<div class="theme-toggle-wrapper">
+  <button id="theme-toggle" class="toggle-btn" title="Dark / Light" aria-label="Toggle Theme">
+    <i class="fas fa-moon dark:hidden"></i>
+    <i class="fas fa-sun hidden dark:inline"></i>
+  </button>
+  <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR" aria-label="Toggle Text Direction">
+    â‡„
+  </button>
+</div>
+
+<!-- ===== SIGNUP CARD ===== -->
+<div class="container-tight relative z-10 py-6">
+  <div class="signup-card animate-fade-in">
+    <!-- ===== LOGO - CENTERED ===== -->
+    <div class="logo-center">
+      <a href="index.html" class="flex flex-col items-center gap-2 group shrink-0 mb-1" dir="ltr" title="Back to Yoga &amp; Meditation Studio">
+        <img class="h-14 w-auto dark:hidden transition transform group-hover:scale-105" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+        <img class="h-14 w-auto hidden dark:block transition transform group-hover:scale-105" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+      </a>
+      <h1 class="welcome-title">Create Your Account</h1>
+      <div class="flourish-divider">
+        <span class="line"></span>
+        <i class="fas fa-om"></i>
+        <span class="line"></span>
+      </div>
+      <p class="welcome-subtitle">Begin your mindful practice journey with us</p>
+    </div>
+
+    <!-- ===== SIGNUP FORM ===== -->
+    <form id="signupForm" class="space-y-3.5" action="login.html" method="GET">
+      <!-- Full Name -->
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gift-slate dark:text-gift-slate-bright input-icon">
+          <i class="fas fa-user w-4 text-sm"></i>
+        </span>
+        <input type="text" id="fullName" name="name" placeholder="Full name (e.g. Maya Lin)" required
+          class="signup-input">
+      </div>
+
+      <!-- Email -->
+      <div class="relative">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gift-slate dark:text-gift-slate-bright input-icon">
+          <i class="fas fa-envelope w-4 text-sm"></i>
+        </span>
+        <input type="email" id="email" name="email" placeholder="Email address" required
+          class="signup-input">
+      </div>
+
+    
+
+      <!-- Password with eye -->
+      <div class="password-wrapper">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gift-slate dark:text-gift-slate-bright input-icon">
+          <i class="fas fa-lock w-4 text-sm"></i>
+        </span>
+        <input type="password" id="signup-password" name="password" placeholder="Create password (8+ characters)" required
+          class="signup-input">
+        <button type="button" class="toggle-password" data-target="signup-password" aria-label="Show password">
+          <i class="far fa-eye-slash"></i>
+        </button>
+      </div>
+
+      <!-- Confirm Password with eye -->
+      <div class="password-wrapper">
+        <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gift-slate dark:text-gift-slate-bright input-icon">
+          <i class="fas fa-shield-alt w-4 text-sm"></i>
+        </span>
+        <input type="password" id="signup-confirm-password" name="confirm_password" placeholder="Confirm password" required
+          class="signup-input">
+        <button type="button" class="toggle-password" data-target="signup-confirm-password" aria-label="Show password">
+          <i class="far fa-eye-slash"></i>
+        </button>
+      </div>
+
+      <!-- Terms -->
+      <div class="flex items-start space-x-2 rtl:space-x-reverse mt-2">
+        <input type="checkbox" id="terms" class="mt-1 rounded border-gray-300 dark:border-gray-600 custom-checkbox" required>
+        <label for="terms" class="terms-text ml-1 rtl:mr-1">
+          I agree to the <a href="#" class="terms-link" id="termsLink">Terms of Practice</a> and <a href="#" class="terms-link" id="privacyLink">Privacy Policy</a>
+        </label>
+      </div>
+
+      <!-- Submit -->
+      <button type="submit" class="btn-sanctuary mt-2">
+        Create Practitioner Account <i class="fas fa-user-plus ml-2 rtl:rotate-180"></i>
+      </button>
+    </form>
+
+    <!-- ===== Divider + Social ===== -->
+    <div class="relative my-4">
+      <div class="absolute inset-0 flex items-center">
+        <div class="w-full border-t border-gift-slate/15 dark:border-gift-slate-bright/15"></div>
+      </div>
+      <div class="relative justify-center flex text-xs">
+        <span class="bg-white dark:bg-[#18221B] px-4 py-0.5 text-neutral-dark/70 dark:text-gray-300 rounded-full font-semibold">
+          or sign up with
+        </span>
+      </div>
+    </div>
+
+    <div class="flex gap-3">
+      <button class="social-btn" id="googleSignupBtn">
+        <i class="fab fa-google"></i>
+        <span>Google</span>
+      </button>
+      <button class="social-btn" id="appleSignupBtn">
+        <i class="fab fa-apple"></i>
+        <span>Apple</span>
+      </button>
+    </div>
+
+    <!-- ===== LOGIN LINK ===== -->
+    <div class="mt-5 text-center pt-3 border-t border-dashed border-gift-slate/15 dark:border-gift-slate-bright/15">
+      <span class="text-xs text-neutral-dark/70 dark:text-gray-400">Already a Member?</span>
+      <a href="login.html" class="text-xs font-bold text-gift-slate dark:text-gift-slate-bright ml-1 rtl:mr-1 hover:underline">
+        Sign in
+      </a>
+      <div class="mt-2.5">
+        <a href="index.html" class="inline-flex items-center gap-1.5 text-xs text-neutral-dark/60 dark:text-gray-400 hover:text-gift-slate dark:hover:text-gift-slate-bright transition">
+          <i class="fas fa-arrow-left text-xs rtl:rotate-180"></i> Return to Studio Home
+        </a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== SCRIPTS ===== -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // 1. Theme Toggle
+  const themeBtn = document.getElementById('theme-toggle');
+  function setTheme(isDark) {
+    if (isDark) {
+      document.documentElement.classList.add('dark');
+    } else {
+      document.documentElement.classList.remove('dark');
+    }
+    document.documentElement.setAttribute('data-theme', 'sanctuary-green');
+    const moon = themeBtn?.querySelector('.fa-moon');
+    const sun = themeBtn?.querySelector('.fa-sun');
+    if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+    else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  if (themeBtn) {
+    themeBtn.addEventListener('click', () => {
+      setTheme(!document.documentElement.classList.contains('dark'));
+    });
+  }
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme === 'dark');
+
+  // 2. RTL Toggle
+  const rtlBtn = document.getElementById('rtl-toggle');
+  function setRTL(isRTL) {
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', isRTL ? 'ar' : 'en');
+    localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+  }
+  const savedDir = localStorage.getItem('dir');
+  setRTL(savedDir === 'rtl');
+  if (rtlBtn) {
+    rtlBtn.addEventListener('click', () => {
+      setRTL(document.documentElement.getAttribute('dir') !== 'rtl');
+    });
+  }
+
+  // 3. Password Toggle
+  document.querySelectorAll('.toggle-password').forEach(button => {
+    button.addEventListener('click', function(e) {
+      e.preventDefault();
+      const targetId = this.getAttribute('data-target');
+      const input = document.getElementById(targetId);
+      if (input) {
+        const type = input.getAttribute('type') === 'password' ? 'text' : 'password';
+        input.setAttribute('type', type);
+        const icon = this.querySelector('i');
+        if (icon) {
+          icon.classList.toggle('fa-eye-slash');
+          icon.classList.toggle('fa-eye');
+        }
+      }
+    });
+  });
+
+  // 4. Social signup placeholder
+  document.getElementById('googleSignupBtn').addEventListener('click', function() {
+    alert('Connecting with Google account... Redirecting to Welcome Flow.');
+    window.location.href = 'login.html';
+  });
+  document.getElementById('appleSignupBtn').addEventListener('click', function() {
+    alert('Connecting with Apple ID... Redirecting to Welcome Flow.');
+    window.location.href = 'login.html';
+  });
+
+  // 5. Demo signup â€” validate & redirect to login
+  document.getElementById('signupForm').addEventListener('submit', function(e) {
+    e.preventDefault();
+    const password = document.getElementById('signup-password').value;
+    const confirm = document.getElementById('signup-confirm-password').value;
+    if (password.length < 8) {
+      alert('Please choose a password with at least 8 characters.');
+      return;
+    }
+    if (password !== confirm) {
+      alert('Passwords do not match. Please verify your password entry.');
+      return;
+    }
+    if (!document.getElementById('terms').checked) {
+      alert('Please agree to the Terms of Practice and Privacy Policy.');
+      return;
+    }
+    alert('Welcome to Yoga & Meditation Studio! Your account has been registered. Redirecting to Sign In.');
+    window.location.href = 'login.html';
+  });
+
+  // 6. Terms & Privacy links
+  document.getElementById('termsLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Sanctuary Terms of Practice: Respect the silence of the shala, barefoot entry, and mindfulness of fellow practitioners.');
+  });
+  document.getElementById('privacyLink').addEventListener('click', function(e) {
+    e.preventDefault();
+    alert('Sanctuary Privacy Policy: Your personal wellness records and contact details are stored securely and never shared.');
+  });
+});
+</script>
+</body>
+</html>

@@ -1,0 +1,2207 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-theme="sanctuary-green">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Member Portal | Yoga &amp; Meditation Studio</title>
+<link rel="icon" type="image/png" href="images/logo-dark.png">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'gift-slate': 'rgba(var(--color-rgb-primary), <alpha-value>)',
+        'gift-slate-light': 'rgba(var(--color-rgb-light), <alpha-value>)',
+        'gift-slate-dark': 'rgba(var(--color-rgb-dark), <alpha-value>)',
+        'gift-slate-bright': 'rgba(var(--color-rgb-bright), <alpha-value>)',
+        'gift-accent': 'rgba(var(--color-rgb-accent), <alpha-value>)',
+        'bg-warm': 'var(--color-bg-warm)',
+        'neutral-dark': 'rgba(26, 36, 28, <alpha-value>)',
+        'neutral-light': '#EBF2EC',
+        'dark-bg': '#111712',
+        'dark-card': '#18221B',
+        'dark-surface': '#202D24',
+      },
+      fontFamily: {
+        'sans': ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'serif': ['Cormorant Garamond', 'serif'],
+        'display': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'premium': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'alt': ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      animation: {
+        'slide-up': 'slideUp 0.5s ease-out',
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'pulse-glow': 'pulseGlow 3s infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
+      },
+      keyframes: {
+        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        pulseGlow: { '0%, 100%': { opacity: '0.6' }, '50%': { opacity: '1' } },
+        floatSlow: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+      }
+    }
+  }
+};
+</script>
+<script>
+if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+if (localStorage.getItem('dir') === 'rtl') { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }
+</script>
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+:root, [data-theme="sanctuary-green"] {
+  --color-primary: #2A5C3E;
+  --color-primary-light: #3E7B54;
+  --color-primary-dark: #1B3D28;
+  --color-primary-bright: #7F9F7C;
+  --color-accent: #D4A373;
+  --color-bg-warm: #FCFBF8;
+  --color-text-dark: #1A241C;
+  --color-rgb-primary: 42, 92, 62;
+  --color-rgb-light: 62, 123, 84;
+  --color-rgb-dark: 27, 61, 40;
+  --color-rgb-bright: 127, 159, 124;
+  --color-rgb-accent: 212, 163, 115;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-dark);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.dark body { background-color: #111712; color: #EAEFEA; }
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Cormorant Garamond', 'Outfit', serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-bright) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .gold-gradient-text {
+  background: linear-gradient(135deg, #B5D4B2 0%, #7F9F7C 50%, #527A50 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .text-gift-slate { color: var(--color-primary-bright) !important; }
+.dark .border-gift-slate { border-color: var(--color-primary-bright) !important; }
+.dark .bg-gift-slate { background-color: var(--color-primary-bright) !important; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; height: 100vh;
+  width: 280px;
+  background: #FFFFFF;
+  border-right: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  transition: transform 0.3s ease;
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.dark .sidebar { background: #18221B; border-right-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } }
+[dir="rtl"] .sidebar { left: auto; right: 0; border-right: none; border-left: 1px solid rgba(var(--color-rgb-primary), 0.12); }
+[dir="rtl"].dark .sidebar { border-left-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { [dir="rtl"] .sidebar { transform: translateX(100%); } [dir="rtl"] .sidebar.open { transform: translateX(0); } }
+
+.sidebar-overlay { position: fixed; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.5); z-index:99; display:none; }
+.sidebar-overlay.open { display:block; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.85rem 1.4rem; margin: 0.25rem 0.75rem;
+  border-radius: 12px; color: var(--color-text-dark);
+  transition: all 0.2s; cursor: pointer;
+  font-weight: 500; font-size: 0.92rem;
+}
+.dark .sidebar-item { color: #EAEFEA; }
+.sidebar-item:hover { background: rgba(var(--color-rgb-primary), 0.08); color: var(--color-primary); }
+.dark .sidebar-item:hover { background: rgba(var(--color-rgb-bright), 0.12); color: var(--color-primary-bright); }
+.sidebar-item.active { background: var(--color-primary); color: #FFFFFF; font-weight: 600; box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.25); }
+.dark .sidebar-item.active { background: var(--color-primary-bright); color: #111712; box-shadow: 0 4px 12px rgba(var(--color-rgb-bright), 0.25); }
+.sidebar-item i { width: 22px; font-size: 1.05rem; }
+
+.main-content { margin-left: 280px; padding: 1.5rem; min-height: 100vh; }
+[dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
+@media (max-width: 768px) { .main-content { margin-left: 0; margin-right: 0; padding-top: 75px; } }
+
+.mobile-header {
+  display: none; position: fixed; top:0;left:0;right:0;
+  background: #FFFFFF; padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  z-index: 50; align-items: center; justify-content: space-between;
+}
+.dark .mobile-header { background: #18221B; border-bottom-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { .mobile-header { display: flex; } }
+
+.toggle-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(var(--color-rgb-primary), 0.08);
+  color: var(--color-text-dark); display: inline-flex;
+  align-items: center; justify-content: center; cursor: pointer;
+  transition: all 0.2s; border: none; font-size: 0.95rem;
+}
+.dark .toggle-btn { background: rgba(var(--color-rgb-bright), 0.12); color: #EAEFEA; }
+.toggle-btn:hover { background: var(--color-primary); color: #FFFFFF; }
+.dark .toggle-btn:hover { background: var(--color-primary-bright); color: #111712; }
+
+.card-design {
+  background: #FFFFFF; border-radius: 28px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+}
+.dark .card-design { background: #18221B; border-color: rgba(var(--color-rgb-bright), 0.18); }
+.card-design:hover { border-color: var(--color-primary); }
+.dark .card-design:hover { border-color: var(--color-primary-bright); }
+
+.btn-primary-design {
+  background: var(--color-primary); color: #FFFFFF;
+  font-weight: 700; border-radius: 60px; transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.25);
+  white-space: nowrap; border: none; cursor: pointer;
+}
+.btn-primary-design:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(var(--color-rgb-primary), 0.35); color: #FFFFFF; }
+.dark .btn-primary-design { background: var(--color-primary-bright); color: #111712; }
+.dark .btn-primary-design:hover { background: #A8C9A5; color: #111712; }
+
+.btn-outline-design {
+  border: 1.5px solid var(--color-primary); color: var(--color-primary);
+  background: transparent; border-radius: 60px; font-weight: 600;
+  transition: all 0.3s; white-space: nowrap; cursor: pointer;
+}
+.btn-outline-design:hover { background: var(--color-primary); color: #FFFFFF; transform: translateY(-2px); }
+.dark .btn-outline-design { border-color: var(--color-primary-bright); color: var(--color-primary-bright); }
+.dark .btn-outline-design:hover { background: var(--color-primary-bright); color: #111712; }
+
+.stat-card {
+  background: #FFFFFF; border-radius: 20px; padding: 1.25rem;
+  border: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  transition: all 0.3s;
+}
+.dark .stat-card { background: #18221B; border-color: rgba(var(--color-rgb-bright), 0.18); }
+.stat-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
+
+.status-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.25rem 0.75rem; border-radius: 40px; font-size: 0.7rem;
+  font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  white-space: nowrap; flex-shrink: 0; line-height: 1.2;
+}
+.status-confirmed, .status-active, .status-completed, .status-paid {
+  background: #E8F5EB; color: #1B5E2C;
+}
+.dark .status-confirmed, .dark .status-active, .dark .status-completed, .dark .status-paid {
+  background: #1B3D28; color: #A8DDAE;
+}
+.status-requested, .status-installment {
+  background: #FEF3E2; color: #B45309;
+}
+.dark .status-requested, .dark .status-installment {
+  background: #45260A; color: #FCD34D;
+}
+.status-trial-scheduled, .status-scheduled {
+  background: #E0F2FE; color: #0369A1;
+}
+.dark .status-trial-scheduled, .dark .status-scheduled {
+  background: #082F49; color: #7DD3FC;
+}
+.status-pending-payment {
+  background: #FEE2E2; color: #B91C1C;
+}
+.dark .status-pending-payment {
+  background: #450A0A; color: #FCA5A5;
+}
+
+.form-input {
+  width: 100%; padding: 0.75rem 1rem;
+  border-radius: 16px; border: 1.5px solid rgba(var(--color-rgb-primary), 0.2);
+  background: #FFFFFF; transition: all 0.3s;
+  color: var(--color-text-dark); font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dark .form-input { background: #111712; border-color: rgba(var(--color-rgb-bright), 0.22); color: #EAEFEA; }
+.form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(var(--color-rgb-primary), 0.15); }
+.dark .form-input:focus { border-color: var(--color-primary-bright); box-shadow: 0 0 0 3px rgba(var(--color-rgb-bright), 0.15); }
+
+.form-label {
+  display: block; font-size: 0.82rem; font-weight: 600;
+  margin-bottom: 0.35rem; color: var(--color-text-dark);
+}
+.dark .form-label { color: #EAEFEA; }
+
+.progress-bar {
+  background: rgba(var(--color-rgb-primary), 0.12); border-radius: 9999px; height: 8px; overflow: hidden;
+}
+.dark .progress-bar { background: rgba(var(--color-rgb-bright), 0.15); }
+.progress-fill {
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary));
+  height: 100%; border-radius: 9999px; transition: width 0.4s ease;
+}
+.dark .progress-fill { background: linear-gradient(90deg, var(--color-primary-bright), var(--color-primary-light)); }
+
+.look-thumb {
+  position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4/5;
+  cursor: pointer; border: 2.5px solid transparent; transition: all 0.3s ease;
+  background: #E8ECE8;
+}
+.dark .look-thumb { background: #1F2C23; }
+.look-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.look-thumb:hover img { transform: scale(1.05); }
+.look-thumb.selected { border-color: var(--color-primary); box-shadow: 0 8px 24px rgba(var(--color-rgb-primary), 0.25); }
+.dark .look-thumb.selected { border-color: var(--color-primary-bright); }
+.check-badge {
+  position: absolute; top: 10px; right: 10px; width: 28px; height: 28px; border-radius: 50%;
+  background: var(--color-primary); color: white; display: none; align-items: center; justify-content: center; font-size: 0.75rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.25);
+}
+.dark .check-badge { background: var(--color-primary-bright); color: #111712; }
+.look-thumb.selected .check-badge { display: flex; }
+.look-label {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem 0.75rem 0.65rem;
+  background: linear-gradient(to top, rgba(17, 23, 18, 0.9) 0%, transparent 100%);
+  color: white; font-size: 0.82rem; font-weight: 600; text-align: center;
+}
+
+.receipt-item {
+  padding: 0.9rem; border-bottom: 1px solid rgba(var(--color-rgb-primary), 0.08);
+}
+.dark .receipt-item { border-bottom-color: rgba(var(--color-rgb-bright), 0.12); }
+
+/* Audio wave equalizer bars */
+@keyframes eqBar {
+  0%, 100% { height: 6px; }
+  50% { height: 26px; }
+}
+.eq-bar {
+  width: 4px; border-radius: 9999px;
+  background: var(--color-primary);
+  animation: eqBar 1.2s ease-in-out infinite;
+}
+.dark .eq-bar { background: var(--color-primary-bright); }
+.eq-bar:nth-child(1) { animation-delay: 0.1s; height: 12px; }
+.eq-bar:nth-child(2) { animation-delay: 0.3s; height: 22px; }
+.eq-bar:nth-child(3) { animation-delay: 0.5s; height: 16px; }
+.eq-bar:nth-child(4) { animation-delay: 0.2s; height: 24px; }
+.eq-bar:nth-child(5) { animation-delay: 0.4s; height: 14px; }
+.eq-bar.paused { animation-play-state: paused; height: 6px !important; }
+
+/* Filter pills */
+.filter-btn {
+  padding: 0.45rem 1rem; border-radius: 9999px;
+  font-size: 0.78rem; font-weight: 600;
+  transition: all 0.2s ease; cursor: pointer;
+  border: 1.5px solid rgba(var(--color-rgb-primary), 0.18);
+  background: #FFFFFF; color: var(--color-text-dark);
+}
+.dark .filter-btn {
+  background: #18221B; border-color: rgba(var(--color-rgb-bright), 0.22); color: #EAEFEA;
+}
+.filter-btn:hover {
+  border-color: var(--color-primary); color: var(--color-primary);
+}
+.dark .filter-btn:hover {
+  border-color: var(--color-primary-bright); color: var(--color-primary-bright);
+}
+.filter-btn.active {
+  background: var(--color-primary); color: #FFFFFF; border-color: var(--color-primary);
+  box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.25);
+}
+.dark .filter-btn.active {
+  background: var(--color-primary-bright); color: #111712; border-color: var(--color-primary-bright);
+}
+
+/* Punchcard circles */
+.punch-slot {
+  width: 46px; height: 46px; border-radius: 50%;
+  display: flex; flex-direction: column; align-items: center; justify-content: center;
+  transition: all 0.25s ease; position: relative; font-size: 0.75rem; font-weight: 700;
+}
+.punch-slot.used {
+  background: rgba(var(--color-rgb-primary), 0.12);
+  border: 2px solid var(--color-primary);
+  color: var(--color-primary);
+}
+.dark .punch-slot.used {
+  background: rgba(var(--color-rgb-bright), 0.18);
+  border-color: var(--color-primary-bright);
+  color: var(--color-primary-bright);
+}
+.punch-slot.available {
+  border: 2px dashed rgba(var(--color-rgb-primary), 0.35);
+  color: rgba(var(--color-rgb-primary), 0.5);
+  background: transparent;
+}
+.dark .punch-slot.available {
+  border-color: rgba(var(--color-rgb-bright), 0.4);
+  color: rgba(var(--color-rgb-bright), 0.6);
+}
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <div class="flex items-center gap-2">
+    <button id="menuToggle" class="toggle-btn" aria-label="Toggle Navigation"><i class="fas fa-bars"></i></button>
+    <a href="index.html" class="flex items-center gap-2" dir="ltr" title="Yoga &amp; Meditation Studio">
+      <img class="h-8 w-auto dark:hidden" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+      <img class="h-8 w-auto hidden dark:block" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+    </a>
+  </div>
+  <div class="flex items-center gap-2">
+    <button id="theme-toggle-mobile" class="toggle-btn" aria-label="Toggle Theme"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i></button>
+    <button id="rtl-toggle-mobile" class="toggle-btn" aria-label="Toggle RTL">â‡„</button>
+    <a href="login.html" class="toggle-btn" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
+</header>
+
+<!-- Sidebar Overlay -->
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar">
+  <div class="p-6 pb-4 border-b border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)] flex justify-between items-center">
+    <a href="index.html" class="flex flex-col items-start gap-1" dir="ltr" title="Yoga &amp; Meditation Studio">
+      <img class="h-9 w-auto dark:hidden" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+      <img class="h-9 w-auto hidden dark:block" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+      <span class="block text-[10px] tracking-wider text-gift-slate dark:text-gift-slate-bright uppercase font-bold mt-1">Practitioner Portal</span>
+    </a>
+  </div>
+
+  <nav class="flex-1 py-1">
+    <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-home"></i><span>Home (Atmosphere)</span></div>
+    <div class="sidebar-item" data-page="classes"><i class="fas fa-layer-group"></i><span>Classes (Style & Level)</span></div>
+    <div class="sidebar-item" data-page="instructors"><i class="fas fa-user-friends"></i><span>Instructors</span></div>
+    <div class="sidebar-item" data-page="memberships"><i class="fas fa-ticket-alt"></i><span>Membership Plans</span></div>
+    <div class="sidebar-item" data-page="bookings"><i class="fas fa-calendar-check"></i><span>My Sessions</span></div>
+    <div class="sidebar-item" data-page="lookbook"><i class="fas fa-spa"></i><span>Ritual Spaces</span></div>
+    <div class="sidebar-item" data-page="documents"><i class="fas fa-file-signature"></i><span>Agreements & Waivers</span></div>
+    <a href="login.html" class="sidebar-item text-gift-slate font-semibold"><i class="fas fa-sign-in-alt"></i><span>Login Portal</span></a>
+  </nav>
+
+  <div class="p-3 border-t border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)] space-y-0.5">
+ 
+    <a href="login.html" class="sidebar-item text-xs text-red-600 dark:text-red-400">
+      <i class="fas fa-sign-out-alt"></i><span>Sign Out</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Top Greeting & Quick Actions Bar -->
+  <div class="card-design p-4 md:p-6 flex justify-between items-center flex-wrap gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-serif font-bold" id="page-title">Sanctuary Overview</h1>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400" id="page-subtitle">Welcome back, Sophia Â· Member #SAN-2841</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" class="toggle-btn hidden md:inline-flex" title="Dark / Light mode">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:inline"></i>
+      </button>
+      <button id="rtl-toggle" class="toggle-btn hidden md:inline-flex" title="Toggle Text Direction">
+        â‡„
+      </button>
+      <button data-nav="new-booking" class="btn-primary-design px-4 py-2 text-sm inline-flex items-center gap-2">
+        <i class="fas fa-plus"></i> Reserve Mat
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 1: HOME (STUDIO ATMOSPHERE) ========== -->
+  <section id="page-dashboard" class="page-content">
+    <!-- Calm Minimalist Side Heading Card -->
+    <div class="card-design p-5 md:p-6 mb-6 bg-gradient-to-r from-[rgba(var(--color-rgb-primary),0.06)] via-transparent to-[rgba(var(--color-rgb-primary),0.03)] border-l-4 border-l-gift-slate">
+      <div class="flex items-start gap-4">
+        <div class="w-11 h-11 rounded-2xl bg-gift-slate text-white flex items-center justify-center shrink-0 shadow-md">
+          <i class="fas fa-spa text-lg"></i>
+        </div>
+        <div class="min-w-0 flex-1">
+          <div class="flex items-center gap-2 flex-wrap mb-1.5">
+            <span class="text-[11px] font-bold uppercase tracking-widest px-2.5 py-0.5 rounded-full bg-gift-slate/15 text-gift-slate">Dashboard: Yes</span>
+            <span class="text-xs text-neutral-dark/60 dark:text-gray-400">Member Sanctuary Portal</span>
+          </div>
+          <p class="text-sm sm:text-base font-bold text-neutral-dark dark:text-white leading-snug">
+            Dashboard: Yes (Member dashboard for booking class slots, tracking class pack usage, viewing upcoming sessions, and managing membership renewal).
+          </p>
+          <p class="text-xs sm:text-sm text-neutral-dark/75 dark:text-gray-300 mt-1.5 leading-relaxed">
+            <strong>Detail:</strong> Calm, minimalist layout with a Home page featuring studio atmosphere, a Classes page by style and level, an Instructors page, a Membership Plans page, and a Login portal for members.
+          </p>
+        </div>
+      </div>
+    </div>
+
+    <!-- STUDIO ATMOSPHERE SHOWCASE -->
+    <div class="card-design p-6 mb-6 border-gift-slate/20">
+      <div class="flex flex-wrap items-center justify-between gap-3 mb-5 pb-4 border-b border-[rgba(var(--color-rgb-primary),0.1)]">
+        <div class="flex items-center gap-3">
+          <div class="w-10 h-10 rounded-xl bg-[rgba(var(--color-rgb-primary),0.1)] text-gift-slate flex items-center justify-center text-lg">
+            <i class="fas fa-wind"></i>
+          </div>
+          <div>
+            <h3 class="font-serif font-bold text-xl sm:text-2xl">Studio Atmosphere & Sensory Sanctuary</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Live ambient resonance, natural air quality & daily mindfulness feed</p>
+          </div>
+        </div>
+        <span class="inline-flex items-center gap-1.5 text-xs font-semibold px-3 py-1 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 border border-emerald-500/20">
+          <span class="w-2 h-2 rounded-full bg-emerald-500 animate-pulse"></span> Studio Open Â· Quiet Hours Active
+        </span>
+      </div>
+
+      <!-- 432 Hz Resonance Soundscape Player & Live Studio Environment -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+        <!-- 432 Hz Sound Player -->
+        <div class="p-5 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] border border-[rgba(var(--color-rgb-primary),0.1)] flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-xs uppercase font-bold tracking-wider text-gift-slate flex items-center gap-1.5">
+                <i class="fas fa-volume-up"></i> Live Studio Acoustic Resonance
+              </span>
+              <span id="playerFreqLabel" class="text-xs px-2 py-0.5 rounded-full bg-gift-slate text-white dark:bg-gift-slate-bright dark:text-[#111712] font-semibold">432 Hz Solfeggio</span>
+            </div>
+            <h4 class="font-serif font-bold text-lg mb-1">Tibetan Bowls & Chiron Planetary Gong</h4>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-4">Streamed directly from The Sound Sanctuary shala for home centering and pre-class grounding.</p>
+          </div>
+
+          <div class="space-y-4">
+            <!-- Animated Sound Wave & Play Button -->
+            <div class="flex items-center gap-4 p-3 rounded-xl bg-white dark:bg-[#111712] border border-[rgba(var(--color-rgb-primary),0.1)]">
+              <button id="soundPlayBtn" onclick="toggleAtmosphereAudio()" class="w-12 h-12 rounded-full bg-gift-slate text-white flex items-center justify-center shrink-0 hover:opacity-90 transition shadow-md">
+                <i id="playIcon" class="fas fa-play text-base"></i>
+              </button>
+              <div class="min-w-0 flex-1">
+                <div class="flex items-center justify-between text-xs mb-1">
+                  <span id="audioTrackStatus" class="font-semibold text-gift-slate">Click to Play 432 Hz Soundscape</span>
+                  <span class="text-neutral-dark/60 dark:text-gray-400">Stream â€¢ 432 Hz</span>
+                </div>
+                <div class="flex items-center gap-1 h-7">
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                  <div class="eq-bar paused"></div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Frequency Switcher -->
+            <div class="flex items-center gap-2 flex-wrap">
+              <span class="text-[11px] text-neutral-dark/60 dark:text-gray-400">Resonance:</span>
+              <button onclick="setAtmosphereFreq('432 Hz', 'Natural Theta Healing & Cellular Calm')" class="freq-pill px-2.5 py-1 text-xs rounded-full bg-gift-slate text-white dark:bg-gift-slate-bright dark:text-[#111712] font-semibold">432 Hz Calm</button>
+              <button onclick="setAtmosphereFreq('528 Hz', 'Miracle Transformation & Heart Coherence')" class="freq-pill px-2.5 py-1 text-xs rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] hover:bg-gift-slate hover:text-white transition text-neutral-dark dark:text-gray-200 font-semibold">528 Hz Heart</button>
+              <button onclick="setAtmosphereFreq('963 Hz', 'Pure Crown Awakening & Spiritual Oneness')" class="freq-pill px-2.5 py-1 text-xs rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] hover:bg-gift-slate hover:text-white transition text-neutral-dark dark:text-gray-200 font-semibold">963 Hz Spirit</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- Environmental & Mindfulness Indicators -->
+        <div class="p-5 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] border border-[rgba(var(--color-rgb-primary),0.1)] flex flex-col justify-between">
+          <div>
+            <span class="text-xs uppercase font-bold tracking-wider text-gift-slate flex items-center gap-1.5 mb-3">
+              <i class="fas fa-leaf"></i> Sanctuary Ambient Climate
+            </span>
+            <div class="grid grid-cols-2 gap-3 mb-4">
+              <div class="p-3 rounded-xl bg-white dark:bg-[#111712] border border-[rgba(var(--color-rgb-primary),0.08)]">
+                <div class="flex items-center justify-between text-gift-slate mb-1">
+                  <span class="text-[11px] font-semibold uppercase">Oak Shala</span>
+                  <i class="fas fa-temperature-half text-xs"></i>
+                </div>
+                <p class="text-xl font-bold font-serif">74Â°F <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ 23Â°C</span></p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">Humidity: 48% (Optimal)</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-white dark:bg-[#111712] border border-[rgba(var(--color-rgb-primary),0.08)]">
+                <div class="flex items-center justify-between text-gift-slate mb-1">
+                  <span class="text-[11px] font-semibold uppercase">Solar Shala</span>
+                  <i class="fas fa-fire-flame-simple text-xs"></i>
+                </div>
+                <p class="text-xl font-bold font-serif">85Â°F <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ 29Â°C</span></p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">Radiant Oak Warmth</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-white dark:bg-[#111712] border border-[rgba(var(--color-rgb-primary),0.08)]">
+                <div class="flex items-center justify-between text-gift-slate mb-1">
+                  <span class="text-[11px] font-semibold uppercase">Air Purity</span>
+                  <i class="fas fa-shield-halved text-xs"></i>
+                </div>
+                <p class="text-xl font-bold font-serif">99.9% <span class="text-xs font-normal text-emerald-600 dark:text-emerald-400">Pure</span></p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">HEPA & Mountain Pine</p>
+              </div>
+
+              <div class="p-3 rounded-xl bg-white dark:bg-[#111712] border border-[rgba(var(--color-rgb-primary),0.08)]">
+                <div class="flex items-center justify-between text-gift-slate mb-1">
+                  <span class="text-[11px] font-semibold uppercase">Sacred Aroma</span>
+                  <i class="fas fa-certificate text-xs"></i>
+                </div>
+                <p class="text-base font-bold font-serif truncate">Hinoki Cypress</p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">& Hojari Frankincense</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Interactive 4-7-8 Breath Pacer Button -->
+          <div class="pt-3 border-t border-[rgba(var(--color-rgb-primary),0.1)] flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span id="breathDot" class="w-3 h-3 rounded-full bg-gift-slate transition-all duration-1000"></span>
+              <span id="breathText" class="text-xs font-medium text-neutral-dark/80 dark:text-gray-300">Ready to center? Take a mindful breath.</span>
+            </div>
+            <button onclick="triggerMindfulBreath()" class="btn-outline-design px-3 py-1 text-xs">Pace Breath (4-7-8)</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- 4 KEY MEMBER STATS CARDS -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="stat-card cursor-pointer" onclick="navigateTo('memberships')">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Class Pack Usage</p>
+            <p class="text-2xl font-bold font-serif text-gift-slate">7 of 10 Used</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-ticket-alt text-gift-slate text-base"></i>
+          </div>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" style="width:70%"></div></div>
+        <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-1.5 flex justify-between">
+          <span>3 credits remaining</span>
+          <span class="text-gift-slate font-bold">Track &rarr;</span>
+        </p>
+      </div>
+
+      <div class="stat-card cursor-pointer" onclick="navigateTo('bookings')">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Next Practice Slot</p>
+            <p class="text-xl font-bold font-serif">May 20 Â· 6 PM</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-calendar-check text-gift-slate text-base"></i>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-dark/70 dark:text-gray-300 truncate">432 Hz Sound Bath</p>
+        <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-1">Mat Circle #07 Â· Confirmed</p>
+      </div>
+
+      <div class="stat-card cursor-pointer" onclick="navigateTo('memberships')">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Membership Plan</p>
+            <p class="text-xl font-bold font-serif text-gift-slate">Unlimited Pass</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-crown text-gift-slate text-base"></i>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-dark/70 dark:text-gray-300">Auto-Renew: Active</p>
+        <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400 mt-1">Next renewal: June 01, 2026</p>
+      </div>
+
+      <div class="stat-card cursor-pointer" onclick="navigateTo('classes')">
+        <div class="flex justify-between items-center mb-2">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Available Classes</p>
+            <p class="text-2xl font-bold font-serif">6 Styles</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-layer-group text-gift-slate text-base"></i>
+          </div>
+        </div>
+        <p class="text-xs text-neutral-dark/70 dark:text-gray-300">All levels welcome</p>
+        <p class="text-[10px] text-gift-slate font-bold mt-1">Browse by Style & Level &rarr;</p>
+      </div>
+    </div>
+
+    <!-- Active Booking & Quick Actions -->
+    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+      <div class="card-design p-6 lg:col-span-2">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-serif font-bold text-xl">Upcoming Booked Sessions</h3>
+          <span class="text-xs text-gift-slate font-bold cursor-pointer hover:underline" onclick="navigateTo('bookings')">View Schedule &rarr;</span>
+        </div>
+        <div class="space-y-3.5">
+          <div class="flex items-center justify-between gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <div class="w-10 h-10 rounded-xl bg-gift-slate/10 dark:bg-white/10 flex items-center justify-center shrink-0 text-gift-slate">
+                <i class="fas fa-bell"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-bold truncate">432 Hz Sound Bath & Gong Immersion</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">May 20, 2026 Â· 6:00 PM Â· The Sound Sanctuary (Lead: Siobhan Kelly)</p>
+              </div>
+            </div>
+            <span class="status-badge status-confirmed">Confirmed</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <div class="w-10 h-10 rounded-xl bg-gift-slate/10 dark:bg-white/10 flex items-center justify-center shrink-0 text-gift-slate">
+                <i class="fas fa-sun"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-bold truncate">Solar Vinyasa & Prana Flow (Heated 85Â°F)</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">May 23, 2026 Â· 8:00 AM Â· The Sunlit Shala Â· Mat 04 (Lead: Elena Vance)</p>
+              </div>
+            </div>
+            <span class="status-badge status-confirmed">Confirmed</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <div class="w-10 h-10 rounded-xl bg-gift-slate/10 dark:bg-white/10 flex items-center justify-center shrink-0 text-gift-slate">
+                <i class="fas fa-moon"></i>
+              </div>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-bold truncate">Restorative Yin & Reiki Practice</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">May 28, 2026 Â· 7:15 PM Â· The Lotus Pavilion (Lead: Maya Lin)</p>
+              </div>
+            </div>
+            <span class="status-badge status-requested">Waitlist #1</span>
+          </div>
+        </div>
+        <button onclick="navigateTo('classes')" class="btn-outline-design w-full mt-5 py-2.5 text-sm flex items-center justify-center gap-2">
+          <i class="fas fa-plus-circle"></i> Book Next Class Slot (By Style & Level)
+        </button>
+      </div>
+
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <h3 class="font-serif font-bold text-xl mb-4">Quick Studio Actions</h3>
+          <div class="space-y-2.5">
+            <button onclick="navigateTo('classes')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.14)] transition flex items-center gap-3">
+              <i class="fas fa-layer-group text-gift-slate"></i>
+              <div>
+                <p class="text-xs font-bold">Browse Classes</p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">By style and level</p>
+              </div>
+            </button>
+            <button onclick="navigateTo('memberships')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.14)] transition flex items-center gap-3">
+              <i class="fas fa-ticket-alt text-gift-slate"></i>
+              <div>
+                <p class="text-xs font-bold">Class Pack & Renewal</p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">Track 10-pack & auto-renew</p>
+              </div>
+            </button>
+            <button onclick="navigateTo('instructors')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.14)] transition flex items-center gap-3">
+              <i class="fas fa-user-friends text-gift-slate"></i>
+              <div>
+                <p class="text-xs font-bold">Instructors Directory</p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">Meet our master guides</p>
+              </div>
+            </button>
+            <a href="login.html" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.14)] transition flex items-center gap-3">
+              <i class="fas fa-sign-in-alt text-gift-slate"></i>
+              <div>
+                <p class="text-xs font-bold">Login Portal</p>
+                <p class="text-[10px] text-neutral-dark/60 dark:text-gray-400">Switch account or login</p>
+              </div>
+            </a>
+          </div>
+        </div>
+
+        <div class="mt-5 p-4 rounded-2xl bg-gift-slate/5 dark:bg-white/5 border border-gift-slate/15">
+          <p class="text-[10px] font-bold uppercase tracking-wider text-gift-slate mb-1">Today's Studio Intention</p>
+          <p class="text-xs italic font-serif text-neutral-dark/80 dark:text-gray-300">"Inhale presence, exhale tension. Let your breath anchor the mind in quiet, radiant awareness."</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE: CLASSES (BY STYLE & LEVEL) ========== -->
+  <section id="page-classes" class="page-content hidden">
+    <div class="card-design p-6 mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-5">
+        <div>
+          <div class="flex items-center gap-2 mb-1">
+            <span class="text-xs font-bold uppercase tracking-wider text-gift-slate">Schedule & Shala Directory</span>
+            <span class="text-xs px-2 py-0.5 rounded-full bg-emerald-500/10 text-emerald-700 dark:text-emerald-400 font-semibold">Live Booking</span>
+          </div>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold">Sanctuary Classes by Style & Level</h2>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Filter through our sacred movement lineages, breath immersions, and restorative healing sessions.</p>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-xs font-semibold text-neutral-dark/60 dark:text-gray-400">Your Credits: <strong class="text-gift-slate font-bold">3 of 10 Available</strong></span>
+        </div>
+      </div>
+
+      <!-- Filter Controls: By Style and Level -->
+      <div class="space-y-3.5 pt-4 border-t border-[rgba(var(--color-rgb-primary),0.1)]">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-neutral-dark/70 dark:text-gray-400 block mb-2">Filter by Practice Style:</span>
+          <div class="flex flex-wrap gap-2" id="styleFilterGroup">
+            <button class="filter-btn active" data-style="all">All Styles</button>
+            <button class="filter-btn" data-style="vinyasa">Solar Vinyasa Flow</button>
+            <button class="filter-btn" data-style="yin">Restorative & Yin</button>
+            <button class="filter-btn" data-style="ashtanga">Mysore Ashtanga</button>
+            <button class="filter-btn" data-style="sound">Sound Bath & Meditation</button>
+            <button class="filter-btn" data-style="pranayama">PrÄnÄyÄma Breathwork</button>
+          </div>
+        </div>
+
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-neutral-dark/70 dark:text-gray-400 block mb-2">Filter by Practice Level:</span>
+          <div class="flex flex-wrap gap-2" id="levelFilterGroup">
+            <button class="filter-btn active" data-level="all">All Levels</button>
+            <button class="filter-btn" data-level="level1">Level 1 â€” Gentle / Beginner</button>
+            <button class="filter-btn" data-level="level2">Level 2 â€” Intermediate Flow</button>
+            <button class="filter-btn" data-level="level3">Level 3 â€” Advanced Immersion</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Class Cards Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6" id="classesGrid">
+      <!-- Class 1 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="vinyasa" data-level="level2">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&q=80" alt="Solar Vinyasa" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">Solar Vinyasa</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">Level 2</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-fire-flame-simple text-amber-400"></i> Heated 85Â°F Â· Radiant Floors
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">Solar Vinyasa & Prana Flow</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Elena Vance</strong> Â· Sunlit Oak Shala</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Dynamic breath-synchronized movements designed to build core vitality, cultivate prana, and open heart meridians with sunlight.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 75 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Daily 8:00 AM</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">4 slots left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('Solar Vinyasa & Prana Flow', 'Elena Vance', 'Sunlit Oak Shala (Heated 85Â°F)', 'Daily at 8:00 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Class 2 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="sound" data-level="level1">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="images/home2-hero.jpg" alt="Sound Bath" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">Sound Immersion</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">All Levels</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-spa text-gift-slate-bright"></i> 432 Hz Solfeggio Resonance
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">432 Hz Sound Bath & Gong Immersion</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Siobhan Kelly</strong> Â· The Sound Sanctuary</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Deep cellular acoustic journey utilizing 7 frosted quartz singing bowls, Tibetan bronzes, and planetary symphonic gongs.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 75 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Wed & Fri 6:00 PM</span>
+              <span class="text-amber-600 dark:text-amber-400 font-semibold">2 slots left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('432 Hz Sound Bath & Gong Immersion', 'Siobhan Kelly', 'The Sound Sanctuary (Room C)', 'Wed & Fri at 6:00 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Class 3 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="yin" data-level="level1">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Restorative Yin" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">Restorative & Yin</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">All Levels</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-hands-holding text-emerald-300"></i> Somatic Reiki & Bolsters
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">Restorative Yin & Reiki Practice</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Maya Lin</strong> Â· The Lotus Pavilion</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Passive floor poses held for 3â€“5 minutes with organic buckwheat bolsters, weighted sandbags, and gentle hands-on reiki energy balancing.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 60 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Tue & Thu 7:15 PM</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">5 slots left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('Restorative Yin & Reiki Practice', 'Maya Lin', 'The Lotus Pavilion (Room B)', 'Tue & Thu at 7:15 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Class 4 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="ashtanga" data-level="level3">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Mysore Ashtanga" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">Mysore Ashtanga</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">Level 3</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-compass text-amber-300"></i> Mysore Lineage Tradition
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">Mysore Ashtanga Alignment Intensive</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Marcus Chen</strong> Â· Sunlit Oak Shala</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Traditional self-paced practice following the primary series, accompanied by individualized verbal cues and anatomical hands-on adjustments.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 90 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Mon, Wed, Fri 6:30 AM</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">3 slots left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('Mysore Ashtanga Alignment Intensive', 'Marcus Chen', 'Sunlit Oak Shala (Room A)', 'Mon, Wed, Fri at 6:30 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Class 5 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="pranayama" data-level="level1">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80" alt="Pranayama Breathwork" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">PrÄnÄyÄma</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">Level 1</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-wind text-sky-300"></i> Vagus Nerve Regulation
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">PrÄnÄyÄma & Breath Awakening</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Master Ananya Sharma</strong> Â· Garden Shala</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Ancient Himalayan breath regulation (Nadi Shodhana, Kapalabhati, Bhramari) to soothe the nervous system and cultivate boundless clarity.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 60 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Sat & Sun 10:00 AM</span>
+              <span class="text-emerald-600 dark:text-emerald-400 font-semibold">6 slots left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('PrÄnÄyÄma & Breath Awakening', 'Master Ananya Sharma', 'The Garden Shala', 'Sat & Sun at 10:00 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+
+      <!-- Class 6 -->
+      <div class="card-design overflow-hidden flex flex-col justify-between class-card" data-style="sound" data-level="level1">
+        <div>
+          <div class="h-44 relative overflow-hidden">
+            <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Yoga Nidra" class="w-full h-full object-cover">
+            <div class="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent"></div>
+            <div class="absolute top-3 left-3 flex gap-1.5 flex-wrap">
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-gift-slate text-white">Yoga Nidra</span>
+              <span class="text-[10px] uppercase font-bold tracking-wider px-2.5 py-0.5 rounded-full bg-black/60 text-white backdrop-blur-sm">All Levels</span>
+            </div>
+            <div class="absolute bottom-2.5 left-3 text-white text-xs font-semibold flex items-center gap-1.5">
+              <i class="fas fa-moon text-indigo-300"></i> Delta Brainwave Sleep
+            </div>
+          </div>
+          <div class="p-5">
+            <h3 class="font-serif font-bold text-xl mb-1">Candlelight Deep Yoga Nidra</h3>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-3">Guide: <strong class="text-neutral-dark dark:text-gray-200">Dr. Aarav Mehta</strong> Â· Sound Sanctuary</p>
+            <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+              Conscious yogic sleep guiding brainwaves into deep delta states for cellular nervous system restoration and tranquil mental renewal.
+            </p>
+            <div class="flex items-center justify-between text-xs text-neutral-dark/70 dark:text-gray-400 py-2 border-t border-[rgba(var(--color-rgb-primary),0.08)]">
+              <span><i class="fas fa-clock text-gift-slate mr-1"></i> 60 mins</span>
+              <span><i class="fas fa-calendar text-gift-slate mr-1"></i> Sunday 8:00 PM</span>
+              <span class="text-amber-600 dark:text-amber-400 font-semibold">1 slot left</span>
+            </div>
+          </div>
+        </div>
+        <div class="p-5 pt-0">
+          <button onclick="openSlotBooking('Candlelight Deep Yoga Nidra', 'Dr. Aarav Mehta', 'The Sound Sanctuary (Room C)', 'Sunday at 8:00 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-2">
+            <i class="fas fa-calendar-plus"></i> Book Class Slot
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE: INSTRUCTORS ========== -->
+  <section id="page-instructors" class="page-content hidden">
+    <div class="card-design p-6 mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-4">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gift-slate">Resident Guides & Lineage Mentors</span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold mt-1">Sanctuary Instructors</h2>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Our faculty embodies decades of lineage training, anatomical precision, and compassionate guidance.</p>
+        </div>
+        <button onclick="navigateTo('classes')" class="btn-outline-design px-4 py-2 text-xs font-semibold">
+          <i class="fas fa-layer-group mr-1"></i> View Full Class Schedule
+        </button>
+      </div>
+    </div>
+
+    <!-- Instructor Directory Grid -->
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Instructor 1 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=300&q=80" alt="Master Ananya Sharma" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Master Ananya Sharma</h3>
+              <p class="text-xs text-gift-slate font-semibold">Founder & PrÄnÄyÄma Master</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">22 Yrs Experience Â· Rishikesh Lineage</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "Breath is the subtle bridge between the physical vessel and pure consciousness. When breath settles, mind dissolves."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">PrÄnÄyÄma</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Kundalini</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Vedic Philosophy</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Sat & Sun Â· 10:00 AM â€” PrÄnÄyÄma Awakening</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('PrÄnÄyÄma & Breath Awakening', 'Master Ananya Sharma', 'The Garden Shala', 'Sat & Sun at 10:00 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Ananya
+        </button>
+      </div>
+
+      <!-- Instructor 2 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=300&q=80" alt="Elena Vance" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Elena Vance</h3>
+              <p class="text-xs text-gift-slate font-semibold">Lead Yogini & Vinyasa Director</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">E-RYT 500 Â· Functional Biomechanics</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "Movement is medicine when guided with anatomical alignment and unwavering presence. We flow to unravel rigidity."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Solar Vinyasa</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Heated Flow</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Anatomy</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Daily Â· 8:00 AM â€” Solar Vinyasa & Prana Flow</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('Solar Vinyasa & Prana Flow', 'Elena Vance', 'Sunlit Oak Shala (Heated 85Â°F)', 'Daily at 8:00 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Elena
+        </button>
+      </div>
+
+      <!-- Instructor 3 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=300&q=80" alt="Dr. Aarav Mehta" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Dr. Aarav Mehta</h3>
+              <p class="text-xs text-gift-slate font-semibold">Meditation Master & Somatic Scientist</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">PhD Neuroscience Â· Vedic Scholar</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "By decelerating neural oscillations into theta and delta states, the nervous system naturally sheds decades of stored trauma."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Yoga Nidra</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Neuro-Meditation</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Chakra Tuning</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Sunday Â· 8:00 PM â€” Candlelight Deep Yoga Nidra</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('Candlelight Deep Yoga Nidra', 'Dr. Aarav Mehta', 'The Sound Sanctuary (Room C)', 'Sunday at 8:00 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Aarav
+        </button>
+      </div>
+
+      <!-- Instructor 4 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=300&q=80" alt="Siobhan Kelly" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Siobhan Kelly</h3>
+              <p class="text-xs text-gift-slate font-semibold">Sound Alchemist & Gong Master</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">Copenhagen Acoustic Conservatory</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "Acoustic frequencies bypass the analytical mind entirely. Sound resonance vibrates every water molecule in your body back into harmonic coherence."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">432 Hz Sound Bath</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Planetary Gongs</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Tibetan Bowls</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Wed & Fri Â· 6:00 PM â€” 432 Hz Sound Bath & Gong</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('432 Hz Sound Bath & Gong Immersion', 'Siobhan Kelly', 'The Sound Sanctuary (Room C)', 'Wed & Fri at 6:00 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Siobhan
+        </button>
+      </div>
+
+      <!-- Instructor 5 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=300&q=80" alt="Marcus Chen" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Marcus Chen</h3>
+              <p class="text-xs text-gift-slate font-semibold">Ashtanga & Alignment Specialist</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">KPJAYI Mysore Authorized</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "Devotion to the breath and bandhas cultivates internal heat (tapas) that purifies the nervous system and stanches the restless mind."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Mysore Ashtanga</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Primary Series</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Bandha Control</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Mon, Wed, Fri Â· 6:30 AM â€” Mysore Intensive</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('Mysore Ashtanga Alignment Intensive', 'Marcus Chen', 'Sunlit Oak Shala (Room A)', 'Mon, Wed, Fri at 6:30 AM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Marcus
+        </button>
+      </div>
+
+      <!-- Instructor 6 -->
+      <div class="card-design p-6 flex flex-col justify-between">
+        <div>
+          <div class="flex items-center gap-4 mb-4">
+            <div class="w-16 h-16 rounded-2xl overflow-hidden border-2 border-gift-slate shrink-0 shadow-md">
+              <img src="https://images.unsplash.com/photo-1548142813-c348350df52b?auto=format&fit=crop&w=300&q=80" alt="Maya Lin" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <h3 class="font-serif font-bold text-xl">Maya Lin</h3>
+              <p class="text-xs text-gift-slate font-semibold">Restorative Yin & Somatic Guide</p>
+              <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400 mt-0.5">Reiki Master Level III Â· Trauma Informed</p>
+            </div>
+          </div>
+          <p class="text-xs text-neutral-dark/80 dark:text-gray-300 leading-relaxed mb-4">
+            "True strength is the courage to soften. In deep surrender, fascia unbinds and the emotional body finds long-awaited refuge."
+          </p>
+          <div class="flex flex-wrap gap-1.5 mb-4">
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Yin Yoga</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Reiki Energy</span>
+            <span class="text-[10px] px-2 py-0.5 rounded-full bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.12)] text-gift-slate font-semibold">Fascial Release</span>
+          </div>
+          <div class="p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] text-xs mb-4">
+            <p class="font-bold text-[11px] text-gift-slate mb-1">Weekly Teaching Schedule:</p>
+            <p class="text-neutral-dark/70 dark:text-gray-300">Tue & Thu Â· 7:15 PM â€” Restorative Yin & Reiki</p>
+          </div>
+        </div>
+        <button onclick="openSlotBooking('Restorative Yin & Reiki Practice', 'Maya Lin', 'The Lotus Pavilion (Room B)', 'Tue & Thu at 7:15 PM')" class="btn-primary-design w-full py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-calendar-check"></i> Book Class with Maya
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE: MEMBERSHIP PLANS & CLASS PACK USAGE ========== -->
+  <section id="page-memberships" class="page-content hidden">
+    <!-- SECTION 1: TRACKING CLASS PACK USAGE -->
+    <div class="card-design p-6 mb-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-[rgba(var(--color-rgb-primary),0.1)]">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gift-slate flex items-center gap-1.5">
+            <i class="fas fa-ticket-alt"></i> Class Pack Usage Tracker
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold mt-1">10-Class Sanctuary Pack Punchcard</h2>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Track used credits, remaining booking allowance, and punch history.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openPurchasePackModal()" class="btn-primary-design px-4 py-2 text-xs font-bold inline-flex items-center gap-1.5">
+            <i class="fas fa-plus"></i> Top Up / Buy 10-Pack ($180)
+          </button>
+        </div>
+      </div>
+
+      <!-- Visual Punchcard Tracker (10 slots) -->
+      <div class="p-6 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.03)] dark:bg-[rgba(var(--color-rgb-bright),0.04)] border border-[rgba(var(--color-rgb-primary),0.12)] mb-6">
+        <div class="flex items-center justify-between flex-wrap gap-2 mb-4">
+          <div>
+            <h4 class="font-serif font-bold text-lg">Active Punchcard: #PK-9821</h4>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Purchased April 10, 2026 Â· Valid until July 15, 2026 (45 days remaining)</p>
+          </div>
+          <span class="text-xs font-bold px-3 py-1 rounded-full bg-gift-slate text-white dark:bg-gift-slate-bright dark:text-[#111712]">
+            7 Used Â· 3 Remaining
+          </span>
+        </div>
+
+        <!-- 10 Punch Slots Visualizer -->
+        <div class="grid grid-cols-5 sm:grid-cols-10 gap-2.5 sm:gap-3 my-4">
+          <div class="punch-slot used" title="Session 1: Apr 15 Â· Candlelight Nidra">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">1</span>
+          </div>
+          <div class="punch-slot used" title="Session 2: Apr 22 Â· Solar Vinyasa">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">2</span>
+          </div>
+          <div class="punch-slot used" title="Session 3: Apr 28 Â· PrÄnÄyÄma">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">3</span>
+          </div>
+          <div class="punch-slot used" title="Session 4: May 05 Â· Mysore Ashtanga">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">4</span>
+          </div>
+          <div class="punch-slot used" title="Session 5: May 10 Â· Restorative Yin">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">5</span>
+          </div>
+          <div class="punch-slot used" title="Session 6: May 14 Â· Sound Bath">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">6</span>
+          </div>
+          <div class="punch-slot used" title="Session 7: May 18 Â· Solar Vinyasa">
+            <i class="fas fa-check text-xs"></i>
+            <span class="text-[9px] mt-0.5">7</span>
+          </div>
+          <div class="punch-slot available" title="Session 8: Available credit">
+            <i class="fas fa-plus text-xs"></i>
+            <span class="text-[9px] mt-0.5">8</span>
+          </div>
+          <div class="punch-slot available" title="Session 9: Available credit">
+            <i class="fas fa-plus text-xs"></i>
+            <span class="text-[9px] mt-0.5">9</span>
+          </div>
+          <div class="punch-slot available" title="Session 10: Available credit">
+            <i class="fas fa-plus text-xs"></i>
+            <span class="text-[9px] mt-0.5">10</span>
+          </div>
+        </div>
+
+        <div class="progress-bar my-3"><div class="progress-fill" style="width:70%"></div></div>
+        <div class="flex justify-between items-center text-xs text-neutral-dark/60 dark:text-gray-400">
+          <span>70% pack consumed</span>
+          <span>3 class slots ready to book</span>
+        </div>
+      </div>
+
+      <!-- Class Pack Punch History Table -->
+      <h4 class="font-serif font-bold text-lg mb-3">Recent Class Pack Deductions</h4>
+      <div class="overflow-x-auto">
+        <table class="w-full text-xs text-left">
+          <thead class="text-neutral-dark/60 dark:text-gray-400 border-b border-[rgba(var(--color-rgb-primary),0.1)]">
+            <tr>
+              <th class="py-2.5 px-3">Date</th>
+              <th class="py-2.5 px-3">Class Modality</th>
+              <th class="py-2.5 px-3">Guide / Instructor</th>
+              <th class="py-2.5 px-3">Shala Room</th>
+              <th class="py-2.5 px-3">Mat Slot</th>
+              <th class="py-2.5 px-3 text-right">Credit Used</th>
+            </tr>
+          </thead>
+          <tbody class="divide-y divide-[rgba(var(--color-rgb-primary),0.06)]">
+            <tr>
+              <td class="py-2.5 px-3 font-semibold">May 18, 2026</td>
+              <td class="py-2.5 px-3">Solar Vinyasa & Prana Flow</td>
+              <td class="py-2.5 px-3">Elena Vance</td>
+              <td class="py-2.5 px-3">Sunlit Oak Shala</td>
+              <td class="py-2.5 px-3">Mat 04</td>
+              <td class="py-2.5 px-3 text-right font-bold text-gift-slate">1 Credit</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold">May 14, 2026</td>
+              <td class="py-2.5 px-3">432 Hz Sound Bath & Gong Immersion</td>
+              <td class="py-2.5 px-3">Siobhan Kelly</td>
+              <td class="py-2.5 px-3">The Sound Sanctuary</td>
+              <td class="py-2.5 px-3">Mat Circle #07</td>
+              <td class="py-2.5 px-3 text-right font-bold text-gift-slate">1 Credit</td>
+            </tr>
+            <tr>
+              <td class="py-2.5 px-3 font-semibold">May 10, 2026</td>
+              <td class="py-2.5 px-3">Restorative Yin & Reiki Practice</td>
+              <td class="py-2.5 px-3">Maya Lin</td>
+              <td class="py-2.5 px-3">The Lotus Pavilion</td>
+              <td class="py-2.5 px-3">Mat 02</td>
+              <td class="py-2.5 px-3 text-right font-bold text-gift-slate">1 Credit</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- SECTION 2: MANAGING MEMBERSHIP RENEWAL -->
+    <div class="card-design p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-5 pb-4 border-b border-[rgba(var(--color-rgb-primary),0.1)]">
+        <div>
+          <span class="text-xs font-bold uppercase tracking-wider text-gift-slate flex items-center gap-1.5">
+            <i class="fas fa-crown"></i> Membership Renewal Manager
+          </span>
+          <h2 class="text-2xl sm:text-3xl font-serif font-bold mt-1">Unlimited Sanctuary Pass & Renewal</h2>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Manage billing cadence, auto-renewal preferences, and plan tier upgrades.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <button onclick="openRenewModal()" class="btn-primary-design px-4 py-2 text-xs font-bold inline-flex items-center gap-1.5">
+            <i class="fas fa-redo"></i> Renew / Extend Now
+          </button>
+        </div>
+      </div>
+
+      <!-- Current Membership Card & Auto-Renew Toggle -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-5 mb-6">
+        <div class="p-5 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.05)] dark:bg-[rgba(var(--color-rgb-bright),0.06)] border border-[rgba(var(--color-rgb-primary),0.12)]">
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Active Membership Tier</p>
+          <p class="text-2xl font-bold font-serif text-gift-slate">Unlimited Sanctuary</p>
+          <p class="text-sm font-semibold mt-1">$220.00 <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ month</span></p>
+          <span class="inline-block mt-3 text-[10px] uppercase font-bold px-2 py-0.5 rounded-full bg-emerald-500/15 text-emerald-700 dark:text-emerald-400">
+            All Shalas & Sound Baths Included
+          </span>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.05)] dark:bg-[rgba(var(--color-rgb-bright),0.06)] border border-[rgba(var(--color-rgb-primary),0.12)] flex flex-col justify-between">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Renewal Schedule</p>
+            <p class="text-2xl font-bold font-serif">June 01, 2026</p>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Next charge: $220.00 on Visa â€¢â€¢â€¢â€¢ 4242</p>
+          </div>
+          <div class="flex items-center justify-between pt-3 border-t border-[rgba(var(--color-rgb-primary),0.08)] mt-3">
+            <span class="text-xs font-semibold">Auto-Renewal:</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+              <input type="checkbox" id="autoRenewToggle" checked onchange="toggleAutoRenew(this.checked)" class="sr-only peer">
+              <div class="w-11 h-6 bg-gray-300 peer-focus:outline-none rounded-full peer dark:bg-gray-700 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-[2px] after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-gift-slate"></div>
+            </label>
+          </div>
+        </div>
+
+        <div class="p-5 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.05)] dark:bg-[rgba(var(--color-rgb-bright),0.06)] border border-[rgba(var(--color-rgb-primary),0.12)] flex flex-col justify-between">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Payment Method</p>
+            <div class="flex items-center gap-2 mt-1">
+              <i class="fab fa-cc-visa text-2xl text-gift-slate"></i>
+              <div>
+                <p class="text-sm font-bold">Visa ending in 4242</p>
+                <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400">Expires 08/2028 Â· Primary</p>
+              </div>
+            </div>
+          </div>
+          <button onclick="alert('Redirecting to secure card management modal...')" class="btn-outline-design w-full py-1.5 text-xs font-semibold mt-3">
+            Update Payment Card
+          </button>
+        </div>
+      </div>
+
+      <!-- Plan Tiers Comparison for Upgrade/Switching -->
+      <h4 class="font-serif font-bold text-xl mb-3">Compare Sanctuary Membership Tiers</h4>
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+        <div class="p-4 rounded-xl border border-[rgba(var(--color-rgb-primary),0.1)] hover:border-gift-slate transition">
+          <p class="font-serif font-bold text-base">Drop-In Single</p>
+          <p class="text-xl font-bold font-serif text-gift-slate mt-1">$25 <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ class</span></p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-2">Single class mat booking with all shala amenities included.</p>
+          <button onclick="alert('Single drop-in slot booked!')" class="btn-outline-design w-full py-1.5 text-xs mt-3">Select Single</button>
+        </div>
+
+        <div class="p-4 rounded-xl border border-[rgba(var(--color-rgb-primary),0.1)] hover:border-gift-slate transition">
+          <p class="font-serif font-bold text-base">5-Class Pack</p>
+          <p class="text-xl font-bold font-serif text-gift-slate mt-1">$100 <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">($20/cl)</span></p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-2">Flexible 5-session punchcard valid for 60 days across all shalas.</p>
+          <button onclick="alert('5-Class Pack selected!')" class="btn-outline-design w-full py-1.5 text-xs mt-3">Buy 5-Pack</button>
+        </div>
+
+        <div class="p-4 rounded-xl border-2 border-gift-slate bg-[rgba(var(--color-rgb-primary),0.04)] relative">
+          <span class="absolute -top-2.5 right-3 text-[9px] uppercase font-bold tracking-wider px-2 py-0.5 rounded-full bg-gift-slate text-white">Current Plan</span>
+          <p class="font-serif font-bold text-base">Unlimited Sanctuary</p>
+          <p class="text-xl font-bold font-serif text-gift-slate mt-1">$220 <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ mo</span></p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-2">Unlimited classes, heated flows, sound baths, plus 1 guest pass/mo.</p>
+          <button class="w-full py-1.5 text-xs font-bold rounded-full bg-gift-slate text-white mt-3 cursor-default">Current Tier</button>
+        </div>
+
+        <div class="p-4 rounded-xl border border-[rgba(var(--color-rgb-primary),0.1)] hover:border-gift-slate transition">
+          <p class="font-serif font-bold text-base">Annual Patron Pass</p>
+          <p class="text-xl font-bold font-serif text-gift-slate mt-1">$2,200 <span class="text-xs font-normal text-neutral-dark/60 dark:text-gray-400">/ yr</span></p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-2">2 months complimentary, 4 private 1-on-1 sessions, priority mat booking.</p>
+          <button onclick="alert('Annual pass upgrade request submitted!')" class="btn-outline-design w-full py-1.5 text-xs mt-3">Upgrade Annual</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 2: MY SESSIONS ========== -->
+  <section id="page-bookings" class="page-content hidden">
+    <div class="card-design p-6">
+      <div class="flex flex-wrap items-center justify-between gap-4 mb-4">
+        <div>
+          <h3 class="font-serif font-bold text-2xl">My Practice Sessions</h3>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Track sound baths, solar vinyasa flows, and reserved meditation mats.</p>
+        </div>
+        <button data-nav="new-booking" class="btn-primary-design px-4 py-2 text-sm"><i class="fas fa-plus mr-1"></i> Book New Practice</button>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Booking Card 1 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">432 Hz Sound Bath & Gong Immersion</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">75-minute acoustic resonance journey Â· Tibetan bowls & planetary gong</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-confirmed">Confirmed</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 20, 2026 Â· 6:00 PM Â· Mat Circle #07</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Session rescheduled request sent to Studio Concierge.')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-calendar-plus mr-1"></i>Reschedule</button>
+              <button onclick="showBookingDetail('432 Hz Sound Bath & Gong Immersion', 'May 20, 2026 at 6:00 PM', 'The Sound Sanctuary (Room C)', 'Siobhan Kelly (Sound Alchemist)', 'Mat Circle #07 (Center Resonance)')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Reserved</span>
+              <span class="text-center truncate">Mat Assigned</span>
+              <span class="text-center truncate">Preparation Tea</span>
+              <span class="text-right truncate">Practice Ready</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <!-- Booking Card 2 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">Solar Vinyasa & Prana Flow (Heated 85Â°F)</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Dynamic breath-to-movement flow Â· Oak shala with radiant floor warmth</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-confirmed">Confirmed</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 23, 2026 Â· 8:00 AM Â· Mat 04 (Sunlit East)</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Reschedule request sent.')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-calendar-plus mr-1"></i>Reschedule</button>
+              <button onclick="showBookingDetail('Solar Vinyasa & Prana Flow', 'May 23, 2026 at 8:00 AM', 'The Sunlit Shala (Room A)', 'Elena Vance (Lead Yogini)', 'Mat 04 (Front Sunlit Row)')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Reserved</span>
+              <span class="text-center truncate">Mat Assigned</span>
+              <span class="text-center truncate">Preparation Tea</span>
+              <span class="text-right truncate">Practice Ready</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:50%"></div></div>
+          </div>
+        </div>
+
+        <!-- Booking Card 3 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">Restorative Yin & Reiki Practice</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Deep somatic release with organic buckwheat bolsters and tuning forks</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-requested">Waitlist Requested</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 28, 2026 Â· 7:00 PM Â· The Lotus Pavilion</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Waitlist status checked. You are #1 in queue!')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-info-circle mr-1"></i>Queue #1</button>
+              <button onclick="showBookingDetail('Restorative Yin & Reiki', 'May 28, 2026 at 7:00 PM', 'The Lotus Pavilion (Room B)', 'Dr. Aarav Mehta', 'Waitlist Status #1')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Requested</span>
+              <span class="text-center truncate">Waitlist</span>
+              <span class="text-center truncate">Mat Matched</span>
+              <span class="text-right truncate">Confirmed</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 3: REQUEST SESSION ========== -->
+  <section id="page-new-booking" class="page-content hidden">
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-2">Book Practice or Private Mat</h3>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Select your practice modality, preferred guide, and reservation time slot.</p>
+      <form id="bookingRequestForm" class="space-y-4">
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          <div>
+            <label class="form-label">Practice Modality <span class="text-gift-slate">*</span></label>
+            <select class="form-input" required>
+              <option value="">Select practice modality</option>
+              <option>432 Hz Sound Bath & Gong Meditation</option>
+              <option>Solar Vinyasa Flow (Heated 85Â°F)</option>
+              <option>Restorative Yin & Reiki Healing</option>
+              <option>Mysore Ashtanga Intensive (Self-Paced)</option>
+              <option>1-on-1 Private Teacher Guidance (60 min)</option>
+              <option>Full Shala Private Buyout / Retreat</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Practitioners Count (Mats) <span class="text-gift-slate">*</span></label>
+            <input type="number" class="form-input" value="1" min="1" max="15" required>
+          </div>
+          <div>
+            <label class="form-label">Preferred Date <span class="text-gift-slate">*</span></label>
+            <input type="date" class="form-input" required>
+          </div>
+          <div>
+            <label class="form-label">Preferred Time Slot <span class="text-gift-slate">*</span></label>
+            <select class="form-input" required>
+              <option value="">Select preferred session slot</option>
+              <option>07:00 AM â€” Morning Prana Awakening</option>
+              <option>08:30 AM â€” Solar Vinyasa Wave</option>
+              <option>12:15 PM â€” Midday Centering Flow</option>
+              <option>05:30 PM â€” Twilight Sound Bath</option>
+              <option>07:00 PM â€” Restorative Yin & Gong</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Teacher / Guide Preference</label>
+            <select class="form-input">
+              <option value="any">First Available Lead Teacher</option>
+              <option>Elena Vance â€” Lead Yogini & Director</option>
+              <option>Dr. Aarav Mehta â€” Meditation Master & Pranayama</option>
+              <option>Siobhan Kelly â€” Sound Alchemist & Gong Master</option>
+              <option>James Sterling â€” Vinyasa & Anatomy Specialist</option>
+            </select>
+          </div>
+          <div>
+            <label class="form-label">Mat Position Preference</label>
+            <select class="form-input">
+              <option>Front Sunlit Row (Near East Windows)</option>
+              <option>Center Shala (Balanced Acoustic Zone)</option>
+              <option>Back Quiet Row (Near Garden View)</option>
+              <option>No Preference â€” Assign Optimal Spot</option>
+            </select>
+          </div>
+          <div class="md:col-span-2">
+            <label class="form-label">Practice Intentions, Sensitivities & Prop Needs</label>
+            <textarea class="form-input" rows="3" placeholder="Tell us about your intentions, recent joint sensitivities, pregnancy accommodations, or preferred essential oil scents (organic lavender, cedarwood, frankincense)."></textarea>
+          </div>
+        </div>
+        <button type="submit" class="btn-primary-design w-full py-3 text-base font-bold inline-flex items-center justify-center gap-2 mt-4">
+          <i class="fas fa-check-circle"></i> Confirm Practice Reservation
+        </button>
+      </form>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 4: LOOKBOOK (SANCTUARY SPACES & RITUALS) ========== -->
+  <section id="page-lookbook" class="page-content hidden">
+    <div class="card-design p-6">
+      <div class="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <div>
+          <h3 class="font-serif font-bold text-2xl">Sanctuary Spaces & Ritual Board</h3>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mt-1">Select up to 8 sanctuary rituals and shala spaces to customize your practice visits.</p>
+        </div>
+        <div class="flex items-center gap-3">
+          <span class="text-xs text-neutral-dark/60 dark:text-gray-400"><span id="selectedCount" class="font-bold text-gift-slate">3</span> / 8 selected</span>
+          <button onclick="alert('Your practice aesthetic board has been saved to your member profile!')" class="btn-primary-design text-xs px-4 py-2"><i class="fas fa-check mr-1"></i>Save Ritual Board</button>
+        </div>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <!-- Space 1 -->
+        <div class="look-thumb selected" data-look="432 Hz Sound Sanctuary">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&q=80" alt="Sound Sanctuary">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">432 Hz Sound Sanctuary</div>
+        </div>
+        <!-- Space 2 -->
+        <div class="look-thumb selected" data-look="Sunlit Oak Shala">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Sunlit Oak Shala">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Sunlit Oak Shala</div>
+        </div>
+        <!-- Space 3 -->
+        <div class="look-thumb selected" data-look="Restorative Yin Space">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Restorative Yin Space">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Restorative Yin Space</div>
+        </div>
+        <!-- Space 4 -->
+        <div class="look-thumb" data-look="Herbal Tea & Garden Lounge">
+          <img src="https://images.unsplash.com/photo-1576092768241-dec231879fc3?auto=format&fit=crop&w=600&q=80" alt="Herbal Tea Lounge">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Herbal Tea Lounge</div>
+        </div>
+        <!-- Space 5 -->
+        <div class="look-thumb" data-look="Vinyasa Aerial & Movement">
+          <img src="https://images.unsplash.com/photo-1599447421416-3414500d18a5?auto=format&fit=crop&w=600&q=80" alt="Aerial & Movement">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Aerial & Movement</div>
+        </div>
+        <!-- Space 6 -->
+        <div class="look-thumb" data-look="Cork & Cedar Organic Mats">
+          <img src="https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?auto=format&fit=crop&w=600&q=80" alt="Organic Mats & Props">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Cork & Cedar Props</div>
+        </div>
+        <!-- Space 7 -->
+        <div class="look-thumb" data-look="Morning Prana Shala">
+          <img src="images/home2-hero.jpg" alt="Lotus Meditation Hero">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Lotus Center Shala</div>
+        </div>
+        <!-- Space 8 -->
+        <div class="look-thumb" data-look="Outdoor Stone Courtyard">
+          <img src="https://images.unsplash.com/photo-1507652313519-d4e9174996dd?auto=format&fit=crop&w=600&q=80" alt="Courtyard Meditation">
+          <div class="check-badge"><i class="fas fa-check"></i></div>
+          <div class="look-label">Courtyard Meditation</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 5: PAYMENTS & PASSES ========== -->
+  <section id="page-payments" class="page-content hidden">
+    <div class="card-design p-6 mb-6">
+      <h3 class="font-serif font-bold text-2xl mb-4">Membership & Pass Summary</h3>
+      <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 mb-6">
+        <div class="p-4 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] border border-[rgba(var(--color-rgb-primary),0.1)]">
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Current Membership Tier</p>
+          <p class="text-2xl font-bold font-serif text-neutral-dark dark:text-white">Unlimited Sanctuary</p>
+          <p class="text-xs text-gift-slate font-semibold mt-1">$220 / month</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] border border-[rgba(var(--color-rgb-primary),0.1)]">
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Pass Status</p>
+          <p class="text-2xl font-bold font-serif text-green-600 dark:text-green-400">Active</p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">Renews June 01, 2026</p>
+        </div>
+        <div class="p-4 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] border border-[rgba(var(--color-rgb-primary),0.1)]">
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Practices This Month</p>
+          <p class="text-2xl font-bold font-serif text-gift-slate">16 Sessions</p>
+          <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-1">~4 sessions / week</p>
+        </div>
+      </div>
+      <div class="progress-bar mb-2"><div class="progress-fill" style="width:70%"></div></div>
+      <p class="text-xs text-neutral-dark/60 dark:text-gray-400 text-right">Cycle 70% elapsed Â· Auto-pay scheduled on Visa â€¢â€¢â€¢â€¢ 4242</p>
+    </div>
+
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-4">Pass Invoices & Payment Receipts</h3>
+      <div class="space-y-3">
+        <div class="receipt-item flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.02)] sm:bg-transparent">
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center shrink-0">
+              <i class="fas fa-check text-green-600 dark:text-green-400 text-sm"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-bold text-sm sm:text-base leading-tight">Unlimited Monthly Shala Pass Â· May 2026</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-0.5">Paid May 01, 2026 Â· Visa â€¢â€¢â€¢â€¢ 4242 Â· Invoice #SAN-INV-8421</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-3">
+            <span class="font-bold text-base">$220.00</span>
+            <span class="status-badge status-paid text-xs">Paid</span>
+            <button onclick="alert('Receipt downloaded.')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="receipt-item flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.02)] sm:bg-transparent">
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center shrink-0">
+              <i class="fas fa-check text-green-600 dark:text-green-400 text-sm"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-bold text-sm sm:text-base leading-tight">Unlimited Monthly Shala Pass Â· April 2026</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-0.5">Paid Apr 01, 2026 Â· Visa â€¢â€¢â€¢â€¢ 4242 Â· Invoice #SAN-INV-7910</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-3">
+            <span class="font-bold text-base">$220.00</span>
+            <span class="status-badge status-paid text-xs">Paid</span>
+            <button onclick="alert('Receipt downloaded.')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="receipt-item flex flex-col sm:flex-row sm:items-center justify-between gap-3 p-3 rounded-xl bg-[rgba(var(--color-rgb-primary),0.02)] sm:bg-transparent">
+          <div class="flex items-center gap-3 min-w-0 flex-1">
+            <div class="w-10 h-10 rounded-full bg-green-100 dark:bg-green-900/40 flex items-center justify-center shrink-0">
+              <i class="fas fa-check text-green-600 dark:text-green-400 text-sm"></i>
+            </div>
+            <div class="min-w-0 flex-1">
+              <p class="font-bold text-sm sm:text-base leading-tight">Private Sound Immersion Add-on (60 min)</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mt-0.5">Paid Mar 22, 2026 Â· Invoice #SAN-INV-7440</p>
+            </div>
+          </div>
+          <div class="flex items-center justify-between sm:justify-end gap-3">
+            <span class="font-bold text-base">$120.00</span>
+            <span class="status-badge status-paid text-xs">Paid</span>
+            <button onclick="alert('Receipt downloaded.')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+      </div>
+      <button onclick="alert('Redirecting to secure card update portal...')" class="btn-primary-design w-full mt-6 py-3 text-sm font-bold inline-flex items-center justify-center gap-2">
+        <i class="fas fa-credit-card"></i> Update Payment Method or Membership
+      </button>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 6: AGREEMENTS & WAIVERS ========== -->
+  <section id="page-documents" class="page-content hidden">
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-4">Agreements & Waivers</h3>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Review your signed sanctuary waivers, health intake records, and studio policies.</p>
+      <div class="space-y-3">
+        <div class="receipt-item flex justify-between items-center">
+          <div>
+            <p class="font-bold">Yoga &amp; Meditation Studio Practice Waiver &amp; Release</p>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Signed electronically Â· Valid through Dec 2026</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="status-badge status-completed text-xs">Signed</span>
+            <button onclick="alert('Downloading signed waiver PDF...')" class="text-gift-slate hover:opacity-80"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="receipt-item flex justify-between items-center">
+          <div>
+            <p class="font-bold">Holistic Health & Breathwork Intake Form</p>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Personal wellness record Â· Updated March 2026</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="status-badge status-completed text-xs">Complete</span>
+            <button onclick="alert('Downloading intake form...')" class="text-gift-slate hover:opacity-80"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="receipt-item flex justify-between items-center">
+          <div>
+            <p class="font-bold">Sound Bath Sensory & Acoustic Guidelines</p>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Shala silence & frequency compliance</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="status-badge status-completed text-xs">Acknowledged</span>
+            <button onclick="alert('Downloading guidelines...')" class="text-gift-slate hover:opacity-80"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+
+        <div class="receipt-item flex justify-between items-center">
+          <div>
+            <p class="font-bold">Monthly Unlimited Membership Terms</p>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Auto-renewal & 30-day cancellation terms</p>
+          </div>
+          <div class="flex items-center gap-4">
+            <span class="status-badge status-completed text-xs">Active</span>
+            <button onclick="alert('Downloading terms...')" class="text-gift-slate hover:opacity-80"><i class="fas fa-download"></i></button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Details Modal -->
+<div id="bookingModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+  <div class="card-design max-w-lg w-full p-6 animate-slide-up relative">
+    <button onclick="closeBookingDetail()" class="absolute top-4 right-4 text-neutral-dark/60 dark:text-gray-300 hover:text-gift-slate text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-gift-slate/15 text-gift-slate flex items-center justify-center">
+        <i class="fas fa-spa"></i>
+      </div>
+      <div>
+        <h4 id="modalTitle" class="font-serif font-bold text-xl">Practice Details</h4>
+        <p id="modalTime" class="text-xs text-neutral-dark/60 dark:text-gray-400"></p>
+      </div>
+    </div>
+    <div class="space-y-3 text-sm py-2 border-y border-[rgba(var(--color-rgb-primary),0.1)] my-3">
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Room / Shala:</span>
+        <span id="modalRoom" class="font-semibold text-right"></span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Lead Practitioner:</span>
+        <span id="modalTeacher" class="font-semibold text-right"></span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Reserved Spot:</span>
+        <span id="modalSpot" class="font-semibold text-right text-gift-slate"></span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Included Amenities:</span>
+        <span class="font-semibold text-right">Organic Props, Hinoki Tea, Linens</span>
+      </div>
+    </div>
+    <div class="flex gap-3 mt-4">
+      <button onclick="closeBookingDetail()" class="btn-primary-design w-full py-2.5 text-sm">Close Details</button>
+    </div>
+  </div>
+</div>
+
+<!-- Class Slot Reservation Modal -->
+<div id="slotBookingModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+  <div class="card-design max-w-lg w-full p-6 animate-slide-up relative">
+    <button onclick="closeSlotBooking()" class="absolute top-4 right-4 text-neutral-dark/60 dark:text-gray-300 hover:text-gift-slate text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-gift-slate/15 text-gift-slate flex items-center justify-center">
+        <i class="fas fa-calendar-plus text-base"></i>
+      </div>
+      <div>
+        <h4 id="slotModalClassName" class="font-serif font-bold text-xl">Reserve Class Slot</h4>
+        <p id="slotModalInfo" class="text-xs text-neutral-dark/60 dark:text-gray-400"></p>
+      </div>
+    </div>
+
+    <form id="slotReserveForm" onsubmit="confirmSlotBooking(event)" class="space-y-4">
+      <div>
+        <label class="form-label">Preferred Session Date</label>
+        <select class="form-input" id="slotModalDate" required>
+          <option value="Tomorrow (Morning Wave)">Tomorrow â€” Morning Wave</option>
+          <option value="This Friday (Evening Wave)">This Friday â€” Evening Wave</option>
+          <option value="This Saturday (Weekend Immersion)">This Saturday â€” Weekend Immersion</option>
+          <option value="Next Monday (Dawn Centering)">Next Monday â€” Dawn Centering</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label">Mat Position in Shala</label>
+        <select class="form-input" id="slotModalMat" required>
+          <option value="Mat 01 (Front East Sunlit)">Mat 01 â€” Front East Sunlit Row</option>
+          <option value="Mat 04 (Center Acoustic Zone)">Mat 04 â€” Center Harmonic Zone</option>
+          <option value="Mat 07 (Garden View Shala)">Mat 07 â€” Garden Alcove Row</option>
+          <option value="Mat 10 (Quiet Back Row)">Mat 10 â€” Quiet Grounding Corner</option>
+        </select>
+      </div>
+
+      <div>
+        <label class="form-label">Payment & Credit Allocation</label>
+        <div class="space-y-2">
+          <label class="p-3 rounded-xl border border-[rgba(var(--color-rgb-primary),0.2)] flex items-center justify-between cursor-pointer hover:bg-gift-slate/5 transition">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="creditChoice" value="pack" checked class="text-gift-slate">
+              <div>
+                <p class="text-xs font-bold">10-Class Pack Credit</p>
+                <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400">Deduct 1 of 3 available pack credits</p>
+              </div>
+            </div>
+            <span class="text-xs font-semibold text-gift-slate">3 Left</span>
+          </label>
+
+          <label class="p-3 rounded-xl border border-[rgba(var(--color-rgb-primary),0.2)] flex items-center justify-between cursor-pointer hover:bg-gift-slate/5 transition">
+            <div class="flex items-center gap-2.5">
+              <input type="radio" name="creditChoice" value="unlimited" class="text-gift-slate">
+              <div>
+                <p class="text-xs font-bold">Unlimited Membership Pass</p>
+                <p class="text-[11px] text-neutral-dark/60 dark:text-gray-400">Included in monthly membership</p>
+              </div>
+            </div>
+            <span class="status-badge status-confirmed text-[10px]">Active</span>
+          </label>
+        </div>
+      </div>
+
+      <div class="pt-2 flex gap-3">
+        <button type="button" onclick="closeSlotBooking()" class="btn-outline-design w-1/3 py-2.5 text-xs font-bold">Cancel</button>
+        <button type="submit" class="btn-primary-design w-2/3 py-2.5 text-xs font-bold inline-flex items-center justify-center gap-1.5">
+          <i class="fas fa-check-circle"></i> Confirm Slot Booking
+        </button>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- Renew / Extend Membership Modal -->
+<div id="renewModal" class="fixed inset-0 bg-black/60 z-50 hidden flex items-center justify-center p-4">
+  <div class="card-design max-w-md w-full p-6 animate-slide-up relative">
+    <button onclick="closeRenewModal()" class="absolute top-4 right-4 text-neutral-dark/60 dark:text-gray-300 hover:text-gift-slate text-xl">
+      <i class="fas fa-times"></i>
+    </button>
+    <div class="flex items-center gap-3 mb-4">
+      <div class="w-10 h-10 rounded-full bg-gift-slate/15 text-gift-slate flex items-center justify-center">
+        <i class="fas fa-redo text-base"></i>
+      </div>
+      <div>
+        <h4 class="font-serif font-bold text-xl">Membership Renewal</h4>
+        <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Unlimited Sanctuary Pass Â· $220 / month</p>
+      </div>
+    </div>
+    <div class="space-y-3 text-xs py-3 border-y border-[rgba(var(--color-rgb-primary),0.1)] mb-4">
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Current Expiration:</span>
+        <span class="font-bold">June 01, 2026</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">New Renewal Date:</span>
+        <span class="font-bold text-gift-slate">July 01, 2026 (+30 Days)</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Renewal Amount:</span>
+        <span class="font-bold">$220.00</span>
+      </div>
+      <div class="flex justify-between">
+        <span class="text-neutral-dark/60 dark:text-gray-400">Payment Card:</span>
+        <span class="font-bold">Visa â€¢â€¢â€¢â€¢ 4242</span>
+      </div>
+    </div>
+    <div class="flex gap-3">
+      <button onclick="closeRenewModal()" class="btn-outline-design w-1/3 py-2 text-xs">Close</button>
+      <button onclick="executeRenewal()" class="btn-primary-design w-2/3 py-2 text-xs font-bold">Confirm Renewal</button>
+    </div>
+  </div>
+</div>
+
+<!-- Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const rtlToggleMobile = document.getElementById('rtl-toggle-mobile');
+  function setRTL(isRTL) {
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', isRTL ? 'ar' : 'en');
+    localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+  }
+  const savedDir = localStorage.getItem('dir');
+  setRTL(savedDir === 'rtl');
+  if (rtlToggle) rtlToggle.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+  if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  function setTheme(isDark) {
+    if (isDark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    [themeToggle, themeToggleMobile].forEach(btn => {
+      if (btn) {
+        let moon = btn.querySelector('.fa-moon'), sun = btn.querySelector('.fa-sun');
+        if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+      }
+    });
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme === 'dark');
+  if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+  // Mobile Sidebar
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+  if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+  window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+  // Page Navigation
+  const sidebarItems = document.querySelectorAll('.sidebar-item[data-page]');
+  const pages = document.querySelectorAll('.page-content');
+  const pageTitle = document.getElementById('page-title');
+  const pageSubtitle = document.getElementById('page-subtitle');
+  const titles = {
+    dashboard: { title: 'Home (Studio Atmosphere)', subtitle: 'Calm, minimalist layout featuring ambient sound resonance, live shala metrics & daily intention' },
+    classes: { title: 'Classes (Style & Level)', subtitle: 'Filter by style and level Â· Reserve your class slot with 1-click' },
+    instructors: { title: 'Sanctuary Instructors', subtitle: 'Meet our master guides, lineage teachers, and class schedules' },
+    memberships: { title: 'Membership Plans & Class Pack', subtitle: 'Track your 10-Class Pack punchcard usage and manage membership renewal' },
+    bookings: { title: 'My Sessions', subtitle: 'View upcoming practice sessions, mat assignments & reschedule slots' },
+    lookbook: { title: 'Ritual Spaces & Shalas', subtitle: 'Explore and curate sanctuary aesthetics' },
+    'new-booking': { title: 'Book Practice / Mat', subtitle: 'Select practice modality, preferred guide & shala space' },
+    payments: { title: 'Passes & Payments', subtitle: 'Manage your Unlimited Shala pass & invoices' },
+    documents: { title: 'Agreements & Waivers', subtitle: 'Download signed studio liability and health intake waivers' }
+  };
+
+  window.navigateTo = function(page) {
+    sidebarItems.forEach(i => i.classList.remove('active'));
+    document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
+    pages.forEach(p => p.classList.add('hidden'));
+    document.getElementById(`page-${page}`)?.classList.remove('hidden');
+    if (titles[page]) {
+      pageTitle.textContent = titles[page].title;
+      pageSubtitle.textContent = titles[page].subtitle;
+    }
+    closeSidebar();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  sidebarItems.forEach(item => {
+    item.addEventListener('click', () => { navigateTo(item.getAttribute('data-page')); });
+  });
+  document.querySelectorAll('[data-nav]').forEach(btn => {
+    btn.addEventListener('click', () => { navigateTo(btn.getAttribute('data-nav')); });
+  });
+
+  // Filter Classes by Style & Level
+  let currentStyle = 'all';
+  let currentLevel = 'all';
+
+  function applyClassFilters() {
+    const classCards = document.querySelectorAll('.class-card');
+    classCards.forEach(card => {
+      const cardStyle = card.getAttribute('data-style');
+      const cardLevel = card.getAttribute('data-level');
+      const matchStyle = (currentStyle === 'all' || cardStyle === currentStyle);
+      const matchLevel = (currentLevel === 'all' || cardLevel === currentLevel);
+      if (matchStyle && matchLevel) {
+        card.classList.remove('hidden');
+      } else {
+        card.classList.add('hidden');
+      }
+    });
+  }
+
+  document.querySelectorAll('#styleFilterGroup .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#styleFilterGroup .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentStyle = btn.getAttribute('data-style');
+      applyClassFilters();
+    });
+  });
+
+  document.querySelectorAll('#levelFilterGroup .filter-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+      document.querySelectorAll('#levelFilterGroup .filter-btn').forEach(b => b.classList.remove('active'));
+      btn.classList.add('active');
+      currentLevel = btn.getAttribute('data-level');
+      applyClassFilters();
+    });
+  });
+
+  // Look Reference Selection
+  const lookThumbs = document.querySelectorAll('.look-thumb');
+  const selectedCount = document.getElementById('selectedCount');
+  function updateCount() {
+    const count = document.querySelectorAll('.look-thumb.selected').length;
+    if (selectedCount) selectedCount.textContent = count;
+  }
+  lookThumbs.forEach(thumb => {
+    thumb.addEventListener('click', () => {
+      thumb.classList.toggle('selected');
+      updateCount();
+    });
+  });
+  updateCount();
+
+  // Booking Form Submission
+  const bookingForm = document.getElementById('bookingRequestForm');
+  if (bookingForm) {
+    bookingForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Your practice reservation has been confirmed! We have set aside your mat in the shala.');
+      navigateTo('bookings');
+    });
+  }
+});
+
+// Audio Player for Studio Atmosphere
+let isPlayingAudio = false;
+function toggleAtmosphereAudio() {
+  isPlayingAudio = !isPlayingAudio;
+  const playIcon = document.getElementById('playIcon');
+  const statusLabel = document.getElementById('audioTrackStatus');
+  const eqBars = document.querySelectorAll('.eq-bar');
+  if (isPlayingAudio) {
+    playIcon.className = 'fas fa-pause text-base';
+    statusLabel.textContent = 'Streaming 432 Hz Solfeggio â€¢ Active';
+    eqBars.forEach(bar => bar.classList.remove('paused'));
+  } else {
+    playIcon.className = 'fas fa-play text-base';
+    statusLabel.textContent = 'Click to Play 432 Hz Soundscape';
+    eqBars.forEach(bar => bar.classList.add('paused'));
+  }
+}
+
+function setAtmosphereFreq(freq, desc) {
+  document.getElementById('playerFreqLabel').textContent = freq + ' Solfeggio';
+  document.getElementById('audioTrackStatus').textContent = freq + ' Â· ' + desc;
+  if (!isPlayingAudio) toggleAtmosphereAudio();
+}
+
+// 4-7-8 Breath Pacer
+let breathInterval = null;
+function triggerMindfulBreath() {
+  const dot = document.getElementById('breathDot');
+  const txt = document.getElementById('breathText');
+  if (breathInterval) {
+    clearInterval(breathInterval);
+    breathInterval = null;
+    dot.style.transform = 'scale(1)';
+    txt.textContent = 'Mindful breath completed. Settle into the peace of now.';
+    return;
+  }
+  let step = 0;
+  function cycle() {
+    if (step === 0) {
+      txt.textContent = 'Inhale deeply through nose (4s)...';
+      dot.style.transform = 'scale(2.4)';
+      dot.style.backgroundColor = 'var(--color-primary)';
+      step = 1;
+      setTimeout(cycle, 4000);
+    } else if (step === 1) {
+      txt.textContent = 'Hold breath gently (7s)...';
+      dot.style.transform = 'scale(2.4)';
+      dot.style.backgroundColor = '#D4A373';
+      step = 2;
+      setTimeout(cycle, 7000);
+    } else {
+      txt.textContent = 'Exhale slowly through mouth (8s)...';
+      dot.style.transform = 'scale(1)';
+      dot.style.backgroundColor = 'var(--color-primary-bright)';
+      step = 0;
+      setTimeout(cycle, 8000);
+    }
+  }
+  cycle();
+}
+
+// Auto-Renew Toggle
+function toggleAutoRenew(isChecked) {
+  if (isChecked) {
+    alert('Auto-Renewal Active: Your Unlimited Sanctuary Pass will automatically renew on June 01, 2026.');
+  } else {
+    alert('Auto-Renewal Paused: Your membership will remain active until June 01, 2026, without automatic recharging.');
+  }
+}
+
+// Slot Reservation Modal Functions
+function openSlotBooking(className, teacher, room, time) {
+  document.getElementById('slotModalClassName').textContent = className;
+  document.getElementById('slotModalInfo').textContent = `${teacher} Â· ${room} Â· ${time}`;
+  document.getElementById('slotBookingModal').classList.remove('hidden');
+}
+
+function closeSlotBooking() {
+  document.getElementById('slotBookingModal').classList.add('hidden');
+}
+
+function confirmSlotBooking(e) {
+  e.preventDefault();
+  const className = document.getElementById('slotModalClassName').textContent;
+  const mat = document.getElementById('slotModalMat').value;
+  const date = document.getElementById('slotModalDate').value;
+  closeSlotBooking();
+  alert(`Slot Confirmed!\n\nClass: ${className}\nDate: ${date}\nAssigned Mat: ${mat}\n\nYour session has been added to My Sessions.`);
+  navigateTo('bookings');
+}
+
+// Renewal Modals
+function openRenewModal() {
+  document.getElementById('renewModal').classList.remove('hidden');
+}
+
+function closeRenewModal() {
+  document.getElementById('renewModal').classList.add('hidden');
+}
+
+function executeRenewal() {
+  closeRenewModal();
+  alert('Membership Renewed!\n\nYour Unlimited Sanctuary Pass has been extended through July 01, 2026. A receipt has been issued to Visa ending in 4242.');
+}
+
+function openPurchasePackModal() {
+  alert('Top-Up Requested!\n\nNew 10-Class Sanctuary Pack ($180) added to your account on Visa â€¢â€¢â€¢â€¢ 4242. 10 fresh credits have been loaded onto your punchcard!');
+}
+
+// Existing Booking Detail Modal
+function showBookingDetail(title, time, room, teacher, spot) {
+  document.getElementById('modalTitle').textContent = title;
+  document.getElementById('modalTime').textContent = time;
+  document.getElementById('modalRoom').textContent = room;
+  document.getElementById('modalTeacher').textContent = teacher;
+  document.getElementById('modalSpot').textContent = spot;
+  document.getElementById('bookingModal').classList.remove('hidden');
+}
+
+function closeBookingDetail() {
+  document.getElementById('bookingModal').classList.add('hidden');
+}
+</script>
+</body>
+</html>

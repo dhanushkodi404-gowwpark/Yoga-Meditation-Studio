@@ -1,0 +1,802 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>About Our Sanctuary &middot; Yoga &amp; Meditation Studio</title>
+  <meta name="description" content="Discover the philosophy, lineage, acoustic architecture, and resident guides behind our luxury Yoga & Meditation Sanctuary.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: oklch(99% .004 105);
+      --foreground: oklch(27% .025 145);
+      --primary: oklch(47% .053 150);
+      --primary-foreground: oklch(99% .004 105);
+      --studio-surface: oklch(95% .012 120);
+      --studio-green: oklch(29% .032 150);
+      --studio-sage: oklch(88% .025 130);
+      --studio-ink: oklch(27% .025 145);
+      --studio-white: oklch(99% .004 105);
+      --studio-muted: oklch(54% .02 140);
+      --studio-border: oklch(86% .016 130);
+      --studio-rose: var(--primary);
+      --studio-overlay: oklch(20% .025 140 / .5);
+      --studio-shadow: 0 8px 35px oklch(20% .02 140 / .08);
+      --font-body: "Plus Jakarta Sans", sans-serif;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+    }
+    .dark {
+      --background: oklch(20% .012 145);
+      --foreground: oklch(94% .01 120);
+      --studio-surface: oklch(24% .015 145);
+      --studio-ink: oklch(94% .01 120);
+      --studio-muted: oklch(73% .015 140);
+      --studio-border: oklch(35% .02 145);
+      --card: oklch(23% .015 145);
+      --primary: oklch(85% .03 140);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body { font-family: var(--font-body); background-color: var(--background); color: var(--foreground); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, a, summary { -webkit-tap-highlight-color: transparent; }
+    button { font-family: inherit; }
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; letter-spacing: 0; line-height: 1.15; }
+    h1 { font-size: clamp(42px, 5.5vw, 76px); }
+    h2 { font-size: clamp(34px, 4vw, 52px); }
+    h3 { font-size: clamp(22px, 2.5vw, 32px); }
+    h1 em, h2 em { font-weight: 400; font-style: italic; color: var(--primary); }
+    p { font-size: 15px; color: var(--studio-muted); line-height: 1.85; }
+
+    .page-container { max-width: 1240px; margin: 0 auto; padding: 0 36px; }
+    .section-space { padding: 90px 0; }
+    .eyebrow { letter-spacing: 2px; color: var(--primary); margin-bottom: 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; display: inline-block; }
+    .section-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; gap: 30px; flex-wrap: wrap; }
+    .section-heading > div { max-width: 650px; }
+
+    /* Studio button */
+    .studio-button {
+      background: var(--studio-ink);
+      color: var(--studio-white);
+      border-radius: 9999px;
+      padding: 11px 26px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .studio-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); opacity: 0.95; }
+    .studio-button.ghost { background: transparent; color: var(--studio-ink); border: 1px solid var(--studio-border); }
+    .studio-button.ghost:hover { background: var(--studio-surface); }
+    .arrow-disc {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--studio-surface);
+      color: var(--studio-ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    .studio-button:hover .arrow-disc { transform: translateX(3px); }
+
+    /* Header */
+    .site-header { position: sticky; top: 16px; z-index: 50; padding: 0 28px; margin-bottom: 24px; }
+    .nav-island {
+      background: var(--background);
+      border-radius: 50px;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1340px;
+      margin: auto;
+      display: flex;
+      box-shadow: var(--studio-shadow);
+      border: 1px solid var(--studio-border);
+      min-height: 70px;
+      padding: 12px 26px;
+      backdrop-filter: blur(14px);
+    }
+    .brand { white-space: nowrap; font-family: var(--font-display); color: var(--studio-ink); align-items: center; gap: 10px; font-size: 24px; font-weight: 600; display: flex; }
+    .brand-logo { height: 44px; width: auto; display: block; }
+    .brand-logo-light { display: none; }
+    .dark .brand-logo-dark { display: none; }
+    .dark .brand-logo-light { display: block; }
+
+    .desktop-nav { text-transform: uppercase; align-items: center; gap: 22px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.5px; display: flex; }
+    .desktop-nav a { color: var(--studio-ink); transition: color 0.2s; padding: 6px 4px; }
+    .desktop-nav > a:hover, .desktop-nav a.active, .desktop-nav summary.active, .active { color: var(--primary) !important; font-weight: 600; }
+    .dark .desktop-nav > a:hover, .dark .desktop-nav a.active, .dark .desktop-nav summary.active, .dark .active { color: var(--studio-sage) !important; }
+
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-dropdown summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 4px; color: var(--studio-ink); }
+    .nav-dropdown summary::-webkit-details-marker { display: none; }
+    .dropdown-content {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 14px;
+      box-shadow: var(--studio-shadow);
+      padding: 10px 8px;
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 60;
+    }
+    .dropdown-content a { text-transform: none; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; }
+    .dropdown-content a:hover { background: var(--studio-surface); }
+
+    .nav-toggles { display: flex; align-items: center; gap: 8px; margin-left: 6px; }
+    .circle-button {
+      border: 1px solid var(--studio-border);
+      width: 36px;
+      height: 36px;
+      color: var(--studio-ink);
+      cursor: pointer;
+      background: transparent;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .circle-button:hover { background: var(--studio-surface); transform: scale(1.05); }
+    .circle-button svg { width: 16px; height: 16px; }
+
+    [hidden] { display: none !important; }
+
+    .mobile-toggle { display: none; border: 1px solid var(--studio-border); width: 38px; height: 38px; border-radius: 50%; background: transparent; color: var(--studio-ink); align-items: center; justify-content: center; cursor: pointer; }
+    .mobile-nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 28px;
+      right: 28px;
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 20px;
+      box-shadow: var(--studio-shadow);
+      padding: 24px;
+      display: none !important;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 55;
+    }
+    .mobile-nav a { font-size: 16px; color: var(--studio-ink); padding: 8px 0; border-bottom: 1px solid var(--studio-border); }
+    .mobile-nav a.active { color: var(--primary) !important; font-weight: 600; }
+    .mobile-nav .studio-button { width: 100%; justify-content: center; margin-top: 8px; }
+    .mobile-nav .nav-toggles { display: flex; gap: 8px; margin-top: 8px; }
+
+    @media (max-width: 960px) {
+      .desktop-nav { display: none !important; }
+      .mobile-toggle { display: inline-flex !important; }
+      .mobile-nav:not([hidden]) { display: flex !important; }
+    }
+
+    /* =========================================================
+       1. ABOUT HERO (EDITORIAL SPLIT WITH FLOATING FOUNDER CARD)
+       ========================================================= */
+    .about-hero { padding: 40px 0 80px; }
+    .about-hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
+    .hero-badge-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      padding: 6px 16px;
+      border-radius: 9999px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      font-weight: 600;
+      color: var(--studio-green);
+      margin-bottom: 24px;
+    }
+    .about-hero p.lead { font-size: 18px; line-height: 1.8; margin: 24px 0 34px; color: var(--studio-ink); font-weight: 400; }
+    .hero-stats-strip { display: flex; gap: 36px; padding-top: 28px; border-top: 1px solid var(--studio-border); }
+    .stat-item h4 { font-size: 38px; color: var(--studio-green); margin-bottom: 4px; }
+    .stat-item p { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
+
+    .about-visual-cluster { position: relative; }
+    .visual-main-frame {
+      border-radius: 28px;
+      overflow: hidden;
+      aspect-ratio: 4/5;
+      box-shadow: var(--studio-shadow);
+      border: 1px solid var(--studio-border);
+    }
+    .visual-main-frame img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .visual-floating-badge {
+      position: absolute;
+      bottom: -24px;
+      left: -24px;
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 20px;
+      padding: 20px 24px;
+      box-shadow: var(--studio-shadow);
+      max-width: 270px;
+    }
+    .visual-floating-badge .quote { font-family: var(--font-display); font-size: 17px; font-style: italic; color: var(--studio-ink); margin-bottom: 8px; line-height: 1.4; }
+    .visual-floating-badge .author { font-size: 11px; letter-spacing: 1.5px; color: var(--primary); text-transform: uppercase; font-weight: 700; }
+
+    /* =========================================================
+       2. FOUNDERS' STORY & LINEAGE (ASYMMETRIC SPLIT)
+       ========================================================= */
+    .story-section { background: var(--studio-surface); border-radius: 36px; margin: 20px 0; }
+    .story-grid { display: grid; grid-template-columns: 0.9fr 1.1fr; gap: 60px; align-items: center; padding: 80px 48px; }
+    .story-photo-stack { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+    .story-photo-stack img { border-radius: 20px; aspect-ratio: 3/4; }
+    .story-photo-stack img:nth-child(2) { transform: translateY(30px); }
+    .story-quote-box {
+      border-left: 3px solid var(--primary);
+      padding-left: 24px;
+      margin: 28px 0;
+      font-family: var(--font-display);
+      font-size: 21px;
+      color: var(--studio-ink);
+      line-height: 1.5;
+    }
+
+    /* =========================================================
+       3. SACRED PILLARS OF PRACTICE (CARDS GRID)
+       ========================================================= */
+    .pillars-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 30px; }
+    .pillar-card {
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 24px;
+      padding: 36px 28px;
+      transition: all 0.3s ease;
+      position: relative;
+    }
+    .pillar-card:hover { transform: translateY(-6px); box-shadow: var(--studio-shadow); border-color: var(--studio-green); }
+    .pillar-num { font-family: var(--font-display); font-size: 42px; color: var(--primary); font-weight: 600; line-height: 1; margin-bottom: 20px; }
+    .pillar-card h3 { font-size: 22px; margin-bottom: 12px; color: var(--studio-ink); }
+
+    /* =========================================================
+       4. SANCTUARY ARCHITECTURE & ACOUSTICS
+       ========================================================= */
+    .acoustics-box {
+      background: var(--studio-green);
+      color: var(--studio-white);
+      border-radius: 32px;
+      padding: 70px 56px;
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 50px;
+      align-items: center;
+    }
+    .acoustics-box h2 { color: var(--studio-white); margin-bottom: 20px; }
+    .acoustics-box p { color: oklch(90% .015 130); font-size: 15.5px; }
+    .spec-pills { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 30px; }
+    .spec-pill {
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.18);
+      padding: 16px 20px;
+      border-radius: 16px;
+    }
+    .spec-pill strong { display: block; font-size: 14px; font-weight: 600; margin-bottom: 4px; color: var(--studio-white); }
+    .spec-pill span { font-size: 12.5px; color: oklch(85% .015 130); line-height: 1.5; }
+    .acoustics-visual { border-radius: 24px; overflow: hidden; aspect-ratio: 4/3; }
+
+    /* =========================================================
+       5. RESIDENT GUIDES & TEACHERS
+       ========================================================= */
+    .guides-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+    .guide-card {
+      border: 1px solid var(--studio-border);
+      border-radius: 24px;
+      overflow: hidden;
+      background: var(--background);
+      transition: transform 0.3s;
+    }
+    .guide-card:hover { transform: translateY(-5px); box-shadow: var(--studio-shadow); }
+    .guide-thumb { aspect-ratio: 3/4; overflow: hidden; }
+    .guide-thumb img { transition: transform 0.4s; }
+    .guide-card:hover .guide-thumb img { transform: scale(1.05); }
+    .guide-info { padding: 22px 20px; }
+    .guide-info h3 { font-size: 20px; color: var(--studio-ink); margin-bottom: 4px; }
+    .guide-role { font-size: 11px; text-transform: uppercase; letter-spacing: 1.5px; color: var(--primary); font-weight: 700; display: block; margin-bottom: 10px; }
+    .guide-bio { font-size: 13px; line-height: 1.6; }
+
+    /* =========================================================
+       6. PHILOSOPHY MILESTONES & VALUES
+       ========================================================= */
+    .values-strip { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 20px; }
+    .value-box {
+      border-top: 2px solid var(--studio-border);
+      padding-top: 24px;
+    }
+    .value-box h3 { font-size: 24px; color: var(--studio-ink); margin-bottom: 10px; }
+    .value-box p { font-size: 14px; }
+
+    /* =========================================================
+       7. INVITATION CTA
+       ========================================================= */
+    .about-cta-banner {
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      border-radius: 36px;
+      padding: 80px 40px;
+      text-align: center;
+      margin: 40px 0 90px;
+    }
+    .about-cta-banner h2 { max-width: 650px; margin: 0 auto 18px; }
+    .about-cta-banner p { max-width: 520px; margin: 0 auto 32px; font-size: 16px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--studio-border); padding: 75px 0 40px; background: var(--background); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 0.9fr 1fr 1fr; gap: 40px; }
+    .footer-brand p { margin: 18px 0 24px; font-size: 13.5px; max-width: 320px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--studio-border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--studio-ink);
+      transition: all 0.2s;
+    }
+    .social-links a:hover { background: var(--studio-ink); color: var(--studio-white); }
+    .social-links svg { width: 16px; height: 16px; }
+    .footer-col h3 { font-family: var(--font-body); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 22px; color: var(--studio-ink); }
+    .footer-col a { display: block; font-size: 14px; color: var(--studio-muted); margin-bottom: 12px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--studio-muted); margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--primary); }
+    .footer-bottom { border-top: 1px solid var(--studio-border); margin-top: 50px; padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 12px; }
+    .footer-bottom em { font-family: var(--font-display); color: var(--primary); font-style: normal; font-size: 14px; }
+
+    /* Modal dialog */
+    .modal-backdrop { background: var(--studio-overlay); z-index: 100; place-items: center; padding: 20px; display: grid; position: fixed; inset: 0; }
+    .portal-dialog { background: var(--background); width: 100%; max-width: 440px; box-shadow: var(--studio-shadow); border-radius: 16px; padding: 40px; position: relative; border: 1px solid var(--studio-border); }
+    .portal-dialog h2 { margin: 16px 0; font-size: 32px; color: var(--studio-ink); }
+    .dialog-close { position: absolute; top: 16px; right: 16px; }
+
+    /* Responsive */
+    @media (max-width: 1150px) {
+      .pillars-grid, .guides-grid { grid-template-columns: repeat(2, 1fr); }
+      .about-hero-grid, .story-grid, .acoustics-box { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .acoustics-box { padding: 48px 32px; }
+    }
+    @media (max-width: 960px) {
+      .desktop-nav { display: none; }
+      .mobile-toggle { display: inline-flex; }
+      .site-header { padding: 0 16px; }
+      .page-container { padding: 0 20px; }
+      .story-grid { padding: 40px 24px; }
+    }
+    @media (max-width: 640px) {
+      .pillars-grid, .guides-grid, .values-strip, .spec-pills { grid-template-columns: 1fr; }
+      .story-photo-stack { grid-template-columns: 1fr; }
+      .story-photo-stack img:nth-child(2) { transform: none; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .about-cta-banner { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav aria-label="Main navigation" class="nav-island">
+      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio â€” home">
+        <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+        <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+      </a>
+      <div class="desktop-nav">
+        <details class="nav-dropdown">
+          <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+          <div class="dropdown-content">
+            <a href="index.html#home">Home 1</a>
+            <a href="home2.html">Home 2</a>
+          </div>
+        </details>
+        <a href="about.html" class="active">About</a>
+        <a href="services.html">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <details class="nav-dropdown">
+          <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+          <div class="dropdown-content">
+            <a href="admin.html">Studio Admin</a>
+            <a href="client.html">Member Portal</a>
+          </div>
+        </details>
+        <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
+        <div class="nav-toggles">
+          <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+          </button>
+          <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 8 4 4-4 4"></path><path d="M2 12h20"></path><path d="m6 8-4 4 4 4"></path></svg>
+          </button>
+        </div>
+      </div>
+      <button aria-expanded="false" aria-label="Toggle Navigation Menu" class="mobile-toggle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. ABOUT HERO SECTION -->
+    <section class="about-hero">
+      <div class="page-container">
+        <div class="about-hero-grid">
+          <div>
+            <div class="hero-badge-pill">
+              <span style="display:inline-block;width:7px;height:7px;border-radius:50%;background:#4ade80;"></span>
+              EST. 2018 Â· SACRED SPATIAL ARCHITECTURE
+            </div>
+            <h1>A Space to Return to <em>Your Essence.</em></h1>
+            <p class="lead">We believe that true healing begins when the nervous system feels unconditionally safe. Our sanctuary was built as an architectural refuge from the relentless pace of urban lifeâ€”fusing Mysore breath lineage, somatic movement, and cellular acoustic frequencies.</p>
+            <div style="display:flex;gap:14px;flex-wrap:wrap;">
+              <a href="#story" class="studio-button">Our Sanctuary Story &rarr;</a>
+              <a href="services.html" class="studio-button ghost">Explore Practices</a>
+            </div>
+            <div class="hero-stats-strip">
+              <div class="stat-item">
+                <h4>8+</h4>
+                <p>Years of Practice</p>
+              </div>
+              <div class="stat-item">
+                <h4>15k</h4>
+                <p>Mats Reserved</p>
+              </div>
+              <div class="stat-item">
+                <h4>432Hz</h4>
+                <p>Harmonic Tuning</p>
+              </div>
+            </div>
+          </div>
+          <div class="about-visual-cluster">
+            <div class="visual-main-frame">
+              <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=1200&q=80" alt="Practitioner in lotus meditation inside sunlit sanctuary">
+            </div>
+            <div class="visual-floating-badge">
+              <div class="quote">"Silence is not the absence of sound, but the presence of stillness."</div>
+              <div class="author">Elena Vance Â· Co-Founder</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. FOUNDERS' STORY & LINEAGE -->
+    <section class="section-space" id="story">
+      <div class="page-container">
+        <div class="story-section">
+          <div class="story-grid">
+            <div class="story-photo-stack">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Elena Vance, Lead Guide">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="James Vance, Acoustic Architect">
+            </div>
+            <div>
+              <span class="eyebrow">OUR BEGINNING &amp; INTENTION</span>
+              <h2>Born from the Search for Stillness<em>.</em></h2>
+              <p>In 2018, founders Elena and James left their high-pressure Manhattan careers after experiencing severe chronic burnout. Their journey took them through the ashrams of Rishikesh, the sound temples of Nepal, and the restorative bathhouses of Kyoto.</p>
+              <div class="story-quote-box">
+                "We realized modern wellness had become another performance metric. We wanted a shala where you don't come to achieve or burn out, but simply to unravel and listen."
+              </div>
+              <p>Together, they designed a sanctuary that honors classical 8-limb Ashtanga principles while embracing modern neuroscience, circadian daylight rhythms, and somatic bodywork.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SACRED PILLARS OF OUR PRACTICE -->
+    <section class="section-space">
+      <div class="page-container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">FOUR SACRED TENETS</span>
+            <h2>The Pillars of Our Shala<em>.</em></h2>
+          </div>
+          <p>Every class, ambient frequency, and herbal cup poured in our sanctuary is guided by four foundational intentions.</p>
+        </div>
+
+        <div class="pillars-grid">
+          <div class="pillar-card">
+            <div class="pillar-num">01</div>
+            <h3>Somatic Breathwork</h3>
+            <p>Breath is the bridge between the conscious and unconscious. Our instructors guide slow, rhythmic pranayama that gently regulates the vagus nerve and lowers sympathetic stress.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">02</div>
+            <h3>Biophilic Architecture</h3>
+            <p>Constructed with non-toxic limewash plaster, FSC-certified white oak, living olive trees, and filtered triple-glazed sunlight to ground the sensory system.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">03</div>
+            <h3>432 Hz Sound Science</h3>
+            <p>Our acoustic sanctuary features German-engineered quartz crystal bowls and hand-forged Nepalese gongs tuned to 432 Hzâ€”known to induce restorative theta brainwaves.</p>
+          </div>
+          <div class="pillar-card">
+            <div class="pillar-num">04</div>
+            <h3>Mindful Sangha</h3>
+            <p>A welcoming community where hierarchy melts away. Whether it is your very first vinyasa or your thousandth meditation, you are received with open hands.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. ACOUSTIC ARCHITECTURE & SPATIAL DESIGN -->
+    <section class="section-space">
+      <div class="page-container">
+        <div class="acoustics-box">
+          <div>
+            <span class="eyebrow" style="color:var(--studio-sage);">TIGHTLY TUNED FREQUENCIES</span>
+            <h2>Architectural Acoustics &amp; Sound Healing<em>.</em></h2>
+            <p>Most urban studios echo harsh street sirens and subway tremors. Our shala was structurally decoupled with sub-floor dampening and sound-absorbing acoustic felt panels, achieving an ambient noise floor below 24 decibels.</p>
+            <div class="spec-pills">
+              <div class="spec-pill">
+                <strong>Travertine Sound Baffles</strong>
+                <span>Naturally disperse sound waves without harsh digital echoes.</span>
+              </div>
+              <div class="spec-pill">
+                <strong>German Quartz Bowls</strong>
+                <span>99.9% pure silicon crystal emitting pure sine-wave harmonics.</span>
+              </div>
+              <div class="spec-pill">
+                <strong>Medical-Grade HEPA</strong>
+                <span>Continuous air exchange cycle every 12 minutes for pure prana.</span>
+              </div>
+              <div class="spec-pill">
+                <strong>Underfloor Radiant Heat</strong>
+                <span>Even 78Â°F-92Â°F radiant infrared warmth that warms muscles deeply.</span>
+              </div>
+            </div>
+          </div>
+          <div class="acoustics-visual">
+            <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80" alt="Handcrafted brass sound bowls and incense in sound sanctuary">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. RESIDENT GUIDES & TEACHERS -->
+    <section class="section-space">
+      <div class="page-container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">HELD IN DEVOTION</span>
+            <h2>Meet Your Resident Guides<em>.</em></h2>
+          </div>
+          <p>Our teachers are devoted students first. Each guide holds over 500+ hours of dedicated study across traditional lineages and somatic trauma-informed facilitation.</p>
+        </div>
+
+        <div class="guides-grid">
+          <div class="guide-card">
+            <div class="guide-thumb">
+              <img src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?auto=format&fit=crop&w=600&q=80" alt="Elena Vance">
+            </div>
+            <div class="guide-info">
+              <h3>Elena Vance</h3>
+              <span class="guide-role">Co-Founder Â· Mysore Vinyasa</span>
+              <p class="guide-bio">Practicing for 14 years, Elena weaves dynamic solar breath with traditional Sanskrit chanting and subtle spinal alignment.</p>
+            </div>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-thumb">
+              <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?auto=format&fit=crop&w=600&q=80" alt="Dr. Aarav Mehta">
+            </div>
+            <div class="guide-info">
+              <h3>Dr. Aarav Mehta</h3>
+              <span class="guide-role">Pranayama &amp; Sound Healing</span>
+              <p class="guide-bio">A neuroscientist and classical sitar disciple who bridges sacred Vedic sound traditions with modern vagal nerve research.</p>
+            </div>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-thumb">
+              <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?auto=format&fit=crop&w=600&q=80" alt="Siobhan Klein">
+            </div>
+            <div class="guide-info">
+              <h3>Siobhan Klein</h3>
+              <span class="guide-role">Restorative Yin &amp; Somatics</span>
+              <p class="guide-bio">Specializing in fascial release, weighted sandbag stillness, and gentle meridian stretches under warm candlelight.</p>
+            </div>
+          </div>
+
+          <div class="guide-card">
+            <div class="guide-thumb">
+              <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=600&q=80" alt="James Vance">
+            </div>
+            <div class="guide-info">
+              <h3>James Vance</h3>
+              <span class="guide-role">Co-Founder Â· Acoustic Director</span>
+              <p class="guide-bio">Curator of the sanctuary's 38-inch planetary symphonic gongs and meditative koshi wind chime soundscapes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. COMMITMENT TO LIVING SUSTAINABLY -->
+    <section class="section-space" style="background:var(--studio-surface);border-radius:36px;margin:20px 0;">
+      <div class="page-container" style="padding:60px 36px;">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">AHIMSA IN ACTION</span>
+            <h2>Our Environmental &amp; Ethical Pledge<em>.</em></h2>
+          </div>
+          <p>Yoga does not end when we roll up our mats. We carry reverence for all living systems through every choice in our studio.</p>
+        </div>
+
+        <div class="values-strip">
+          <div class="value-box">
+            <h3>100% Organic &amp; Non-Toxic</h3>
+            <p>Every mat is harvested from sustainable Portuguese cork tree bark. Bolsters are stuffed with organic buckwheat hulls, and all cleaning uses natural essential botanical oils.</p>
+          </div>
+          <div class="value-box">
+            <h3>Zero Single-Use Waste</h3>
+            <p>We do not sell plastic water bottles. Our ceramic tea apothecary serves complimentary wild-harvested herbal tisanes in handcrafted stoneware cups.</p>
+          </div>
+          <div class="value-box">
+            <h3>Community Scholarship Fund</h3>
+            <p>5% of every monthly sanctuary membership directly funds sliding-scale mats and free community meditation circles for local public school educators and nurses.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. INVITATION CTA -->
+    <section class="page-container">
+      <div class="about-cta-banner">
+        <span class="eyebrow">BEGIN YOUR JOURNEY</span>
+        <h2>Your Mat is Waiting in the Stillness<em>.</em></h2>
+        <p>Step through our cedar doors and leave the noise of the city behind. Join us for a complimentary herbal tea and your first sanctuary practice.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <button class="studio-button" onclick="showPortal('Book Introductory Mat')">Reserve Your Intro Mat<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
+          <a href="contact.html" class="studio-button ghost">Visit Studio &amp; Directions &rarr;</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="page-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" dir="ltr" href="index.html#home">
+            <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+            <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+          </a>
+          <p>A luxury architectural yoga and sound meditation sanctuary dedicated to conscious movement, nervous system regulation, and timeless presence.</p>
+          <div class="social-links">
+            <a aria-label="Instagram" href="https://instagram.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+            <a aria-label="YouTube" href="https://youtube.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
+            <a aria-label="Facebook" href="https://facebook.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Navigation</h3>
+          <a href="index.html#home">Home 1</a>
+          <a href="home2.html">Home 2</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact &amp; Booking</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Couture Services</h3>
+          <a href="services.html">Solar Heated Vinyasa</a>
+          <a href="services.html">Restorative Yin &amp; Sound</a>
+          <a href="services.html">432 Hz Sound Baths</a>
+          <a href="services.html">Private Somatic Therapy</a>
+          <a href="services.html">Corporate Mindfulness</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Studio Location</h3>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>5th Ave Luxury Tower, NYC 10001</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+            <span>+1 (800) 555-0199</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect height="16" rx="2" width="20" x="2" y="4"></rect></svg>
+            <span>hello@sanctuarystudio.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+            <span>Mon-Sun: 6:30AM - 9:00PM EST</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Yoga &amp; Meditation Studio. All rights reserved.</p>
+        <em>Mindful Movement &bull; Sacred Stillness &bull; Timeless Harmony</em>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const mobile = $('.mobile-toggle');
+    const desktop = $('.desktop-nav');
+    if (desktop) {
+      const panel = document.createElement('div');
+      panel.className = 'mobile-nav';
+      panel.hidden = true;
+      panel.innerHTML = desktop.innerHTML.replace('Dashboard', 'Portals').replace('Sign In', 'Client Portal Login');
+      $('.site-header').append(panel);
+      if (mobile) {
+        mobile.onclick = () => {
+          panel.hidden = !panel.hidden;
+          mobile.setAttribute('aria-expanded', !panel.hidden);
+        };
+      }
+      panel.querySelectorAll('a').forEach(a => a.onclick = () => { panel.hidden = true; });
+    }
+
+    // Dark Mode Toggle
+    document.querySelectorAll('[aria-label="Toggle Dark/Light Mode"]').forEach(b => b.onclick = () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // RTL/LTR Toggle
+    document.querySelectorAll('[aria-label="Toggle RTL/LTR"]').forEach(b => b.onclick = () => {
+      document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+    });
+
+    // Modal Portal Dialog
+    function showPortal(title) {
+      if (title.toLowerCase().includes('sign in') || title.toLowerCase().includes('client') || title.toLowerCase().includes('login')) {
+        window.location.href = 'login.html';
+        return;
+      }
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-backdrop';
+      overlay.innerHTML = `
+        <div class="portal-dialog" role="dialog" aria-modal="true" aria-label="${title}">
+          <button class="circle-button dialog-close" aria-label="Close dialog">âœ•</button>
+          <h2>${title}</h2>
+          <p>Reserve your mat or consult with our sanctuary concierge. Our guides prepare organic cork mats and herbal tea 15 minutes before practice.</p>
+          <div style="margin:20px 0;display:flex;flex-direction:column;gap:10px;">
+            <a class="studio-button" href="contact.html">Go to Reservation Form &rarr;</a>
+            <a class="studio-button ghost" href="tel:+18005550199">Call Concierge: +1 (800) 555-0199</a>
+          </div>
+        </div>
+      `;
+      document.body.append(overlay);
+      const close = () => { overlay.remove(); document.removeEventListener('keydown', key); };
+      const key = (e) => { if (e.key === 'Escape') close(); };
+      overlay.onclick = (e) => { if (e.target === overlay) close(); };
+      overlay.querySelector('.dialog-close').onclick = close;
+      document.addEventListener('keydown', key);
+      overlay.querySelector('.dialog-close').focus();
+    }
+  </script>
+</body>
+</html>

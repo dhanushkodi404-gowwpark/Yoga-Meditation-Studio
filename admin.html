@@ -1,0 +1,968 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr" class="scroll-smooth" data-theme="sanctuary-green">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Studio Admin | Yoga &amp; Meditation Studio</title>
+<link rel="icon" type="image/png" href="images/logo-dark.png">
+<!-- Tailwind CSS CDN -->
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = {
+  darkMode: 'class',
+  theme: {
+    extend: {
+      colors: {
+        'gift-slate': 'rgba(var(--color-rgb-primary), <alpha-value>)',
+        'gift-slate-light': 'rgba(var(--color-rgb-light), <alpha-value>)',
+        'gift-slate-dark': 'rgba(var(--color-rgb-dark), <alpha-value>)',
+        'gift-slate-bright': 'rgba(var(--color-rgb-bright), <alpha-value>)',
+        'gift-accent': 'rgba(var(--color-rgb-accent), <alpha-value>)',
+        'bg-warm': 'var(--color-bg-warm)',
+        'neutral-dark': 'rgba(26, 36, 28, <alpha-value>)',
+        'neutral-light': '#EBF2EC',
+        'dark-bg': '#111712',
+        'dark-card': '#18221B',
+        'dark-surface': '#202D24',
+      },
+      fontFamily: {
+        'sans': ['Plus Jakarta Sans', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
+        'serif': ['Cormorant Garamond', 'serif'],
+        'display': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'premium': ['Cormorant Garamond', 'Outfit', 'serif'],
+        'alt': ['Plus Jakarta Sans', 'sans-serif'],
+      },
+      animation: {
+        'slide-up': 'slideUp 0.5s ease-out',
+        'fade-in': 'fadeIn 0.3s ease-out',
+        'pulse-glow': 'pulseGlow 3s infinite',
+        'float-slow': 'floatSlow 6s ease-in-out infinite',
+      },
+      keyframes: {
+        slideUp: { '0%': { transform: 'translateY(30px)', opacity: '0' }, '100%': { transform: 'translateY(0)', opacity: '1' } },
+        fadeIn: { '0%': { opacity: '0' }, '100%': { opacity: '1' } },
+        pulseGlow: { '0%, 100%': { opacity: '0.6' }, '50%': { opacity: '1' } },
+        floatSlow: { '0%,100%': { transform: 'translateY(0px)' }, '50%': { transform: 'translateY(-8px)' } },
+      }
+    }
+  }
+};
+</script>
+<script>
+if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark');
+if (localStorage.getItem('dir') === 'rtl') { document.documentElement.dir = 'rtl'; document.documentElement.lang = 'ar'; }
+</script>
+<!-- Fonts & Icons -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Outfit:wght@300;400;500;600;700;800;900&family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;0,800;1,400&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+<style>
+:root, [data-theme="sanctuary-green"] {
+  --color-primary: #2A5C3E;
+  --color-primary-light: #3E7B54;
+  --color-primary-dark: #1B3D28;
+  --color-primary-bright: #7F9F7C;
+  --color-accent: #D4A373;
+  --color-bg-warm: #FCFBF8;
+  --color-text-dark: #1A241C;
+  --color-rgb-primary: 42, 92, 62;
+  --color-rgb-light: 62, 123, 84;
+  --color-rgb-dark: 27, 61, 40;
+  --color-rgb-bright: 127, 159, 124;
+  --color-rgb-accent: 212, 163, 115;
+}
+body {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  background-color: var(--color-bg-warm);
+  color: var(--color-text-dark);
+  transition: background-color 0.4s ease, color 0.4s ease;
+}
+.dark body { background-color: #111712; color: #EAEFEA; }
+h1,h2,h3,h4,h5,h6 {
+  font-family: 'Cormorant Garamond', 'Outfit', serif;
+  font-weight: 700;
+  letter-spacing: -0.015em;
+}
+.gold-gradient-text {
+  background: linear-gradient(135deg, var(--color-primary-bright) 0%, var(--color-primary) 50%, var(--color-primary-dark) 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .gold-gradient-text {
+  background: linear-gradient(135deg, #B5D4B2 0%, #7F9F7C 50%, #527A50 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.dark .text-gift-slate { color: var(--color-primary-bright) !important; }
+.dark .border-gift-slate { border-color: var(--color-primary-bright) !important; }
+.dark .bg-gift-slate { background-color: var(--color-primary-bright) !important; }
+
+/* Sidebar */
+.sidebar {
+  position: fixed;
+  left: 0; top: 0; height: 100vh;
+  width: 280px;
+  background: #FFFFFF;
+  border-right: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  transition: transform 0.3s ease;
+  z-index: 100;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+}
+.dark .sidebar { background: #18221B; border-right-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { .sidebar { transform: translateX(-100%); } .sidebar.open { transform: translateX(0); } }
+[dir="rtl"] .sidebar { left: auto; right: 0; border-right: none; border-left: 1px solid rgba(var(--color-rgb-primary), 0.12); }
+[dir="rtl"].dark .sidebar { border-left-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { [dir="rtl"] .sidebar { transform: translateX(100%); } [dir="rtl"] .sidebar.open { transform: translateX(0); } }
+
+.sidebar-overlay { position: fixed; top:0;left:0;right:0;bottom:0; background: rgba(0,0,0,0.5); z-index:99; display:none; }
+.sidebar-overlay.open { display:block; }
+.sidebar-item {
+  display: flex; align-items: center; gap: 0.75rem;
+  padding: 0.85rem 1.4rem; margin: 0.25rem 0.75rem;
+  border-radius: 12px; color: var(--color-text-dark);
+  transition: all 0.2s; cursor: pointer;
+  font-weight: 500; font-size: 0.92rem;
+}
+.dark .sidebar-item { color: #EAEFEA; }
+.sidebar-item:hover { background: rgba(var(--color-rgb-primary), 0.08); color: var(--color-primary); }
+.dark .sidebar-item:hover { background: rgba(var(--color-rgb-bright), 0.12); color: var(--color-primary-bright); }
+.sidebar-item.active { background: var(--color-primary); color: #FFFFFF; font-weight: 600; box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.25); }
+.dark .sidebar-item.active { background: var(--color-primary-bright); color: #111712; box-shadow: 0 4px 12px rgba(var(--color-rgb-bright), 0.25); }
+.sidebar-item i { width: 22px; font-size: 1.05rem; }
+
+.main-content { margin-left: 280px; padding: 1.5rem; min-height: 100vh; }
+[dir="rtl"] .main-content { margin-left: 0; margin-right: 280px; }
+@media (max-width: 768px) { .main-content { margin-left: 0; margin-right: 0; padding-top: 75px; } }
+
+.mobile-header {
+  display: none; position: fixed; top:0;left:0;right:0;
+  background: #FFFFFF; padding: 0.75rem 1rem;
+  border-bottom: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  z-index: 50; align-items: center; justify-content: space-between;
+}
+.dark .mobile-header { background: #18221B; border-bottom-color: rgba(var(--color-rgb-bright), 0.18); }
+@media (max-width: 768px) { .mobile-header { display: flex; } }
+
+.toggle-btn {
+  width: 38px; height: 38px; border-radius: 10px;
+  background: rgba(var(--color-rgb-primary), 0.08);
+  color: var(--color-text-dark); display: inline-flex;
+  align-items: center; justify-content: center; cursor: pointer;
+  transition: all 0.2s; border: none; font-size: 0.95rem;
+}
+.dark .toggle-btn { background: rgba(var(--color-rgb-bright), 0.12); color: #EAEFEA; }
+.toggle-btn:hover { background: var(--color-primary); color: #FFFFFF; }
+.dark .toggle-btn:hover { background: var(--color-primary-bright); color: #111712; }
+
+.card-design {
+  background: #FFFFFF; border-radius: 28px;
+  transition: all 0.3s ease;
+  border: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  box-shadow: 0 6px 18px rgba(0,0,0,0.03);
+}
+.dark .card-design { background: #18221B; border-color: rgba(var(--color-rgb-bright), 0.18); }
+.card-design:hover { border-color: var(--color-primary); }
+.dark .card-design:hover { border-color: var(--color-primary-bright); }
+
+.btn-primary-design {
+  background: var(--color-primary); color: #FFFFFF;
+  font-weight: 700; border-radius: 60px; transition: all 0.3s;
+  box-shadow: 0 4px 12px rgba(var(--color-rgb-primary), 0.25);
+  white-space: nowrap; border: none; cursor: pointer;
+}
+.btn-primary-design:hover { background: var(--color-primary-dark); transform: translateY(-2px); box-shadow: 0 8px 20px rgba(var(--color-rgb-primary), 0.35); color: #FFFFFF; }
+.dark .btn-primary-design { background: var(--color-primary-bright); color: #111712; }
+.dark .btn-primary-design:hover { background: #A8C9A5; color: #111712; }
+
+.btn-outline-design {
+  border: 1.5px solid var(--color-primary); color: var(--color-primary);
+  background: transparent; border-radius: 60px; font-weight: 600;
+  transition: all 0.3s; white-space: nowrap; cursor: pointer;
+}
+.btn-outline-design:hover { background: var(--color-primary); color: #FFFFFF; transform: translateY(-2px); }
+.dark .btn-outline-design { border-color: var(--color-primary-bright); color: var(--color-primary-bright); }
+.dark .btn-outline-design:hover { background: var(--color-primary-bright); color: #111712; }
+
+.stat-card {
+  background: #FFFFFF; border-radius: 20px; padding: 1.25rem;
+  border: 1px solid rgba(var(--color-rgb-primary), 0.12);
+  transition: all 0.3s;
+}
+.dark .stat-card { background: #18221B; border-color: rgba(var(--color-rgb-bright), 0.18); }
+.stat-card:hover { transform: translateY(-3px); border-color: var(--color-primary); }
+
+.status-badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: 0.25rem 0.75rem; border-radius: 40px; font-size: 0.7rem;
+  font-weight: 700; letter-spacing: 0.03em; text-transform: uppercase;
+  white-space: nowrap; flex-shrink: 0; line-height: 1.2;
+}
+.status-confirmed, .status-active, .status-completed, .status-paid {
+  background: #E8F5EB; color: #1B5E2C;
+}
+.dark .status-confirmed, .dark .status-active, .dark .status-completed, .dark .status-paid {
+  background: #1B3D28; color: #A8DDAE;
+}
+.status-requested, .status-installment {
+  background: #FEF3E2; color: #B45309;
+}
+.dark .status-requested, .dark .status-installment {
+  background: #45260A; color: #FCD34D;
+}
+.status-trial-scheduled, .status-scheduled {
+  background: #E0F2FE; color: #0369A1;
+}
+.dark .status-trial-scheduled, .dark .status-scheduled {
+  background: #082F49; color: #7DD3FC;
+}
+.status-pending-payment {
+  background: #FEE2E2; color: #B91C1C;
+}
+.dark .status-pending-payment {
+  background: #450A0A; color: #FCA5A5;
+}
+
+.form-input {
+  width: 100%; padding: 0.75rem 1rem;
+  border-radius: 16px; border: 1.5px solid rgba(var(--color-rgb-primary), 0.2);
+  background: #FFFFFF; transition: all 0.3s;
+  color: var(--color-text-dark); font-family: 'Plus Jakarta Sans', sans-serif;
+}
+.dark .form-input { background: #111712; border-color: rgba(var(--color-rgb-bright), 0.22); color: #EAEFEA; }
+.form-input:focus { outline: none; border-color: var(--color-primary); box-shadow: 0 0 0 3px rgba(var(--color-rgb-primary), 0.15); }
+.dark .form-input:focus { border-color: var(--color-primary-bright); box-shadow: 0 0 0 3px rgba(var(--color-rgb-bright), 0.15); }
+
+.form-label {
+  display: block; font-size: 0.82rem; font-weight: 600;
+  margin-bottom: 0.35rem; color: var(--color-text-dark);
+}
+.dark .form-label { color: #EAEFEA; }
+
+.progress-bar {
+  background: rgba(var(--color-rgb-primary), 0.12); border-radius: 9999px; height: 8px; overflow: hidden;
+}
+.dark .progress-bar { background: rgba(var(--color-rgb-bright), 0.15); }
+.progress-fill {
+  background: linear-gradient(90deg, var(--color-primary-light), var(--color-primary));
+  height: 100%; border-radius: 9999px; transition: width 0.4s ease;
+}
+.dark .progress-fill { background: linear-gradient(90deg, var(--color-primary-bright), var(--color-primary-light)); }
+
+.look-thumb {
+  position: relative; border-radius: 20px; overflow: hidden; aspect-ratio: 4/5;
+  background: #E8ECE8;
+}
+.dark .look-thumb { background: #1F2C23; }
+.look-thumb img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.4s ease; }
+.look-thumb:hover img { transform: scale(1.05); }
+.look-label {
+  position: absolute; bottom: 0; left: 0; right: 0; padding: 1.2rem 0.75rem 0.65rem;
+  background: linear-gradient(to top, rgba(17, 23, 18, 0.9) 0%, transparent 100%);
+  color: white; font-size: 0.82rem; font-weight: 600; text-align: center;
+}
+</style>
+</head>
+<body class="min-h-screen">
+
+<!-- Mobile Header -->
+<header class="mobile-header">
+  <div class="flex items-center gap-2">
+    <button id="menuToggle" class="toggle-btn" aria-label="Toggle Navigation"><i class="fas fa-bars"></i></button>
+    <a href="index.html" class="flex items-center gap-2" dir="ltr" title="Yoga &amp; Meditation Studio">
+      <img class="h-8 w-auto dark:hidden" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+      <img class="h-8 w-auto hidden dark:block" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+    </a>
+  </div>
+  <div class="flex items-center gap-2">
+    <button id="theme-toggle-mobile" class="toggle-btn" aria-label="Toggle Theme"><i class="fas fa-moon dark:hidden"></i><i class="fas fa-sun hidden dark:inline"></i></button>
+    <button id="rtl-toggle-mobile" class="toggle-btn" aria-label="Toggle RTL">â‡„</button>
+    <a href="login.html" class="toggle-btn" title="Sign Out"><i class="fas fa-sign-out-alt"></i></a>
+  </div>
+</header>
+
+<!-- Sidebar Overlay -->
+<div id="sidebarOverlay" class="sidebar-overlay"></div>
+
+<!-- Sidebar -->
+<aside id="sidebar" class="sidebar">
+  <div class="p-6 pb-4 border-b border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)] flex justify-between items-center">
+    <a href="index.html" class="flex flex-col items-start gap-1" dir="ltr" title="Yoga &amp; Meditation Studio">
+      <img class="h-9 w-auto dark:hidden" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+      <img class="h-9 w-auto hidden dark:block" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+      <span class="block text-[10px] tracking-wider text-gift-slate dark:text-gift-slate-bright uppercase font-bold mt-1">Studio Director Portal</span>
+    </a>
+  </div>
+
+  <div class="p-4 mx-3 my-3 rounded-2xl bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] border border-[rgba(var(--color-rgb-primary),0.1)] flex items-center gap-3">
+    <div class="w-11 h-11 rounded-full bg-gift-slate text-white flex items-center justify-center font-serif font-bold text-base shadow-sm shrink-0">
+      EV
+    </div>
+    <div class="min-w-0 flex-1">
+      <p class="text-sm font-bold truncate">Elena Vance</p>
+      <span class="inline-block text-[10px] px-2 py-0.5 rounded-full bg-gift-slate text-white dark:bg-gift-slate-bright dark:text-[#111712] font-semibold uppercase">Lead Yogini & Director</span>
+    </div>
+  </div>
+
+  <nav class="flex-1 py-2">
+    <div class="sidebar-item active" data-page="dashboard"><i class="fas fa-tachometer-alt"></i><span>Studio Overview</span></div>
+    <div class="sidebar-item" data-page="bookings"><i class="fas fa-calendar-check"></i><span>All Sessions & Mats</span></div>
+    <div class="sidebar-item" data-page="members"><i class="fas fa-users"></i><span>Members & Practitioners</span></div>
+    <div class="sidebar-item" data-page="schedule"><i class="fas fa-chalkboard-teacher"></i><span>Teacher & Guide Schedule</span></div>
+    <div class="sidebar-item" data-page="looks"><i class="fas fa-spa"></i><span>Practice Catalog & Spaces</span></div>
+    <div class="sidebar-item" data-page="payments"><i class="fas fa-credit-card"></i><span>Passes & Invoices</span></div>
+    <div class="sidebar-item" data-page="messages"><i class="fas fa-comments"></i><span>Student Messages</span></div>
+  </nav>
+
+  <div class="p-4 border-t border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)] space-y-1">
+   
+    <a href="login.html" class="sidebar-item text-xs text-red-600 dark:text-red-400">
+      <i class="fas fa-sign-out-alt"></i><span>Sign Out</span>
+    </a>
+  </div>
+</aside>
+
+<!-- Main Content -->
+<main class="main-content">
+  <!-- Top Greeting & Header Bar -->
+  <div class="card-design p-4 md:p-6 flex justify-between items-center flex-wrap gap-4 mb-6">
+    <div>
+      <h1 class="text-2xl md:text-3xl font-serif font-bold" id="page-title">Studio Overview</h1>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400" id="page-subtitle">Welcome back, Elena Â· Studio Director</p>
+    </div>
+    <div class="flex items-center gap-3">
+      <button id="theme-toggle" class="toggle-btn hidden md:inline-flex" title="Dark / Light mode">
+        <i class="fas fa-moon dark:hidden"></i>
+        <i class="fas fa-sun hidden dark:inline"></i>
+      </button>
+      <button id="rtl-toggle" class="toggle-btn hidden md:inline-flex" title="Toggle Text Direction">
+        â‡„
+      </button>
+      <button onclick="navigateTo('bookings')" class="btn-primary-design px-4 py-2 text-sm inline-flex items-center gap-2">
+        <i class="fas fa-plus"></i> New Practice Session
+      </button>
+    </div>
+  </div>
+
+  <!-- ========== PAGE 1: DASHBOARD ========== -->
+  <section id="page-dashboard" class="page-content">
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 mb-6">
+      <div class="stat-card">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Active Members</p>
+            <p class="text-2xl font-bold font-serif">142 Members</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-users text-gift-slate text-base"></i>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Mats Reserved Today</p>
+            <p class="text-2xl font-bold font-serif">38 Mats</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-calendar-check text-gift-slate text-base"></i>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Sound Baths This Week</p>
+            <p class="text-2xl font-bold font-serif">12 Baths</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-bell text-gift-slate text-base"></i>
+          </div>
+        </div>
+      </div>
+      <div class="stat-card">
+        <div class="flex justify-between items-center">
+          <div>
+            <p class="text-xs text-neutral-dark/60 dark:text-gray-400 mb-1">Monthly Pass Revenue</p>
+            <p class="text-2xl font-bold font-serif text-gift-slate">$31,240</p>
+          </div>
+          <div class="w-11 h-11 bg-[rgba(var(--color-rgb-primary),0.08)] dark:bg-[rgba(var(--color-rgb-bright),0.15)] rounded-full flex items-center justify-center">
+            <i class="fas fa-dollar-sign text-gift-slate text-base"></i>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div class="card-design p-6">
+        <div class="flex items-center justify-between mb-4">
+          <h3 class="font-serif font-bold text-xl">Today's Practice Schedule</h3>
+          <span class="text-xs text-gift-slate font-bold cursor-pointer hover:underline" onclick="navigateTo('bookings')">View All &rarr;</span>
+        </div>
+        <div class="space-y-3">
+          <div class="flex items-center justify-between gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <i class="fas fa-bell text-gift-slate mt-1 shrink-0"></i>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-semibold truncate">Sophia Reyes Â· 432 Hz Sound Bath Immersion</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">6:00 PM Â· The Sound Sanctuary (Assigned: Siobhan Kelly)</p>
+              </div>
+            </div>
+            <span class="status-badge status-confirmed text-xs">Confirmed</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3 pb-3 border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.1)]">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <i class="fas fa-sun text-gift-slate mt-1 shrink-0"></i>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-semibold truncate">Emma Liu Â· Solar Vinyasa Flow (Heated 85Â°F)</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">8:00 AM Â· The Sunlit Shala Â· Mat 04 (Assigned: Elena Vance)</p>
+              </div>
+            </div>
+            <span class="status-badge status-completed text-xs">Completed</span>
+          </div>
+
+          <div class="flex items-center justify-between gap-3">
+            <div class="flex items-start gap-3 min-w-0 flex-1">
+              <i class="fas fa-users text-gift-slate mt-1 shrink-0"></i>
+              <div class="min-w-0 flex-1">
+                <p class="text-sm font-semibold truncate">Isabella Chen Â· Private Shala Immersion (Party of 6)</p>
+                <p class="text-xs text-neutral-dark/60 dark:text-gray-400 truncate">May 25 Â· 10:00 AM Â· The Lotus Pavilion (Assigned: Dr. Aarav Mehta)</p>
+              </div>
+            </div>
+            <span class="status-badge status-trial-scheduled text-xs">Booked</span>
+          </div>
+        </div>
+        <button onclick="navigateTo('bookings')" class="btn-outline-design w-full mt-5 py-2 text-sm">Open All Studio Bookings</button>
+      </div>
+
+      <div class="card-design p-6">
+        <h3 class="font-serif font-bold text-xl mb-4">Director Operations</h3>
+        <div class="space-y-3">
+          <button onclick="navigateTo('bookings')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.15)] transition flex items-center gap-3">
+            <i class="fas fa-plus-circle text-gift-slate"></i><span>Create New Practice Booking</span>
+          </button>
+          <button onclick="navigateTo('schedule')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.15)] transition flex items-center gap-3">
+            <i class="fas fa-chalkboard-teacher text-gift-slate"></i><span>Assign Teachers & Guides</span>
+          </button>
+          <button onclick="navigateTo('payments')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.15)] transition flex items-center gap-3">
+            <i class="fas fa-credit-card text-gift-slate"></i><span>Track Membership Auto-Renews</span>
+          </button>
+          <button onclick="navigateTo('messages')" class="w-full text-left px-4 py-3 bg-[rgba(var(--color-rgb-primary),0.06)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] text-neutral-dark dark:text-white rounded-xl hover:bg-[rgba(var(--color-rgb-primary),0.15)] transition flex items-center gap-3">
+            <i class="fas fa-comments text-gift-slate"></i><span>Review Practitioner Inquiries (2 Unread)</span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 2: ALL SESSIONS & BOOKINGS ========== -->
+  <section id="page-bookings" class="page-content hidden">
+    <div class="card-design p-6">
+      <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+        <div>
+          <h3 class="font-serif font-bold text-2xl">All Studio Bookings</h3>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Manage sound bath journeys, solar flows, private sessions, and shala buyouts.</p>
+        </div>
+        <button onclick="alert('Open New Booking Modal...')" class="btn-primary-design px-4 py-2 text-sm"><i class="fas fa-plus mr-1"></i> New Session Booking</button>
+      </div>
+
+      <div class="space-y-4">
+        <!-- Booking Row 1 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">Sophia Reyes Â· 432 Hz Sound Bath Immersion</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">The Sound Sanctuary Â· Mat Circle #07 Â· Lead: Siobhan Kelly</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-confirmed">Confirmed</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 20, 2026 Â· 6:00 PM</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Session updated.')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-edit mr-1"></i>Update</button>
+              <button onclick="alert('Showing booking log for Sophia Reyes.')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Reserved</span>
+              <span class="text-center truncate">Mat Assigned</span>
+              <span class="text-center truncate">Tea Prep</span>
+              <span class="text-right truncate">In Session</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <!-- Booking Row 2 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">Emma Liu Â· Solar Vinyasa Flow (Heated 85Â°F)</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">The Sunlit Shala Â· Mat 04 Â· Lead: Elena Vance</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-completed">Completed</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 18, 2026 Â· 8:00 AM</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Attendance recorded.')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-check mr-1"></i>Checked In</button>
+              <button onclick="alert('Showing booking log for Emma Liu.')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Reserved</span>
+              <span class="text-center truncate">Mat Assigned</span>
+              <span class="text-center truncate">Tea Prep</span>
+              <span class="text-right truncate">Completed</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Booking Row 3 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-start gap-3">
+            <div>
+              <p class="font-bold text-lg font-serif">Isabella Chen Â· Private Shala Immersion (Party of 6)</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">The Lotus Pavilion Â· Full Shala Reserved Â· Lead: Dr. Aarav Mehta</p>
+              <div class="flex items-center gap-3 mt-2">
+                <span class="status-badge status-trial-scheduled">Deposit Paid</span>
+                <span class="text-xs text-neutral-dark/60 dark:text-gray-400">May 25, 2026 Â· 10:00 AM</span>
+              </div>
+            </div>
+            <div class="flex gap-2">
+              <button onclick="alert('Shala setup checklist launched.')" class="btn-outline-design text-xs px-4 py-1.5"><i class="fas fa-tasks mr-1"></i>Checklist</button>
+              <button onclick="alert('Showing booking details.')" class="btn-primary-design text-xs px-4 py-1.5"><i class="fas fa-eye mr-1"></i>Details</button>
+            </div>
+          </div>
+          <div class="mt-4">
+            <div class="grid grid-cols-4 text-[10px] sm:text-xs text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span class="text-left truncate">Deposit Paid</span>
+              <span class="text-center truncate">Shala Prepped</span>
+              <span class="text-center truncate">Props Ready</span>
+              <span class="text-right truncate">Arrival</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 3: MEMBERS & PRACTITIONERS ========== -->
+  <section id="page-members" class="page-content hidden">
+    <div class="card-design p-6">
+      <div class="flex flex-wrap justify-between items-center gap-4 mb-4">
+        <div>
+          <h3 class="font-serif font-bold text-2xl">Member & Practitioner Profiles</h3>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Directory of active members, pass tiers, health notes, and visit frequency.</p>
+        </div>
+        <button onclick="alert('Add Member dialog open...')" class="btn-primary-design px-4 py-2 text-sm"><i class="fas fa-user-plus mr-1"></i> Add Member</button>
+      </div>
+
+      <div class="space-y-3">
+        <!-- Member 1 -->
+        <div class="card-design p-4 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full overflow-hidden border-2 border-gift-slate shrink-0">
+              <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Sophia Reyes" class="w-full h-full object-cover">
+            </div>
+            <div>
+              <p class="font-bold">Sophia Reyes</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Pass: Unlimited Sanctuary Â· 16 visits this month Â· Joined Jan 2025</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 flex-nowrap">
+            <span class="status-badge status-active">Active Member</span>
+            <span class="text-sm font-bold text-gift-slate">$220/mo</span>
+            <button onclick="alert('Viewing member profile for Sophia Reyes...')" class="text-sm font-semibold text-gift-slate hover:underline">View Profile</button>
+          </div>
+        </div>
+
+        <!-- Member 2 -->
+        <div class="card-design p-4 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-gift-slate-light text-white flex items-center justify-center font-serif font-bold shrink-0">EL</div>
+            <div>
+              <p class="font-bold">Emma Liu</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Pass: 10-Class Sound & Flow Pack (3 remaining) Â· Joined Mar 2026</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 flex-nowrap">
+            <span class="status-badge status-confirmed">Pack Active</span>
+            <span class="text-sm font-bold text-gift-slate">$180 Pack</span>
+            <button onclick="alert('Viewing member profile for Emma Liu...')" class="text-sm font-semibold text-gift-slate hover:underline">View Profile</button>
+          </div>
+        </div>
+
+        <!-- Member 3 -->
+        <div class="card-design p-4 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-gift-slate-dark text-white flex items-center justify-center font-serif font-bold shrink-0">IC</div>
+            <div>
+              <p class="font-bold">Isabella Chen</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Private Shala Client Â· Shala Buyout Â· Booking May 25</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 flex-nowrap">
+            <span class="status-badge status-installment">Private Buyout</span>
+            <span class="text-sm font-bold text-gift-slate">$1,200</span>
+            <button onclick="alert('Viewing member profile for Isabella Chen...')" class="text-sm font-semibold text-gift-slate hover:underline">View Profile</button>
+          </div>
+        </div>
+
+        <!-- Member 4 -->
+        <div class="card-design p-4 flex flex-wrap items-center justify-between gap-3">
+          <div class="flex items-center gap-3">
+            <div class="w-11 h-11 rounded-full bg-gift-accent text-white flex items-center justify-center font-serif font-bold shrink-0">MV</div>
+            <div>
+              <p class="font-bold">Marcus Vance</p>
+              <p class="text-xs text-neutral-dark/60 dark:text-gray-400">Pass: Unlimited Sanctuary Â· Mysore Specialist Â· Joined Feb 2024</p>
+            </div>
+          </div>
+          <div class="flex items-center gap-4 flex-nowrap">
+            <span class="status-badge status-active">Active Member</span>
+            <span class="text-sm font-bold text-gift-slate">$220/mo</span>
+            <button onclick="alert('Viewing member profile for Marcus Vance...')" class="text-sm font-semibold text-gift-slate hover:underline">View Profile</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 4: TEACHER & GUIDE SCHEDULE ========== -->
+  <section id="page-schedule" class="page-content hidden">
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-2">Teacher & Shala Schedule</h3>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Assign lead practitioners to practice sessions and track shala preparation.</p>
+      <div class="space-y-4">
+        <!-- Schedule 1 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-center gap-3">
+            <div>
+              <p class="font-bold">Sophia Reyes Â· 432 Hz Sound Bath Immersion</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Assigned: Siobhan Kelly (Sound Alchemist) Â· May 20, 6:00 PM</p>
+            </div>
+            <div class="flex gap-2">
+              <select class="form-input text-sm py-1.5 px-3 w-auto">
+                <option>Siobhan Kelly (Sound Alchemist)</option>
+                <option>Elena Vance (Lead Yogini)</option>
+                <option>Dr. Aarav Mehta (Meditation)</option>
+                <option>James Sterling (Vinyasa)</option>
+              </select>
+              <button onclick="alert('Teacher assignment updated!')" class="btn-primary-design text-sm px-4 py-1.5">Save</button>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="flex justify-between text-[10px] text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span>Shala Aired</span><span>Bowls Tuned</span><span>Tea Brewed</span><span>Ready</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:75%"></div></div>
+          </div>
+        </div>
+
+        <!-- Schedule 2 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-center gap-3">
+            <div>
+              <p class="font-bold">Emma Liu Â· Solar Vinyasa Wave</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Assigned: Elena Vance Â· The Sunlit Shala Â· May 23, 8:00 AM</p>
+            </div>
+            <div class="flex gap-2">
+              <select class="form-input text-sm py-1.5 px-3 w-auto">
+                <option selected>Elena Vance (Lead Yogini)</option>
+                <option>James Sterling (Vinyasa)</option>
+                <option>Dr. Aarav Mehta (Meditation)</option>
+                <option>Siobhan Kelly (Sound Alchemist)</option>
+              </select>
+              <button onclick="alert('Teacher assignment updated!')" class="btn-primary-design text-sm px-4 py-1.5">Save</button>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="flex justify-between text-[10px] text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span>Heater Calibrated (85Â°F)</span><span>Mats Sanitized</span><span>Playlist Ready</span><span>Ready</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:100%"></div></div>
+          </div>
+        </div>
+
+        <!-- Schedule 3 -->
+        <div class="p-5 bg-[rgba(var(--color-rgb-primary),0.04)] dark:bg-[rgba(var(--color-rgb-bright),0.05)] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.08)]">
+          <div class="flex flex-wrap justify-between items-center gap-3">
+            <div>
+              <p class="font-bold">Isabella Chen Â· Private Shala Immersion (Party of 6)</p>
+              <p class="text-sm text-neutral-dark/60 dark:text-gray-400">Assigned: Dr. Aarav Mehta Â· The Lotus Pavilion Â· May 25, 10:00 AM</p>
+            </div>
+            <div class="flex gap-2">
+              <select class="form-input text-sm py-1.5 px-3 w-auto">
+                <option selected>Dr. Aarav Mehta (Meditation)</option>
+                <option>Elena Vance (Lead Yogini)</option>
+                <option>Siobhan Kelly (Sound Alchemist)</option>
+                <option>James Sterling (Vinyasa)</option>
+              </select>
+              <button onclick="alert('Teacher assignment updated!')" class="btn-primary-design text-sm px-4 py-1.5">Save</button>
+            </div>
+          </div>
+          <div class="mt-3">
+            <div class="flex justify-between text-[10px] text-neutral-dark/60 dark:text-gray-400 mb-1.5 font-medium">
+              <span>Private Lounge Reserved</span><span>Organic Refreshments</span><span>Mats Tagged</span><span>Ready</span>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" style="width:25%"></div></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 5: PRACTICE CATALOG & SPACES ========== -->
+  <section id="page-looks" class="page-content hidden">
+    <div class="card-design p-6">
+      <div class="flex flex-wrap justify-between items-center gap-3 mb-6">
+        <div>
+          <h3 class="font-serif font-bold text-2xl">Practice Catalog & Shala Spaces</h3>
+          <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mt-1">Curate and maintain reference images for our acoustic shalas, rooms, and ritual menus.</p>
+        </div>
+        <button onclick="alert('Space photo upload dialog ready.')" class="btn-primary-design px-4 py-2 text-sm"><i class="fas fa-plus mr-1"></i> Add Shala Photo</button>
+      </div>
+
+      <div class="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+        <div class="look-thumb">
+          <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=600&q=80" alt="Sound Sanctuary">
+          <div class="look-label">432 Hz Sound Shala</div>
+        </div>
+        <div class="look-thumb">
+          <img src="https://images.unsplash.com/photo-1518611012118-696072aa579a?auto=format&fit=crop&w=600&q=80" alt="Sunlit Oak Shala">
+          <div class="look-label">Sunlit Oak Shala</div>
+        </div>
+        <div class="look-thumb">
+          <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=600&q=80" alt="Restorative Yin Space">
+          <div class="look-label">Restorative Pavilion</div>
+        </div>
+        <div class="look-thumb">
+          <img src="images/home2-hero.jpg" alt="Lotus Meditation Hero">
+          <div class="look-label">Lotus Center Shala</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 6: PASSES & INVOICES ========== -->
+  <section id="page-payments" class="page-content hidden">
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-4">Pass Revenue & Invoices</h3>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Review auto-renewals, class packs, private buyouts, and payment statements.</p>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.15)] text-neutral-dark/70 dark:text-gray-300">
+              <th class="text-left py-2.5 px-3 font-semibold">Practitioner</th>
+              <th class="text-left py-2.5 px-3 font-semibold">Pass / Booking</th>
+              <th class="text-left py-2.5 px-3 font-semibold">Total</th>
+              <th class="text-left py-2.5 px-3 font-semibold">Paid</th>
+              <th class="text-left py-2.5 px-3 font-semibold">Status</th>
+              <th class="text-left py-2.5 px-3 font-semibold">Action</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr class="border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+              <td class="py-3 px-3 font-medium">Sophia Reyes</td>
+              <td class="py-3 px-3">Unlimited Sanctuary Pass (Monthly)</td>
+              <td class="py-3 px-3 font-bold">$220.00</td>
+              <td class="py-3 px-3 text-green-600 dark:text-green-400 font-semibold">$220.00</td>
+              <td class="py-3 px-3"><span class="status-badge status-paid">Auto-Paid</span></td>
+              <td class="py-3 px-3"><button onclick="alert('Downloading invoice #SAN-INV-8421...')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button></td>
+            </tr>
+            <tr class="border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+              <td class="py-3 px-3 font-medium">Emma Liu</td>
+              <td class="py-3 px-3">10-Class Sound & Flow Pack</td>
+              <td class="py-3 px-3 font-bold">$180.00</td>
+              <td class="py-3 px-3 text-green-600 dark:text-green-400 font-semibold">$180.00</td>
+              <td class="py-3 px-3"><span class="status-badge status-paid">Paid</span></td>
+              <td class="py-3 px-3"><button onclick="alert('Downloading invoice #SAN-INV-8419...')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button></td>
+            </tr>
+            <tr class="border-b border-[rgba(var(--color-rgb-primary),0.08)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+              <td class="py-3 px-3 font-medium">Isabella Chen</td>
+              <td class="py-3 px-3">Private Shala Buyout (Party of 6)</td>
+              <td class="py-3 px-3 font-bold">$1,200.00</td>
+              <td class="py-3 px-3 text-green-600 dark:text-green-400 font-semibold">$600.00 (Deposit)</td>
+              <td class="py-3 px-3"><span class="status-badge status-installment">Deposit Paid</span></td>
+              <td class="py-3 px-3"><button onclick="alert('Downloading invoice #SAN-INV-8390...')" class="text-gift-slate hover:opacity-80 p-1"><i class="fas fa-download"></i></button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <div class="mt-6 flex flex-wrap items-center gap-3">
+        <button onclick="alert('Generating monthly invoices batch...')" class="btn-primary-design px-5 py-2.5 text-sm inline-flex items-center gap-2">
+          <i class="fas fa-file-invoice"></i> Batch Generate Invoices
+        </button>
+        <button onclick="alert('Exporting CSV financial statement...')" class="btn-outline-design px-5 py-2.5 text-sm inline-flex items-center gap-2">
+          <i class="fas fa-download"></i> Export Revenue Report
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <!-- ========== PAGE 7: STUDENT MESSAGES ========== -->
+  <section id="page-messages" class="page-content hidden">
+    <div class="card-design p-6">
+      <h3 class="font-serif font-bold text-2xl mb-4">Practitioner Inquiries & Messages</h3>
+      <p class="text-sm text-neutral-dark/60 dark:text-gray-400 mb-6">Direct communication with studio members and upcoming shala attendees.</p>
+      
+      <div class="space-y-4">
+        <!-- Message 1 -->
+        <div class="p-4 bg-[rgba(var(--color-rgb-primary),0.05)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] rounded-2xl">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold">Sophia Reyes <span class="text-xs font-normal text-gift-slate ml-2">Unlimited Member</span></p>
+              <p class="text-sm mt-1">Hello Elena! For tonight's 432 Hz sound immersion, could Siobhan set up an extra organic bolster for my lumbar support? Looking forward to the session.</p>
+            </div>
+            <span class="text-xs text-neutral-dark/60 dark:text-gray-400">Today, 11:20 AM</span>
+          </div>
+          <div class="mt-3 flex gap-2">
+            <button onclick="replyModal('Sophia Reyes')" class="btn-primary-design px-4 py-1 text-xs">Reply to Sophia</button>
+          </div>
+        </div>
+
+        <!-- Message 2 -->
+        <div class="p-4 bg-white dark:bg-[#111712] rounded-2xl border border-[rgba(var(--color-rgb-primary),0.12)] dark:border-[rgba(var(--color-rgb-bright),0.15)]">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold">Elena Vance <span class="text-xs font-normal text-gift-slate ml-2">Studio Director (You)</span></p>
+              <p class="text-sm mt-1">Absolutely, Sophia! Siobhan has already reserved an organic buckwheat bolster and heavy linen blanket at Mat Circle #07 for you. See you at 6:00 PM.</p>
+            </div>
+            <span class="text-xs text-neutral-dark/60 dark:text-gray-400">Today, 11:35 AM</span>
+          </div>
+        </div>
+
+        <!-- Message 3 -->
+        <div class="p-4 bg-[rgba(var(--color-rgb-primary),0.05)] dark:bg-[rgba(var(--color-rgb-bright),0.08)] rounded-2xl">
+          <div class="flex justify-between items-start">
+            <div>
+              <p class="font-bold">Isabella Chen <span class="text-xs font-normal text-gift-slate ml-2">Shala Buyout Inquirer</span></p>
+              <p class="text-sm mt-1">Can we confirm botanical tea bar options for our private party of 6 on May 25? We would love hot ceremonial matcha and tulsi chamomile.</p>
+            </div>
+            <span class="text-xs text-neutral-dark/60 dark:text-gray-400">Yesterday, 3:15 PM</span>
+          </div>
+          <div class="mt-3 flex gap-2">
+            <button onclick="replyModal('Isabella Chen')" class="btn-primary-design px-4 py-1 text-xs">Reply to Isabella</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="mt-6 pt-4 border-t border-[rgba(var(--color-rgb-primary),0.1)]">
+        <label class="form-label">Send New Practitioner Message</label>
+        <div class="flex gap-3">
+          <input type="text" id="adminNewMsg" class="form-input flex-1" placeholder="Type a message or broadcast notice to practitioners..." />
+          <button onclick="sendAdminMsg()" class="btn-primary-design px-6 py-2"><i class="fas fa-paper-plane"></i></button>
+        </div>
+      </div>
+    </div>
+  </section>
+</main>
+
+<!-- Scripts -->
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  // RTL Toggle
+  const rtlToggle = document.getElementById('rtl-toggle');
+  const rtlToggleMobile = document.getElementById('rtl-toggle-mobile');
+  function setRTL(isRTL) {
+    document.documentElement.setAttribute('dir', isRTL ? 'rtl' : 'ltr');
+    document.documentElement.setAttribute('lang', isRTL ? 'ar' : 'en');
+    localStorage.setItem('dir', isRTL ? 'rtl' : 'ltr');
+  }
+  const savedDir = localStorage.getItem('dir');
+  setRTL(savedDir === 'rtl');
+  if (rtlToggle) rtlToggle.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+  if (rtlToggleMobile) rtlToggleMobile.addEventListener('click', () => setRTL(document.documentElement.getAttribute('dir') !== 'rtl'));
+
+  // Theme Toggle
+  const themeToggle = document.getElementById('theme-toggle');
+  const themeToggleMobile = document.getElementById('theme-toggle-mobile');
+  function setTheme(isDark) {
+    if (isDark) document.documentElement.classList.add('dark');
+    else document.documentElement.classList.remove('dark');
+    [themeToggle, themeToggleMobile].forEach(btn => {
+      if (btn) {
+        let moon = btn.querySelector('.fa-moon'), sun = btn.querySelector('.fa-sun');
+        if (isDark) { moon?.classList.add('hidden'); sun?.classList.remove('hidden'); }
+        else { moon?.classList.remove('hidden'); sun?.classList.add('hidden'); }
+      }
+    });
+    localStorage.setItem('theme', isDark ? 'dark' : 'light');
+  }
+  const savedTheme = localStorage.getItem('theme');
+  setTheme(savedTheme === 'dark');
+  if (themeToggle) themeToggle.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+  if (themeToggleMobile) themeToggleMobile.addEventListener('click', () => setTheme(!document.documentElement.classList.contains('dark')));
+
+  // Mobile Sidebar
+  const menuToggle = document.getElementById('menuToggle');
+  const sidebar = document.getElementById('sidebar');
+  const overlay = document.getElementById('sidebarOverlay');
+  function closeSidebar() { sidebar.classList.remove('open'); overlay.classList.remove('open'); }
+  function openSidebar() { sidebar.classList.add('open'); overlay.classList.add('open'); }
+  if (menuToggle) menuToggle.addEventListener('click', (e) => { e.stopPropagation(); sidebar.classList.contains('open') ? closeSidebar() : openSidebar(); });
+  if (overlay) overlay.addEventListener('click', closeSidebar);
+  window.addEventListener('resize', () => { if (window.innerWidth > 768 && sidebar.classList.contains('open')) closeSidebar(); });
+
+  // Navigation
+  const sidebarItems = document.querySelectorAll('.sidebar-item[data-page]');
+  const pages = document.querySelectorAll('.page-content');
+  const pageTitle = document.getElementById('page-title');
+  const pageSubtitle = document.getElementById('page-subtitle');
+  const titles = {
+    dashboard: { title: 'Studio Overview', subtitle: 'Welcome back, Elena Â· Studio Director' },
+    bookings: { title: 'All Sessions & Mats', subtitle: 'Manage sound bath journeys, solar flows & private bookings' },
+    members: { title: 'Members & Practitioners', subtitle: 'Directory of studio practitioners & memberships' },
+    schedule: { title: 'Teacher & Guide Schedule', subtitle: 'Assign guides to sound baths, vinyasa & yin practices' },
+    looks: { title: 'Practice Catalog & Spaces', subtitle: 'Curate high-res photos of shalas & sanctuary amenities' },
+    payments: { title: 'Passes & Invoices', subtitle: 'Monitor monthly revenue, passes & financial statements' },
+    messages: { title: 'Student Messages', subtitle: 'Respond to practitioner inquiries & retreat requests' }
+  };
+
+  window.navigateTo = function(page) {
+    sidebarItems.forEach(i => i.classList.remove('active'));
+    document.querySelector(`.sidebar-item[data-page="${page}"]`)?.classList.add('active');
+    pages.forEach(p => p.classList.add('hidden'));
+    document.getElementById(`page-${page}`)?.classList.remove('hidden');
+    if (titles[page]) {
+      pageTitle.textContent = titles[page].title;
+      pageSubtitle.textContent = titles[page].subtitle;
+    }
+    closeSidebar();
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  sidebarItems.forEach(item => {
+    item.addEventListener('click', () => { navigateTo(item.getAttribute('data-page')); });
+  });
+  document.querySelectorAll('[data-nav]').forEach(btn => {
+    btn.addEventListener('click', () => { navigateTo(btn.getAttribute('data-nav')); });
+  });
+});
+
+function replyModal(name) {
+  const reply = prompt(`Reply to ${name}:`, `Hello ${name}, thank you for reaching out to Yoga & Meditation Studio...`);
+  if (reply) {
+    alert(`Message dispatched to ${name}.`);
+  }
+}
+
+function sendAdminMsg() {
+  const input = document.getElementById('adminNewMsg');
+  if (input && input.value.trim()) {
+    alert(`Broadcast sent: "${input.value.trim()}"`);
+    input.value = '';
+  }
+}
+</script>
+</body>
+</html>

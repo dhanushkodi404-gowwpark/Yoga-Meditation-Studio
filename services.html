@@ -1,0 +1,931 @@
+﻿<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Services &amp; Practices &middot; Yoga &amp; Meditation Studio</title>
+  <meta name="description" content="Explore our signature solar vinyasa, restorative yin, 432 Hz crystal sound baths, private somatic therapy, and membership passes.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --background: oklch(99% .004 105);
+      --foreground: oklch(27% .025 145);
+      --primary: oklch(47% .053 150);
+      --primary-foreground: oklch(99% .004 105);
+      --studio-surface: oklch(95% .012 120);
+      --studio-green: oklch(29% .032 150);
+      --studio-sage: oklch(88% .025 130);
+      --studio-ink: oklch(27% .025 145);
+      --studio-white: oklch(99% .004 105);
+      --studio-muted: oklch(54% .02 140);
+      --studio-border: oklch(86% .016 130);
+      --studio-rose: var(--primary);
+      --studio-overlay: oklch(20% .025 140 / .5);
+      --studio-shadow: 0 8px 35px oklch(20% .02 140 / .08);
+      --font-body: "Plus Jakarta Sans", sans-serif;
+      --font-display: "Cormorant Garamond", Georgia, serif;
+    }
+    .dark {
+      --background: oklch(20% .012 145);
+      --foreground: oklch(94% .01 120);
+      --studio-surface: oklch(24% .015 145);
+      --studio-ink: oklch(94% .01 120);
+      --studio-muted: oklch(73% .015 140);
+      --studio-border: oklch(35% .02 145);
+      --card: oklch(23% .015 145);
+      --primary: oklch(85% .03 140);
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; scroll-padding-top: 110px; }
+    body { font-family: var(--font-body); background-color: var(--background); color: var(--foreground); line-height: 1.7; -webkit-font-smoothing: antialiased; }
+    a { color: inherit; text-decoration: none; }
+    button, a, summary { -webkit-tap-highlight-color: transparent; }
+    button { font-family: inherit; }
+    img { max-width: 100%; height: auto; display: block; object-fit: cover; }
+    h1, h2, h3, h4 { font-family: var(--font-display); font-weight: 500; letter-spacing: 0; line-height: 1.15; }
+    h1 { font-size: clamp(40px, 5vw, 70px); }
+    h2 { font-size: clamp(32px, 3.8vw, 48px); }
+    h3 { font-size: clamp(20px, 2.2vw, 28px); }
+    h1 em, h2 em { font-weight: 400; font-style: italic; color: var(--primary); }
+    p { font-size: 15px; color: var(--studio-muted); line-height: 1.85; }
+
+    .page-container { max-width: 1240px; margin: 0 auto; padding: 0 36px; }
+    .section-space { padding: 90px 0; }
+    .eyebrow { letter-spacing: 2px; color: var(--primary); margin-bottom: 16px; font-size: 11px; font-weight: 700; text-transform: uppercase; display: inline-block; }
+    .section-heading { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 50px; gap: 30px; flex-wrap: wrap; }
+    .section-heading > div { max-width: 650px; }
+
+    /* Studio buttons */
+    .studio-button {
+      background: var(--studio-ink);
+      color: var(--studio-white);
+      border-radius: 9999px;
+      padding: 11px 26px;
+      font-size: 13.5px;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .studio-button:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.12); opacity: 0.95; }
+    .studio-button.ghost { background: transparent; color: var(--studio-ink); border: 1px solid var(--studio-border); }
+    .studio-button.ghost:hover { background: var(--studio-surface); }
+    .arrow-disc {
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--studio-surface);
+      color: var(--studio-ink);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.2s;
+    }
+    .studio-button:hover .arrow-disc { transform: translateX(3px); }
+
+    /* Header */
+    .site-header { position: sticky; top: 16px; z-index: 50; padding: 0 28px; margin-bottom: 24px; }
+    .nav-island {
+      background: var(--background);
+      border-radius: 50px;
+      justify-content: space-between;
+      align-items: center;
+      max-width: 1340px;
+      margin: auto;
+      display: flex;
+      box-shadow: var(--studio-shadow);
+      border: 1px solid var(--studio-border);
+      min-height: 70px;
+      padding: 12px 26px;
+      backdrop-filter: blur(14px);
+    }
+    .brand { white-space: nowrap; font-family: var(--font-display); color: var(--studio-ink); align-items: center; gap: 10px; font-size: 24px; font-weight: 600; display: flex; }
+    .brand-logo { height: 44px; width: auto; display: block; }
+    .brand-logo-light { display: none; }
+    .dark .brand-logo-dark { display: none; }
+    .dark .brand-logo-light { display: block; }
+
+    .desktop-nav { text-transform: uppercase; align-items: center; gap: 22px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.5px; display: flex; }
+    .desktop-nav a { color: var(--studio-ink); transition: color 0.2s; padding: 6px 4px; }
+    .desktop-nav > a:hover, .desktop-nav a.active, .desktop-nav summary.active, .active { color: var(--primary) !important; font-weight: 600; }
+    .dark .desktop-nav > a:hover, .dark .desktop-nav a.active, .dark .desktop-nav summary.active, .dark .active { color: var(--studio-sage) !important; }
+
+    .nav-dropdown { position: relative; display: inline-block; }
+    .nav-dropdown summary { list-style: none; cursor: pointer; display: flex; align-items: center; gap: 4px; color: var(--studio-ink); }
+    .nav-dropdown summary::-webkit-details-marker { display: none; }
+    .dropdown-content {
+      position: absolute;
+      top: calc(100% + 12px);
+      left: 0;
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 14px;
+      box-shadow: var(--studio-shadow);
+      padding: 10px 8px;
+      min-width: 150px;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      z-index: 60;
+    }
+    .dropdown-content a { text-transform: none; padding: 8px 14px; border-radius: 8px; font-size: 13px; font-weight: 500; }
+    .dropdown-content a:hover { background: var(--studio-surface); }
+
+    .nav-toggles { display: flex; align-items: center; gap: 8px; margin-left: 6px; }
+    .circle-button {
+      border: 1px solid var(--studio-border);
+      width: 36px;
+      height: 36px;
+      color: var(--studio-ink);
+      cursor: pointer;
+      background: transparent;
+      border-radius: 50%;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s;
+    }
+    .circle-button:hover { background: var(--studio-surface); transform: scale(1.05); }
+    .circle-button svg { width: 16px; height: 16px; }
+
+    [hidden] { display: none !important; }
+
+    .mobile-toggle { display: none; border: 1px solid var(--studio-border); width: 38px; height: 38px; border-radius: 50%; background: transparent; color: var(--studio-ink); align-items: center; justify-content: center; cursor: pointer; }
+    .mobile-nav {
+      position: absolute;
+      top: calc(100% + 8px);
+      left: 28px;
+      right: 28px;
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 20px;
+      box-shadow: var(--studio-shadow);
+      padding: 24px;
+      display: none !important;
+      flex-direction: column;
+      gap: 16px;
+      z-index: 55;
+    }
+    .mobile-nav a { font-size: 16px; color: var(--studio-ink); padding: 8px 0; border-bottom: 1px solid var(--studio-border); }
+    .mobile-nav a.active { color: var(--primary) !important; font-weight: 600; }
+    .mobile-nav .studio-button { width: 100%; justify-content: center; margin-top: 8px; }
+    .mobile-nav .nav-toggles { display: flex; gap: 8px; margin-top: 8px; }
+
+    @media (max-width: 960px) {
+      .desktop-nav { display: none !important; }
+      .mobile-toggle { display: inline-flex !important; }
+      .mobile-nav:not([hidden]) { display: flex !important; }
+    }
+
+    /* =========================================================
+       1. SERVICES HERO (CENTERED SHOWCASE & FILTER PILLS)
+       ========================================================= */
+    .services-hero { text-align: center; padding: 40px 0 60px; }
+    .services-hero h1 { max-width: 800px; margin: 0 auto 20px; }
+    .services-hero p.lead { max-width: 680px; margin: 0 auto 36px; font-size: 17.5px; }
+
+    .filter-pills-bar {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-bottom: 40px;
+    }
+    .filter-pill {
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      color: var(--studio-ink);
+      padding: 9px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 500;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: #2A5C3E !important;
+      color: #FFFFFF !important;
+      border-color: #2A5C3E !important;
+    }
+    .dark .filter-pill:hover, .dark .filter-pill.active {
+      background: var(--primary) !important;
+      color: #111712 !important;
+      border-color: var(--primary) !important;
+    }
+
+    /* =========================================================
+       2. SIGNATURE CLASS CARDS GRID
+       ========================================================= */
+    .classes-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; }
+    .class-card {
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 24px;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
+      transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .class-card:hover { transform: translateY(-6px); box-shadow: var(--studio-shadow); border-color: var(--studio-green); }
+    .class-image { height: 220px; overflow: hidden; position: relative; }
+    .class-badge {
+      position: absolute;
+      top: 14px;
+      left: 14px;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(8px);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      color: var(--studio-ink);
+    }
+    .class-body { padding: 26px; display: flex; flex-direction: column; flex-grow: 1; justify-content: space-between; }
+    .class-meta { display: flex; gap: 14px; font-size: 12.5px; color: var(--primary); font-weight: 600; margin-bottom: 8px; }
+    .class-title { font-size: 24px; margin-bottom: 10px; color: var(--studio-ink); }
+    .class-desc { font-size: 14px; line-height: 1.7; margin-bottom: 22px; }
+    .class-footer { display: flex; justify-content: space-between; align-items: center; border-top: 1px solid var(--studio-border); padding-top: 18px; margin-top: auto; }
+    .class-price { font-family: var(--font-display); font-size: 24px; color: var(--studio-ink); font-weight: 600; }
+    .class-price span { font-family: var(--font-body); font-size: 12px; color: var(--studio-muted); font-weight: 400; }
+
+    /* =========================================================
+       3. SOUND SANCTUARY ACOUSTIC IMMERSION
+       ========================================================= */
+    .sound-feature {
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      border-radius: 36px;
+      padding: 70px 50px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 50px;
+      align-items: center;
+      margin: 40px 0;
+    }
+    .sound-feature-img { border-radius: 24px; overflow: hidden; aspect-ratio: 4/3; }
+    .frequency-tags { display: flex; gap: 10px; flex-wrap: wrap; margin: 24px 0 30px; }
+    .freq-tag {
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--studio-ink);
+    }
+
+    /* =========================================================
+       4. PRIVATE 1-ON-1 SOMATIC THERAPY
+       ========================================================= */
+    .privates-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; }
+    .private-card {
+      border: 1px solid var(--studio-border);
+      border-radius: 28px;
+      padding: 36px;
+      background: var(--background);
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: all 0.3s;
+    }
+    .private-card:hover { border-color: var(--studio-green); box-shadow: var(--studio-shadow); }
+    .private-card h3 { font-size: 26px; color: var(--studio-ink); margin-bottom: 12px; }
+    .benefit-list { list-style: none; margin: 20px 0 28px; display: flex; flex-direction: column; gap: 10px; }
+    .benefit-list li { font-size: 14px; display: flex; align-items: center; gap: 10px; color: var(--studio-ink); }
+    .benefit-list li svg { color: var(--studio-green); width: 16px; height: 16px; flex-shrink: 0; }
+
+    /* =========================================================
+       5. MEMBERSHIP PASSES & PRICING MATRIX
+       ========================================================= */
+    .pricing-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 30px; margin-top: 30px; }
+    .pricing-card {
+      background: var(--background);
+      border: 1px solid var(--studio-border);
+      border-radius: 30px;
+      padding: 44px 32px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: all 0.3s;
+    }
+    .pricing-card.featured {
+      background: var(--studio-green);
+      color: var(--studio-white);
+      border-color: var(--studio-green);
+      transform: scale(1.03);
+      box-shadow: 0 16px 40px oklch(29% .032 150 / .2);
+    }
+    .pricing-card.featured h3, .pricing-card.featured .price-num, .pricing-card.featured p { color: var(--studio-white); }
+    .pricing-badge {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--primary);
+      color: var(--studio-white);
+      padding: 5px 16px;
+      border-radius: 20px;
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      font-weight: 700;
+    }
+    .price-num { font-family: var(--font-display); font-size: 52px; font-weight: 600; line-height: 1; margin: 18px 0 10px; color: var(--studio-ink); }
+    .price-num span { font-size: 18px; font-family: var(--font-body); font-weight: 400; opacity: 0.7; }
+    .plan-features { list-style: none; margin: 30px 0; display: flex; flex-direction: column; gap: 14px; flex-grow: 1; }
+    .plan-features li { font-size: 14px; display: flex; align-items: center; gap: 10px; }
+
+    /* =========================================================
+       6. STUDIO ETIQUETTE & MINDFUL PROTOCOL
+       ========================================================= */
+    .etiquette-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; margin-top: 20px; }
+    .etiquette-box {
+      border: 1px solid var(--studio-border);
+      border-radius: 20px;
+      padding: 28px 22px;
+      background: var(--studio-surface);
+    }
+    .etiquette-icon { font-size: 28px; margin-bottom: 14px; }
+    .etiquette-box h4 { font-size: 18px; color: var(--studio-ink); margin-bottom: 8px; }
+    .etiquette-box p { font-size: 13.5px; line-height: 1.6; }
+
+    /* =========================================================
+       7. SERVICES BOOKING CALLOUT
+       ========================================================= */
+    .services-cta-banner {
+      background: var(--studio-ink);
+      color: var(--studio-white);
+      border-radius: 36px;
+      padding: 80px 40px;
+      text-align: center;
+      margin: 40px 0 90px;
+    }
+    .services-cta-banner h2 { color: var(--studio-white); max-width: 680px; margin: 0 auto 16px; }
+    .services-cta-banner p { color: oklch(85% .015 130); max-width: 540px; margin: 0 auto 32px; font-size: 16px; }
+
+    /* Footer */
+    footer { border-top: 1px solid var(--studio-border); padding: 75px 0 40px; background: var(--background); }
+    .footer-grid { display: grid; grid-template-columns: 1.4fr 0.9fr 1fr 1fr; gap: 40px; }
+    .footer-brand p { margin: 18px 0 24px; font-size: 13.5px; max-width: 320px; }
+    .social-links { display: flex; gap: 12px; }
+    .social-links a {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      border: 1px solid var(--studio-border);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--studio-ink);
+      transition: all 0.2s;
+    }
+    .social-links a:hover { background: var(--studio-ink); color: var(--studio-white); }
+    .social-links svg { width: 16px; height: 16px; }
+    .footer-col h3 { font-family: var(--font-body); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 1.5px; margin-bottom: 22px; color: var(--studio-ink); }
+    .footer-col a { display: block; font-size: 14px; color: var(--studio-muted); margin-bottom: 12px; transition: color 0.2s; }
+    .footer-col a:hover { color: var(--primary); }
+    .footer-contact-item { display: flex; align-items: center; gap: 10px; font-size: 13.5px; color: var(--studio-muted); margin-bottom: 12px; }
+    .footer-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; color: var(--primary); }
+    .footer-bottom { border-top: 1px solid var(--studio-border); margin-top: 50px; padding-top: 25px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px; }
+    .footer-bottom p { font-size: 12px; }
+    .footer-bottom em { font-family: var(--font-display); color: var(--primary); font-style: normal; font-size: 14px; }
+
+    /* Modal dialog */
+    .modal-backdrop { background: var(--studio-overlay); z-index: 100; place-items: center; padding: 20px; display: grid; position: fixed; inset: 0; }
+    .portal-dialog { background: var(--background); width: 100%; max-width: 440px; box-shadow: var(--studio-shadow); border-radius: 16px; padding: 40px; position: relative; border: 1px solid var(--studio-border); }
+    .portal-dialog h2 { margin: 16px 0; font-size: 32px; color: var(--studio-ink); }
+    .dialog-close { position: absolute; top: 16px; right: 16px; }
+
+    /* Responsive */
+    @media (max-width: 1150px) {
+      .classes-grid, .pricing-grid { grid-template-columns: repeat(2, 1fr); }
+      .sound-feature, .privates-grid { grid-template-columns: 1fr; gap: 40px; }
+      .footer-grid { grid-template-columns: 1fr 1fr; gap: 30px; }
+      .pricing-card.featured { transform: none; }
+    }
+    @media (max-width: 960px) {
+      .desktop-nav { display: none; }
+      .mobile-toggle { display: inline-flex; }
+      .site-header { padding: 0 16px; }
+      .page-container { padding: 0 20px; }
+      .etiquette-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 640px) {
+      .classes-grid, .pricing-grid, .privates-grid, .etiquette-grid { grid-template-columns: 1fr; }
+      .footer-grid { grid-template-columns: 1fr; }
+      .sound-feature { padding: 36px 20px; }
+      .services-cta-banner { padding: 48px 20px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header class="site-header">
+    <nav aria-label="Main navigation" class="nav-island">
+      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio â€” home">
+        <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+        <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+      </a>
+      <div class="desktop-nav">
+        <details class="nav-dropdown">
+          <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+          <div class="dropdown-content">
+            <a href="index.html#home">Home 1</a>
+            <a href="home2.html">Home 2</a>
+          </div>
+        </details>
+        <a href="about.html">About</a>
+        <a href="services.html" class="active">Services</a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+        <details class="nav-dropdown">
+          <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+          <div class="dropdown-content">
+            <a href="admin.html">Studio Admin</a>
+            <a href="client.html">Member Portal</a>
+          </div>
+        </details>
+        <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
+        <div class="nav-toggles">
+          <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+          </button>
+          <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 8 4 4-4 4"></path><path d="M2 12h20"></path><path d="m6 8-4 4 4 4"></path></svg>
+          </button>
+        </div>
+      </div>
+      <button aria-expanded="false" aria-label="Toggle Navigation Menu" class="mobile-toggle">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16"></path><path d="M4 12h16"></path><path d="M4 19h16"></path></svg>
+      </button>
+    </nav>
+  </header>
+
+  <main>
+    <!-- 1. SERVICES HERO & FILTER PILLS -->
+    <section class="services-hero">
+      <div class="page-container">
+        <span class="eyebrow">SANCTUARY OFFERINGS</span>
+        <h1>Practices for <em>Body, Breath &amp; Spirit.</em></h1>
+        <p class="lead">From invigorating solar flows in radiant warmth to meditative theta-frequency sound baths, discover intentional practices crafted to restore balance to your modern life.</p>
+        
+        <div class="filter-pills-bar">
+          <button class="filter-pill active" onclick="filterServices('all')">All Offerings</button>
+          <button class="filter-pill" onclick="filterServices('solar')">Solar Movement</button>
+          <button class="filter-pill" onclick="filterServices('lunar')">Lunar &amp; Yin</button>
+          <button class="filter-pill" onclick="filterServices('sound')">Sound Baths</button>
+          <button class="filter-pill" onclick="filterServices('privates')">Private Therapy</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. SIGNATURE MOVEMENT CLASSES -->
+    <section class="section-space" style="padding-top:0;">
+      <div class="page-container">
+        <div class="classes-grid">
+          <!-- Class 1 -->
+          <div class="class-card" data-category="solar">
+            <div class="class-image">
+              <span class="class-badge">Solar Â· 92Â°F</span>
+              <img src="https://images.unsplash.com/photo-1510894347713-fc3ed6fdf539?auto=format&fit=crop&w=800&q=80" alt="Solar Heated Vinyasa Flow">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>ALL LEVELS</span></div>
+                <h3 class="class-title">Solar Heated Vinyasa</h3>
+                <p class="class-desc">An energizing, breath-led sequence practiced in gentle far-infrared radiant warmth. Opens tight shoulders, builds core resilience, and detoxifies tissue.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$35 <span>/ mat</span></div>
+                <button class="studio-button" onclick="showPortal('Solar Heated Vinyasa')">Reserve Mat</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class 2 -->
+          <div class="class-card" data-category="lunar">
+            <div class="class-image">
+              <span class="class-badge">Restorative Â· 72Â°F</span>
+              <img src="https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?auto=format&fit=crop&w=800&q=80" alt="Restorative Candlelight Yin">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>75 MIN</span><span>â€¢</span><span>DEEP STILLNESS</span></div>
+                <h3 class="class-title">Candlelight Yin &amp; Reiki</h3>
+                <p class="class-desc">Long, passive holds supported by organic buckwheat bolsters and weighted sandbags. Melts deep fascia tension while soothing the nervous system.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$38 <span>/ mat</span></div>
+                <button class="studio-button" onclick="showPortal('Candlelight Yin & Reiki')">Reserve Mat</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class 3 -->
+          <div class="class-card" data-category="sound">
+            <div class="class-image">
+              <span class="class-badge">Acoustic Â· 432Hz</span>
+              <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=800&q=80" alt="432 Hz Sound Healing">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>NO MOVEMENT</span></div>
+                <h3 class="class-title">432 Hz Crystal Sound Bath</h3>
+                <p class="class-desc">Lie back comfortably under organic linen blankets as pure quartz singing bowls and planetary gongs wash over your body to release mental chatter.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$45 <span>/ mat</span></div>
+                <button class="studio-button" onclick="showPortal('432 Hz Crystal Sound Bath')">Reserve Mat</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class 4 -->
+          <div class="class-card" data-category="solar">
+            <div class="class-image">
+              <span class="class-badge">Mysore Â· 78Â°F</span>
+              <img src="https://images.unsplash.com/photo-1545205597-3d9d02c29597?auto=format&fit=crop&w=800&q=80" alt="Mysore Alignment">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>90 MIN</span><span>â€¢</span><span>INTELLECTUAL FLOW</span></div>
+                <h3 class="class-title">Mysore Prana Alignment</h3>
+                <p class="class-desc">Traditional self-paced practice under the hands-on guidance of senior teachers. Receive personalized tactile adjustments tailored to your anatomy.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$40 <span>/ mat</span></div>
+                <button class="studio-button" onclick="showPortal('Mysore Prana Alignment')">Reserve Mat</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class 5 -->
+          <div class="class-card" data-category="lunar">
+            <div class="class-image">
+              <span class="class-badge">Pranayama Â· 70Â°F</span>
+              <img src="https://images.unsplash.com/photo-1506126613408-eca07ce68773?auto=format&fit=crop&w=800&q=80" alt="Somatic Breathwork Journey">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>TRANSFORMATIVE</span></div>
+                <h3 class="class-title">Somatic Breath &amp; Nidra</h3>
+                <p class="class-desc">Rhythmic circular breathwork followed by 30 minutes of guided psychic sleep (Yoga Nidra). Equivalent to four hours of restorative deep sleep.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$35 <span>/ mat</span></div>
+                <button class="studio-button" onclick="showPortal('Somatic Breath & Nidra')">Reserve Mat</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- Class 6 -->
+          <div class="class-card" data-category="privates">
+            <div class="class-image">
+              <span class="class-badge">Private Â· 1-on-1</span>
+              <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c?auto=format&fit=crop&w=800&q=80" alt="Private Sanctuary Session">
+            </div>
+            <div class="class-body">
+              <div>
+                <div class="class-meta"><span>75 MIN</span><span>â€¢</span><span>CONCIERGE</span></div>
+                <h3 class="class-title">Private Sanctuary Journey</h3>
+                <p class="class-desc">Exclusive use of the shala with a master teacher. Tailored combination of postural bodywork, hands-on fascial release, and private acoustic immersion.</p>
+              </div>
+              <div class="class-footer">
+                <div class="class-price">$185 <span>/ session</span></div>
+                <button class="studio-button" onclick="showPortal('Private Sanctuary Journey')">Book Session</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. SOUND SANCTUARY DEEP DIVE -->
+    <section class="section-space" style="background:var(--studio-surface);border-radius:36px;margin:20px 0;">
+      <div class="page-container">
+        <div class="sound-feature">
+          <div>
+            <span class="eyebrow">CELLULAR FREQUENCY HEALING</span>
+            <h2>Why 432 Hz Sound Resonates Differently<em>.</em></h2>
+            <p>Standard modern music is tuned to 440 Hz, which stimulates mental activity and agitation. Our sacred instruments are tuned to 432 Hz, mathematically aligned with the Fibonacci golden ratio and the Earth's Schumann resonance.</p>
+            <div class="frequency-tags">
+              <span class="freq-tag">âœ¦ Theta Waves (4-8 Hz)</span>
+              <span class="freq-tag">âœ¦ Cortisol Reduction</span>
+              <span class="freq-tag">âœ¦ Vagus Nerve Activation</span>
+              <span class="freq-tag">âœ¦ Nitric Oxide Release</span>
+            </div>
+            <button class="studio-button" onclick="showPortal('Sound Bath Private Session')">Book Private Sound Ceremony &rarr;</button>
+          </div>
+          <div class="sound-feature-img">
+            <img src="https://images.unsplash.com/photo-1518241353330-0f7941c2d9b5?auto=format&fit=crop&w=1200&q=80" alt="Tibetan singing bowl ceremony">
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. PRIVATE 1-ON-1 SOMATIC THERAPIES -->
+    <section class="section-space">
+      <div class="page-container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">BESPOKE WELLNESS CONCIERGE</span>
+            <h2>Private 1-on-1 Somatic Immersions<em>.</em></h2>
+          </div>
+          <p>For those navigating spinal rehabilitation, athletic recovery, deep grief, or executive burnout, our private consultations offer focused individual sanctuary.</p>
+        </div>
+
+        <div class="privates-grid">
+          <div class="private-card">
+            <div>
+              <span class="eyebrow">RESTORATIVE RECOVERY</span>
+              <h3>Spinal Alignment &amp; Somatic Bodywork</h3>
+              <p>Designed for individuals experiencing neck, shoulder, or lower back compression from long desk hours. Includes assisted stretches, myofascial release, and ergonomic posture mapping.</p>
+              <ul class="benefit-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Comprehensive postural gait analysis</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Customized daily 15-minute home sequence</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Organic herbal compress &amp; warm cedar oils</li>
+              </ul>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--studio-border);padding-top:20px;">
+              <div><strong>$195</strong> / 75 Minutes</div>
+              <button class="studio-button" onclick="showPortal('Book Spinal Somatics')">Inquire Session</button>
+            </div>
+          </div>
+
+          <div class="private-card">
+            <div>
+              <span class="eyebrow">NERVOUS SYSTEM RESET</span>
+              <h3>Couples or Partner Sound Immersion</h3>
+              <p>Experience deep shared intimacy and collective calm. Held in the private sound chamber with custom tuned bowls positioned directly on energetic meridians.</p>
+              <ul class="benefit-list">
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Private acoustic shala with beeswax candles</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Hand-hammered Tibetan singing bowls placement</li>
+                <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="20 6 9 17 4 12"></polyline></svg> Ceremonial grade matcha or lavender elixir</li>
+              </ul>
+            </div>
+            <div style="display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--studio-border);padding-top:20px;">
+              <div><strong>$275</strong> / 90 Minutes (2 Guests)</div>
+              <button class="studio-button" onclick="showPortal('Book Partner Sound Bath')">Inquire Session</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. MEMBERSHIP & PASSES MATRIX -->
+    <section class="section-space" id="pricing">
+      <div class="page-container">
+        <div class="section-heading" style="text-align:center;display:block;">
+          <span class="eyebrow">TRANSPARENT SANCTUARY PASSES</span>
+          <h2>Membership Tiers &amp; Class Packages<em>.</em></h2>
+          <p style="margin:12px auto 0;max-width:580px;">No long-term lock-in contracts. Freeze anytime. All passes include complimentary organic cork mats, eucalyptus towels, and herbal tea.</p>
+        </div>
+
+        <div class="pricing-grid">
+          <!-- Tier 1 -->
+          <div class="pricing-card">
+            <h3>Seeker Pass</h3>
+            <p>For flexible weekly practice</p>
+            <div class="price-num">$145 <span>/ 5 classes</span></div>
+            <ul class="plan-features">
+              <li>âœ“ Valid for all vinyasa &amp; yin classes</li>
+              <li>âœ“ 60-day expiration window</li>
+              <li>âœ“ Free cork mat &amp; prop rental</li>
+              <li>âœ“ 1 guest pass per year</li>
+              <li style="opacity:0.4;">âœ• Sound bath access</li>
+            </ul>
+            <button class="studio-button ghost" onclick="showPortal('Select Seeker Pass')">Select Pass &rarr;</button>
+          </div>
+
+          <!-- Tier 2 Featured -->
+          <div class="pricing-card featured">
+            <span class="pricing-badge">MOST BELOVED</span>
+            <h3>Sanctuary Member</h3>
+            <p>Our complete holistic lifestyle commitment</p>
+            <div class="price-num">$220 <span>/ month</span></div>
+            <ul class="plan-features">
+              <li>âœ“ Unlimited daily vinyasa &amp; yin classes</li>
+              <li>âœ“ Complimentary weekly 432 Hz sound baths</li>
+              <li>âœ“ Priority mat reservation up to 14 days</li>
+              <li>âœ“ 2 guest passes every month</li>
+              <li>âœ“ 15% discount on private somatic sessions</li>
+              <li>âœ“ Complimentary tea lounge access</li>
+            </ul>
+            <button class="studio-button" style="background:var(--studio-white);color:var(--studio-green);" onclick="showPortal('Select Sanctuary Membership')">Join Membership</button>
+          </div>
+
+          <!-- Tier 3 -->
+          <div class="pricing-card">
+            <h3>Patron Circle</h3>
+            <p>For deep immersions and bespoke care</p>
+            <div class="price-num">$380 <span>/ month</span></div>
+            <ul class="plan-features">
+              <li>âœ“ All Sanctuary Member benefits</li>
+              <li>âœ“ 1 monthly 75-min private session included</li>
+              <li>âœ“ Reserved favorite mat spot every class</li>
+              <li>âœ“ Unlimited guest passes</li>
+              <li>âœ“ Access to private shala off-peak hours</li>
+              <li>âœ“ Annual seasonal retreat priority booking</li>
+            </ul>
+            <button class="studio-button ghost" onclick="showPortal('Select Patron Circle')">Select Pass &rarr;</button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. STUDIO ETIQUETTE & MINDFUL PROTOCOL -->
+    <section class="section-space">
+      <div class="page-container">
+        <div class="section-heading">
+          <div>
+            <span class="eyebrow">HONORING THE CONTAINER</span>
+            <h2>Studio Etiquette &amp; First Visit Guide<em>.</em></h2>
+          </div>
+          <p>To preserve our sacred acoustic environment, we ask all practitioners to embrace our simple mindful guidelines.</p>
+        </div>
+
+        <div class="etiquette-grid">
+          <div class="etiquette-box">
+            <div class="etiquette-icon">ðŸŒ¿</div>
+            <h4>The Barefoot Shala</h4>
+            <p>Remove outdoor shoes upon entering the cedar foyer. Clean wool slippers and secure keyless lockers are provided.</p>
+          </div>
+          <div class="etiquette-box">
+            <div class="etiquette-icon">ðŸ””</div>
+            <h4>Sacred 10-Min Silence</h4>
+            <p>The shala enters gentle acoustic silence 10 minutes prior to class start. Please silence and stow all cellular devices.</p>
+          </div>
+          <div class="etiquette-box">
+            <div class="etiquette-icon">ðŸµ</div>
+            <h4>Complimentary Props</h4>
+            <p>We provide medical-grade organic cork mats, organic cotton straps, and buckwheat bolsters cleaned with botanical thyme spray.</p>
+          </div>
+          <div class="etiquette-box">
+            <div class="etiquette-icon">ðŸ’§</div>
+            <h4>Herbal Tea Ritual</h4>
+            <p>Arrive 15 minutes early to savor warm wild-harvested mountain tea in our quiet lounge before unrolling your mat.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. SERVICES CTA BANNER -->
+    <section class="page-container">
+      <div class="services-cta-banner">
+        <span class="eyebrow" style="color:var(--studio-sage);">READY TO STEP ON THE MAT?</span>
+        <h2>Your Practice Begins With a Single Breath<em>.</em></h2>
+        <p>Book your first class online or speak directly with our concierge to find the class style suited to your current energy.</p>
+        <div style="display:flex;gap:14px;justify-content:center;flex-wrap:wrap;">
+          <button class="studio-button" style="background:var(--studio-white);color:var(--studio-green);" onclick="showPortal('Book Sanctuary Mat')">Reserve Your Mat Today &rarr;</button>
+          <a href="contact.html" class="studio-button ghost" style="color:var(--studio-white);border-color:rgba(255,255,255,0.3);">Contact Sanctuary Concierge</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer>
+    <div class="page-container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a class="brand" dir="ltr" href="index.html#home">
+            <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
+            <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
+          </a>
+          <p>A luxury architectural yoga and sound meditation sanctuary dedicated to conscious movement, nervous system regulation, and timeless presence.</p>
+          <div class="social-links">
+            <a aria-label="Instagram" href="https://instagram.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a>
+            <a aria-label="YouTube" href="https://youtube.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a>
+            <a aria-label="Facebook" href="https://facebook.com" target="_blank" rel="noreferrer"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a>
+          </div>
+        </div>
+
+        <div class="footer-col">
+          <h3>Quick Navigation</h3>
+          <a href="index.html#home">Home 1</a>
+          <a href="home2.html">Home 2</a>
+          <a href="about.html">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact &amp; Booking</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Couture Services</h3>
+          <a href="services.html">Solar Heated Vinyasa</a>
+          <a href="services.html">Restorative Yin &amp; Sound</a>
+          <a href="services.html">432 Hz Sound Baths</a>
+          <a href="services.html">Private Somatic Therapy</a>
+          <a href="services.html">Corporate Mindfulness</a>
+        </div>
+
+        <div class="footer-col">
+          <h3>Studio Location</h3>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg>
+            <span>5th Ave Luxury Tower, NYC 10001</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg>
+            <span>+1 (800) 555-0199</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect height="16" rx="2" width="20" x="2" y="4"></rect></svg>
+            <span>hello@sanctuarystudio.com</span>
+          </div>
+          <div class="footer-contact-item">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg>
+            <span>Mon-Sun: 6:30AM - 9:00PM EST</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 Yoga &amp; Meditation Studio. All rights reserved.</p>
+        <em>Mindful Movement &bull; Sacred Stillness &bull; Timeless Harmony</em>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const $ = (s) => document.querySelector(s);
+    const mobile = $('.mobile-toggle');
+    const desktop = $('.desktop-nav');
+    if (desktop) {
+      const panel = document.createElement('div');
+      panel.className = 'mobile-nav';
+      panel.hidden = true;
+      panel.innerHTML = desktop.innerHTML.replace('Dashboard', 'Portals').replace('Sign In', 'Client Portal Login');
+      $('.site-header').append(panel);
+      if (mobile) {
+        mobile.onclick = () => {
+          panel.hidden = !panel.hidden;
+          mobile.setAttribute('aria-expanded', !panel.hidden);
+        };
+      }
+      panel.querySelectorAll('a').forEach(a => a.onclick = () => { panel.hidden = true; });
+    }
+
+    // Filter pill interactivity
+    function filterServices(category) {
+      document.querySelectorAll('.filter-pill').forEach(btn => {
+        btn.classList.toggle('active', btn.textContent.toLowerCase().includes(category) || (category === 'all' && btn.textContent.includes('All')));
+      });
+      document.querySelectorAll('.class-card').forEach(card => {
+        const cat = card.getAttribute('data-category');
+        if (category === 'all' || cat === category) {
+          card.style.display = 'flex';
+        } else {
+          card.style.display = 'none';
+        }
+      });
+    }
+
+    // Dark Mode Toggle
+    document.querySelectorAll('[aria-label="Toggle Dark/Light Mode"]').forEach(b => b.onclick = () => {
+      document.documentElement.classList.toggle('dark');
+    });
+
+    // RTL/LTR Toggle
+    document.querySelectorAll('[aria-label="Toggle RTL/LTR"]').forEach(b => b.onclick = () => {
+      document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+    });
+
+    // Modal Portal Dialog
+    function showPortal(title) {
+      if (title.toLowerCase().includes('sign in') || title.toLowerCase().includes('client') || title.toLowerCase().includes('login')) {
+        window.location.href = 'login.html';
+        return;
+      }
+      const overlay = document.createElement('div');
+      overlay.className = 'modal-backdrop';
+      overlay.innerHTML = `
+        <div class="portal-dialog" role="dialog" aria-modal="true" aria-label="${title}">
+          <button class="circle-button dialog-close" aria-label="Close dialog">âœ•</button>
+          <h2>${title}</h2>
+          <p>Reserve your mat or pass with our sanctuary concierge. Complimentary organic cork mats, props, and herbal tea await you.</p>
+          <div style="margin:20px 0;display:flex;flex-direction:column;gap:10px;">
+            <a class="studio-button" href="contact.html">Proceed to Reservation &rarr;</a>
+            <a class="studio-button ghost" href="tel:+18005550199">Call Concierge: +1 (800) 555-0199</a>
+          </div>
+        </div>
+      `;
+      document.body.append(overlay);
+      const close = () => { overlay.remove(); document.removeEventListener('keydown', key); };
+      const key = (e) => { if (e.key === 'Escape') close(); };
+      overlay.onclick = (e) => { if (e.target === overlay) close(); };
+      overlay.querySelector('.dialog-close').onclick = close;
+      document.addEventListener('keydown', key);
+      overlay.querySelector('.dialog-close').focus();
+    }
+  </script>
+</body>
+</html>
