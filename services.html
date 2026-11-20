@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+  <link rel="icon" type="image/png" href="images/logo-dark.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Services &amp; Practices &middot; Yoga &amp; Meditation Studio</title>
@@ -105,7 +106,7 @@
       backdrop-filter: blur(14px);
     }
     .brand { white-space: nowrap; font-family: var(--font-display); color: var(--studio-ink); align-items: center; gap: 10px; font-size: 24px; font-weight: 600; display: flex; }
-    .brand-logo { height: 44px; width: auto; display: block; }
+    .brand-logo { height: 52px; width: auto; display: block; transition: transform 0.2s; }
     .brand-logo-light { display: none; }
     .dark .brand-logo-dark { display: none; }
     .dark .brand-logo-light { display: block; }
@@ -185,7 +186,7 @@
     /* =========================================================
        1. SERVICES HERO (CENTERED SHOWCASE & FILTER PILLS)
        ========================================================= */
-    .services-hero { text-align: center; padding: 40px 0 60px; }
+    .services-hero { min-height: 480px; padding: 60px 0; display: flex; flex-direction: column; justify-content: center; align-items: center; text-align: center; }
     .services-hero h1 { max-width: 800px; margin: 0 auto 20px; }
     .services-hero p.lead { max-width: 680px; margin: 0 auto 36px; font-size: 17.5px; }
 
@@ -423,44 +424,246 @@
       .sound-feature { padding: 36px 20px; }
       .services-cta-banner { padding: 48px 20px; }
     }
-  </style>
+  
+    /* --- Issue 9: Center-align button text in TRANSPARENT SANCTUARY PASSES --- */
+    .pricing-card .studio-button {
+      width: 100% !important;
+      justify-content: center !important;
+      text-align: center !important;
+      margin-top: auto !important;
+      display: flex !important;
+      align-items: center !important;
+    }
+
+    /* --- Enhanced Button Contrast (Light & Dark) --- */
+    .studio-button {
+      background: #183323;
+      color: #FFFFFF !important;
+      border-radius: 9999px;
+      padding: 11px 26px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+    .studio-button:hover {
+      background: #234E35;
+      color: #FFFFFF !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(24, 51, 35, 0.25);
+    }
+    .studio-button.ghost {
+      background: transparent;
+      color: #183323 !important;
+      border: 1px solid var(--studio-border);
+    }
+    .studio-button.ghost:hover {
+      background: var(--studio-surface);
+      color: #183323 !important;
+      border-color: #183323;
+    }
+    .dark .studio-button {
+      background: #8ecba8 !important;
+      color: #0f2417 !important;
+      border-color: #8ecba8 !important;
+      font-weight: 700;
+    }
+    .dark .studio-button:hover {
+      background: #a5dec0 !important;
+      color: #08140c !important;
+      box-shadow: 0 6px 20px rgba(142, 203, 168, 0.3);
+    }
+    .dark .studio-button.ghost {
+      background: transparent !important;
+      color: #ecf3ee !important;
+      border-color: var(--studio-border) !important;
+    }
+    .dark .studio-button.ghost:hover {
+      background: var(--studio-surface) !important;
+      color: #8ecba8 !important;
+      border-color: #8ecba8 !important;
+    }
+    .dark .pricing-card.featured .studio-button {
+      background: #ffffff !important;
+      color: #183323 !important;
+    }
+    .dark .pricing-card.featured .studio-button:hover {
+      background: #f0f5f1 !important;
+      color: #0f2417 !important;
+    }
+    .filter-pill {
+      background: var(--studio-surface);
+      border: 1px solid var(--studio-border);
+      color: #183323;
+      padding: 9px 22px;
+      border-radius: 9999px;
+      font-size: 13.5px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+    .filter-pill:hover, .filter-pill.active {
+      background: #183323 !important;
+      color: #FFFFFF !important;
+      border-color: #183323 !important;
+    }
+    .dark .filter-pill {
+      color: #ecf3ee;
+      border-color: var(--studio-border);
+    }
+    .dark .filter-pill:hover, .dark .filter-pill.active {
+      background: var(--primary) !important;
+      color: #0f2417 !important;
+      border-color: var(--primary) !important;
+      font-weight: 700;
+    }
+
+
+    /* --- Centered Navigation & 1024 Responsive Support --- */
+    .nav-island {
+      background: var(--background);
+      border-radius: 50px;
+      align-items: center;
+      max-width: 1340px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: var(--studio-shadow);
+      border: 1px solid var(--studio-border);
+      min-height: 72px;
+      padding: 10px 24px;
+      backdrop-filter: blur(14px);
+      position: relative;
+    }
+    .brand {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      z-index: 2;
+    }
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      min-width: 0;
+    }
+    .nav-center-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 0 auto;
+      text-transform: uppercase;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .nav-center-links a, .nav-center-links summary {
+      color: var(--studio-ink);
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-center-links a:hover, .nav-center-links summary:hover {
+      color: var(--primary);
+      background: var(--studio-surface);
+    }
+    .nav-center-links a.active, .nav-center-links summary.active {
+      color: var(--primary) !important;
+      font-weight: 700;
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+    }
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .nav-toggles {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 1150px) {
+      .site-header { padding: 0 16px; }
+      .nav-island { padding: 8px 16px; min-height: 66px; }
+      .brand-logo { height: 46px; }
+      .nav-center-links { gap: 12px; font-size: 12.5px; }
+      .nav-center-links a, .nav-center-links summary { padding: 5px 8px; }
+      .nav-right-actions .studio-button { padding: 8px 16px; font-size: 12px; }
+    }
+    @media (max-width: 1024px) {
+      .site-header { padding: 0 12px; }
+      .nav-island { padding: 8px 14px; min-height: 64px; }
+      .brand-logo { height: 44px; }
+      .nav-center-links { gap: 8px; font-size: 12px; }
+      .nav-center-links a, .nav-center-links summary { padding: 4px 6px; }
+      .nav-right-actions { gap: 6px; }
+      .nav-right-actions .studio-button { padding: 7px 14px; font-size: 12px; }
+    }
+    @media (max-width: 960px) {
+      .desktop-nav { display: none !important; }
+      .mobile-toggle { display: inline-flex !important; }
+      .mobile-nav:not([hidden]) { display: flex !important; }
+    }
+
+</style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="site-header">
     <nav aria-label="Main navigation" class="nav-island">
-      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio â€” home">
+      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio — home">
         <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
         <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
       </a>
       <div class="desktop-nav">
-        <details class="nav-dropdown">
-          <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
-          <div class="dropdown-content">
-            <a href="index.html#home">Home 1</a>
-            <a href="home2.html">Home 2</a>
+        <div class="nav-center-links">
+          <details class="nav-dropdown">
+            <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+            <div class="dropdown-content">
+              <a href="index.html#home">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </details>
+          <a href="about.html">About</a>
+          <a href="services.html" class="active">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+          <details class="nav-dropdown">
+            <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+            <div class="dropdown-content">
+              <a href="admin.html">Studio Admin</a>
+              <a href="client.html">Member Portal</a>
+            </div>
+          </details>
+        </div>
+        <div class="nav-right-actions">
+          <div class="nav-toggles">
+            <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+            </button>
+            <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
+            </button>
           </div>
-        </details>
-        <a href="about.html">About</a>
-        <a href="services.html" class="active">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-        <details class="nav-dropdown">
-          <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
-          <div class="dropdown-content">
-            <a href="admin.html">Studio Admin</a>
-            <a href="client.html">Member Portal</a>
-          </div>
-        </details>
-        <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
-        <div class="nav-toggles">
-          <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
-          </button>
-          <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 8 4 4-4 4"></path><path d="M2 12h20"></path><path d="m6 8-4 4 4 4"></path></svg>
-          </button>
+          <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
         </div>
       </div>
       <button aria-expanded="false" aria-label="Toggle Navigation Menu" class="mobile-toggle">
@@ -499,7 +702,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>ALL LEVELS</span></div>
+                <div class="class-meta"><span>60 MIN</span><span>•</span><span>ALL LEVELS</span></div>
                 <h3 class="class-title">Solar Heated Vinyasa</h3>
                 <p class="class-desc">An energizing, breath-led sequence practiced in gentle far-infrared radiant warmth. Opens tight shoulders, builds core resilience, and detoxifies tissue.</p>
               </div>
@@ -518,7 +721,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>75 MIN</span><span>â€¢</span><span>DEEP STILLNESS</span></div>
+                <div class="class-meta"><span>75 MIN</span><span>•</span><span>DEEP STILLNESS</span></div>
                 <h3 class="class-title">Candlelight Yin &amp; Reiki</h3>
                 <p class="class-desc">Long, passive holds supported by organic buckwheat bolsters and weighted sandbags. Melts deep fascia tension while soothing the nervous system.</p>
               </div>
@@ -537,7 +740,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>NO MOVEMENT</span></div>
+                <div class="class-meta"><span>60 MIN</span><span>•</span><span>NO MOVEMENT</span></div>
                 <h3 class="class-title">432 Hz Crystal Sound Bath</h3>
                 <p class="class-desc">Lie back comfortably under organic linen blankets as pure quartz singing bowls and planetary gongs wash over your body to release mental chatter.</p>
               </div>
@@ -556,7 +759,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>90 MIN</span><span>â€¢</span><span>INTELLECTUAL FLOW</span></div>
+                <div class="class-meta"><span>90 MIN</span><span>•</span><span>INTELLECTUAL FLOW</span></div>
                 <h3 class="class-title">Mysore Prana Alignment</h3>
                 <p class="class-desc">Traditional self-paced practice under the hands-on guidance of senior teachers. Receive personalized tactile adjustments tailored to your anatomy.</p>
               </div>
@@ -575,7 +778,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>60 MIN</span><span>â€¢</span><span>TRANSFORMATIVE</span></div>
+                <div class="class-meta"><span>60 MIN</span><span>•</span><span>TRANSFORMATIVE</span></div>
                 <h3 class="class-title">Somatic Breath &amp; Nidra</h3>
                 <p class="class-desc">Rhythmic circular breathwork followed by 30 minutes of guided psychic sleep (Yoga Nidra). Equivalent to four hours of restorative deep sleep.</p>
               </div>
@@ -594,7 +797,7 @@
             </div>
             <div class="class-body">
               <div>
-                <div class="class-meta"><span>75 MIN</span><span>â€¢</span><span>CONCIERGE</span></div>
+                <div class="class-meta"><span>75 MIN</span><span>•</span><span>CONCIERGE</span></div>
                 <h3 class="class-title">Private Sanctuary Journey</h3>
                 <p class="class-desc">Exclusive use of the shala with a master teacher. Tailored combination of postural bodywork, hands-on fascial release, and private acoustic immersion.</p>
               </div>
@@ -617,10 +820,10 @@
             <h2>Why 432 Hz Sound Resonates Differently<em>.</em></h2>
             <p>Standard modern music is tuned to 440 Hz, which stimulates mental activity and agitation. Our sacred instruments are tuned to 432 Hz, mathematically aligned with the Fibonacci golden ratio and the Earth's Schumann resonance.</p>
             <div class="frequency-tags">
-              <span class="freq-tag">âœ¦ Theta Waves (4-8 Hz)</span>
-              <span class="freq-tag">âœ¦ Cortisol Reduction</span>
-              <span class="freq-tag">âœ¦ Vagus Nerve Activation</span>
-              <span class="freq-tag">âœ¦ Nitric Oxide Release</span>
+              <span class="freq-tag">✦ Theta Waves (4-8 Hz)</span>
+              <span class="freq-tag">✦ Cortisol Reduction</span>
+              <span class="freq-tag">✦ Vagus Nerve Activation</span>
+              <span class="freq-tag">✦ Nitric Oxide Release</span>
             </div>
             <button class="studio-button" onclick="showPortal('Sound Bath Private Session')">Book Private Sound Ceremony &rarr;</button>
           </div>
@@ -696,11 +899,11 @@
             <p>For flexible weekly practice</p>
             <div class="price-num">$145 <span>/ 5 classes</span></div>
             <ul class="plan-features">
-              <li>âœ“ Valid for all vinyasa &amp; yin classes</li>
-              <li>âœ“ 60-day expiration window</li>
-              <li>âœ“ Free cork mat &amp; prop rental</li>
-              <li>âœ“ 1 guest pass per year</li>
-              <li style="opacity:0.4;">âœ• Sound bath access</li>
+              <li>✓ Valid for all vinyasa &amp; yin classes</li>
+              <li>✓ 60-day expiration window</li>
+              <li>✓ Free cork mat &amp; prop rental</li>
+              <li>✓ 1 guest pass per year</li>
+              <li style="opacity:0.4;">✕ Sound bath access</li>
             </ul>
             <button class="studio-button ghost" onclick="showPortal('Select Seeker Pass')">Select Pass &rarr;</button>
           </div>
@@ -712,12 +915,12 @@
             <p>Our complete holistic lifestyle commitment</p>
             <div class="price-num">$220 <span>/ month</span></div>
             <ul class="plan-features">
-              <li>âœ“ Unlimited daily vinyasa &amp; yin classes</li>
-              <li>âœ“ Complimentary weekly 432 Hz sound baths</li>
-              <li>âœ“ Priority mat reservation up to 14 days</li>
-              <li>âœ“ 2 guest passes every month</li>
-              <li>âœ“ 15% discount on private somatic sessions</li>
-              <li>âœ“ Complimentary tea lounge access</li>
+              <li>✓ Unlimited daily vinyasa &amp; yin classes</li>
+              <li>✓ Complimentary weekly 432 Hz sound baths</li>
+              <li>✓ Priority mat reservation up to 14 days</li>
+              <li>✓ 2 guest passes every month</li>
+              <li>✓ 15% discount on private somatic sessions</li>
+              <li>✓ Complimentary tea lounge access</li>
             </ul>
             <button class="studio-button" style="background:var(--studio-white);color:var(--studio-green);" onclick="showPortal('Select Sanctuary Membership')">Join Membership</button>
           </div>
@@ -728,12 +931,12 @@
             <p>For deep immersions and bespoke care</p>
             <div class="price-num">$380 <span>/ month</span></div>
             <ul class="plan-features">
-              <li>âœ“ All Sanctuary Member benefits</li>
-              <li>âœ“ 1 monthly 75-min private session included</li>
-              <li>âœ“ Reserved favorite mat spot every class</li>
-              <li>âœ“ Unlimited guest passes</li>
-              <li>âœ“ Access to private shala off-peak hours</li>
-              <li>âœ“ Annual seasonal retreat priority booking</li>
+              <li>✓ All Sanctuary Member benefits</li>
+              <li>✓ 1 monthly 75-min private session included</li>
+              <li>✓ Reserved favorite mat spot every class</li>
+              <li>✓ Unlimited guest passes</li>
+              <li>✓ Access to private shala off-peak hours</li>
+              <li>✓ Annual seasonal retreat priority booking</li>
             </ul>
             <button class="studio-button ghost" onclick="showPortal('Select Patron Circle')">Select Pass &rarr;</button>
           </div>
@@ -754,22 +957,22 @@
 
         <div class="etiquette-grid">
           <div class="etiquette-box">
-            <div class="etiquette-icon">ðŸŒ¿</div>
+            <div class="etiquette-icon">🌿</div>
             <h4>The Barefoot Shala</h4>
             <p>Remove outdoor shoes upon entering the cedar foyer. Clean wool slippers and secure keyless lockers are provided.</p>
           </div>
           <div class="etiquette-box">
-            <div class="etiquette-icon">ðŸ””</div>
+            <div class="etiquette-icon">🔔</div>
             <h4>Sacred 10-Min Silence</h4>
             <p>The shala enters gentle acoustic silence 10 minutes prior to class start. Please silence and stow all cellular devices.</p>
           </div>
           <div class="etiquette-box">
-            <div class="etiquette-icon">ðŸµ</div>
+            <div class="etiquette-icon">🍵</div>
             <h4>Complimentary Props</h4>
             <p>We provide medical-grade organic cork mats, organic cotton straps, and buckwheat bolsters cleaned with botanical thyme spray.</p>
           </div>
           <div class="etiquette-box">
-            <div class="etiquette-icon">ðŸ’§</div>
+            <div class="etiquette-icon">💧</div>
             <h4>Herbal Tea Ritual</h4>
             <p>Arrive 15 minutes early to savor warm wild-harvested mountain tea in our quiet lounge before unrolling your mat.</p>
           </div>
@@ -909,7 +1112,7 @@
       overlay.className = 'modal-backdrop';
       overlay.innerHTML = `
         <div class="portal-dialog" role="dialog" aria-modal="true" aria-label="${title}">
-          <button class="circle-button dialog-close" aria-label="Close dialog">âœ•</button>
+          <button class="circle-button dialog-close" aria-label="Close dialog">✕</button>
           <h2>${title}</h2>
           <p>Reserve your mat or pass with our sanctuary concierge. Complimentary organic cork mats, props, and herbal tea await you.</p>
           <div style="margin:20px 0;display:flex;flex-direction:column;gap:10px;">

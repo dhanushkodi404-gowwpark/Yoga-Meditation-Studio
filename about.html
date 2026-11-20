@@ -1,6 +1,7 @@
 ﻿<!DOCTYPE html>
 <html lang="en" dir="ltr">
 <head>
+  <link rel="icon" type="image/png" href="images/logo-dark.png">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>About Our Sanctuary &middot; Yoga &amp; Meditation Studio</title>
@@ -105,7 +106,7 @@
       backdrop-filter: blur(14px);
     }
     .brand { white-space: nowrap; font-family: var(--font-display); color: var(--studio-ink); align-items: center; gap: 10px; font-size: 24px; font-weight: 600; display: flex; }
-    .brand-logo { height: 44px; width: auto; display: block; }
+    .brand-logo { height: 52px; width: auto; display: block; transition: transform 0.2s; }
     .brand-logo-light { display: none; }
     .dark .brand-logo-dark { display: none; }
     .dark .brand-logo-light { display: block; }
@@ -185,7 +186,7 @@
     /* =========================================================
        1. ABOUT HERO (EDITORIAL SPLIT WITH FLOATING FOUNDER CARD)
        ========================================================= */
-    .about-hero { padding: 40px 0 80px; }
+    .about-hero { min-height: 480px; padding: 60px 0; display: flex; align-items: center; }
     .about-hero-grid { display: grid; grid-template-columns: 1.15fr 0.85fr; gap: 60px; align-items: center; }
     .hero-badge-pill {
       display: inline-flex;
@@ -202,7 +203,7 @@
       margin-bottom: 24px;
     }
     .about-hero p.lead { font-size: 18px; line-height: 1.8; margin: 24px 0 34px; color: var(--studio-ink); font-weight: 400; }
-    .hero-stats-strip { display: flex; gap: 36px; padding-top: 28px; border-top: 1px solid var(--studio-border); }
+    .hero-stats-strip { display: flex; gap: 36px; margin-top: 36px; padding-top: 0; border-top: none; }
     .stat-item h4 { font-size: 38px; color: var(--studio-green); margin-bottom: 4px; }
     .stat-item p { font-size: 12px; text-transform: uppercase; letter-spacing: 1px; }
 
@@ -393,44 +394,206 @@
       .footer-grid { grid-template-columns: 1fr; }
       .about-cta-banner { padding: 48px 20px; }
     }
-  </style>
+  
+    /* --- Enhanced Button Contrast (Light & Dark) --- */
+    .studio-button {
+      background: #183323;
+      color: #FFFFFF !important;
+      border-radius: 9999px;
+      padding: 11px 26px;
+      font-size: 13.5px;
+      font-weight: 600;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+      text-decoration: none;
+    }
+    .studio-button:hover {
+      background: #234E35;
+      color: #FFFFFF !important;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 20px rgba(24, 51, 35, 0.25);
+    }
+    .studio-button.ghost {
+      background: transparent;
+      color: #183323 !important;
+      border: 1px solid var(--studio-border);
+    }
+    .studio-button.ghost:hover {
+      background: var(--studio-surface);
+      color: #183323 !important;
+      border-color: #183323;
+    }
+    .dark .studio-button {
+      background: #8ecba8 !important;
+      color: #0f2417 !important;
+      border-color: #8ecba8 !important;
+      font-weight: 700;
+    }
+    .dark .studio-button:hover {
+      background: #a5dec0 !important;
+      color: #08140c !important;
+      box-shadow: 0 6px 20px rgba(142, 203, 168, 0.3);
+    }
+    .dark .studio-button.ghost {
+      background: transparent !important;
+      color: #ecf3ee !important;
+      border-color: var(--studio-border) !important;
+    }
+    .dark .studio-button.ghost:hover {
+      background: var(--studio-surface) !important;
+      color: #8ecba8 !important;
+      border-color: #8ecba8 !important;
+    }
+    .dark .studio-button .arrow-disc {
+      background: #0f2417 !important;
+      color: #8ecba8 !important;
+    }
+
+
+    /* --- Centered Navigation & 1024 Responsive Support --- */
+    .nav-island {
+      background: var(--background);
+      border-radius: 50px;
+      align-items: center;
+      max-width: 1340px;
+      margin: auto;
+      display: flex;
+      justify-content: space-between;
+      box-shadow: var(--studio-shadow);
+      border: 1px solid var(--studio-border);
+      min-height: 72px;
+      padding: 10px 24px;
+      backdrop-filter: blur(14px);
+      position: relative;
+    }
+    .brand {
+      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      text-decoration: none;
+      z-index: 2;
+    }
+    .desktop-nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      flex: 1;
+      min-width: 0;
+    }
+    .nav-center-links {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 20px;
+      margin: 0 auto;
+      text-transform: uppercase;
+      font-size: 13.5px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+    }
+    .nav-center-links a, .nav-center-links summary {
+      color: var(--studio-ink);
+      transition: all 0.2s;
+      padding: 6px 12px;
+      border-radius: 20px;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .nav-center-links a:hover, .nav-center-links summary:hover {
+      color: var(--primary);
+      background: var(--studio-surface);
+    }
+    .nav-center-links a.active, .nav-center-links summary.active {
+      color: var(--primary) !important;
+      font-weight: 700;
+      background: color-mix(in srgb, var(--primary) 12%, transparent);
+    }
+    .nav-right-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-shrink: 0;
+      margin-left: auto;
+    }
+    .nav-toggles {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    @media (max-width: 1150px) {
+      .site-header { padding: 0 16px; }
+      .nav-island { padding: 8px 16px; min-height: 66px; }
+      .brand-logo { height: 46px; }
+      .nav-center-links { gap: 12px; font-size: 12.5px; }
+      .nav-center-links a, .nav-center-links summary { padding: 5px 8px; }
+      .nav-right-actions .studio-button { padding: 8px 16px; font-size: 12px; }
+    }
+    @media (max-width: 1024px) {
+      .site-header { padding: 0 12px; }
+      .nav-island { padding: 8px 14px; min-height: 64px; }
+      .brand-logo { height: 44px; }
+      .nav-center-links { gap: 8px; font-size: 12px; }
+      .nav-center-links a, .nav-center-links summary { padding: 4px 6px; }
+      .nav-right-actions { gap: 6px; }
+      .nav-right-actions .studio-button { padding: 7px 14px; font-size: 12px; }
+    }
+    @media (max-width: 960px) {
+      .desktop-nav { display: none !important; }
+      .mobile-toggle { display: inline-flex !important; }
+      .mobile-nav:not([hidden]) { display: flex !important; }
+    }
+
+</style>
 </head>
 <body>
 
   <!-- HEADER -->
   <header class="site-header">
     <nav aria-label="Main navigation" class="nav-island">
-      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio â€” home">
+      <a class="brand" dir="ltr" href="index.html#home" aria-label="Yoga &amp; Meditation Studio — home">
         <img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio">
         <img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio">
       </a>
       <div class="desktop-nav">
-        <details class="nav-dropdown">
-          <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
-          <div class="dropdown-content">
-            <a href="index.html#home">Home 1</a>
-            <a href="home2.html">Home 2</a>
+        <div class="nav-center-links">
+          <details class="nav-dropdown">
+            <summary>Home <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+            <div class="dropdown-content">
+              <a href="index.html#home">Home 1</a>
+              <a href="home2.html">Home 2</a>
+            </div>
+          </details>
+          <a href="about.html" class="active">About</a>
+          <a href="services.html">Services</a>
+          <a href="portfolio.html">Portfolio</a>
+          <a href="contact.html">Contact</a>
+          <details class="nav-dropdown">
+            <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
+            <div class="dropdown-content">
+              <a href="admin.html">Studio Admin</a>
+              <a href="client.html">Member Portal</a>
+            </div>
+          </details>
+        </div>
+        <div class="nav-right-actions">
+          <div class="nav-toggles">
+            <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
+            </button>
+            <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
+              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
+            </button>
           </div>
-        </details>
-        <a href="about.html" class="active">About</a>
-        <a href="services.html">Services</a>
-        <a href="portfolio.html">Portfolio</a>
-        <a href="contact.html">Contact</a>
-        <details class="nav-dropdown">
-          <summary>Dashboard <svg aria-hidden="true" width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"></path></svg></summary>
-          <div class="dropdown-content">
-            <a href="admin.html">Studio Admin</a>
-            <a href="client.html">Member Portal</a>
-          </div>
-        </details>
-        <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
-        <div class="nav-toggles">
-          <button aria-label="Toggle Dark/Light Mode" class="circle-button" title="Toggle Dark/Light Mode">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.985 12.486a9 9 0 1 1-9.473-9.472c.405-.022.617.46.402.803a6 6 0 0 0 8.268 8.268c.344-.215.825-.004.803.401"></path></svg>
-          </button>
-          <button aria-label="Toggle RTL/LTR" class="circle-button" title="Toggle RTL/LTR">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m18 8 4 4-4 4"></path><path d="M2 12h20"></path><path d="m6 8-4 4 4 4"></path></svg>
-          </button>
+          <button class="studio-button" onclick="showPortal('Member Sign In')">Sign In<span class="arrow-disc"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></button>
         </div>
       </div>
       <button aria-expanded="false" aria-label="Toggle Navigation Menu" class="mobile-toggle">
@@ -450,7 +613,7 @@
               EST. 2018 Â· SACRED SPATIAL ARCHITECTURE
             </div>
             <h1>A Space to Return to <em>Your Essence.</em></h1>
-            <p class="lead">We believe that true healing begins when the nervous system feels unconditionally safe. Our sanctuary was built as an architectural refuge from the relentless pace of urban lifeâ€”fusing Mysore breath lineage, somatic movement, and cellular acoustic frequencies.</p>
+            <p class="lead">We believe that true healing begins when the nervous system feels unconditionally safe. Our sanctuary was built as an architectural refuge from the relentless pace of urban life—fusing Mysore breath lineage, somatic movement, and cellular acoustic frequencies.</p>
             <div style="display:flex;gap:14px;flex-wrap:wrap;">
               <a href="#story" class="studio-button">Our Sanctuary Story &rarr;</a>
               <a href="services.html" class="studio-button ghost">Explore Practices</a>
@@ -531,7 +694,7 @@
           <div class="pillar-card">
             <div class="pillar-num">03</div>
             <h3>432 Hz Sound Science</h3>
-            <p>Our acoustic sanctuary features German-engineered quartz crystal bowls and hand-forged Nepalese gongs tuned to 432 Hzâ€”known to induce restorative theta brainwaves.</p>
+            <p>Our acoustic sanctuary features German-engineered quartz crystal bowls and hand-forged Nepalese gongs tuned to 432 Hz—known to induce restorative theta brainwaves.</p>
           </div>
           <div class="pillar-card">
             <div class="pillar-num">04</div>
@@ -780,7 +943,7 @@
       overlay.className = 'modal-backdrop';
       overlay.innerHTML = `
         <div class="portal-dialog" role="dialog" aria-modal="true" aria-label="${title}">
-          <button class="circle-button dialog-close" aria-label="Close dialog">âœ•</button>
+          <button class="circle-button dialog-close" aria-label="Close dialog">✕</button>
           <h2>${title}</h2>
           <p>Reserve your mat or consult with our sanctuary concierge. Our guides prepare organic cork mats and herbal tea 15 minutes before practice.</p>
           <div style="margin:20px 0;display:flex;flex-direction:column;gap:10px;">

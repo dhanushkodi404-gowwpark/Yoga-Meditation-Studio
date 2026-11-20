@@ -106,7 +106,7 @@ body {
   background-clip: text;
   -webkit-text-fill-color: transparent;
 }
-/* Theme toggles â€” top-right */
+/* Theme toggles — top-right */
 .theme-toggle-wrapper {
   position: fixed;
   top: 16px;
@@ -449,7 +449,7 @@ body {
     <i class="fas fa-sun hidden dark:inline"></i>
   </button>
   <button id="rtl-toggle" class="toggle-btn" title="RTL / LTR" aria-label="Toggle Text Direction">
-    â‡„
+    <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="display:inline-block;vertical-align:middle;"><path d="m5 8 6 6"></path><path d="m4 14 6-6 2-3"></path><path d="M2 5h12"></path><path d="M7 2h1"></path><path d="m22 22-5-10-5 10"></path><path d="M14 18h6"></path></svg>
   </button>
 </div>
 
@@ -487,7 +487,7 @@ body {
         <span class="absolute inset-y-0 left-0 flex items-center pl-4 text-gift-slate dark:text-gift-slate-bright input-icon">
           <i class="fas fa-lock w-5 text-sm"></i>
         </span>
-        <input type="password" id="login-password" name="password" placeholder="Password" value="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢" required
+        <input type="password" id="login-password" name="password" placeholder="Password" value="••••••••••••" required
           class="login-input text-sm md:text-base">
         <button type="button" class="toggle-password" data-target="login-password" aria-label="Show password">
           <i class="far fa-eye-slash"></i>
@@ -645,7 +645,7 @@ document.addEventListener('DOMContentLoaded', () => {
     window.location.href = currentTarget;
   };
 
-  // 5. Demo login â€” redirect to dashboard
+  // 5. Demo login — redirect to dashboard
   document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
     const email = document.getElementById('login-email').value.toLowerCase();
