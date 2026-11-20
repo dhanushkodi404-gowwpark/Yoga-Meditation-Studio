@@ -812,9 +812,9 @@ p { font-size: 15px; line-height: 1.75; }
 @supports (color: color-mix(in lab, red, red)) {
   .nav-island { background: color-mix(in oklab,var(--background) 90%,transparent); }
 }
-.nav-island { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); border: 1px solid var(--studio-border); min-height: 70px; padding: 12px 28px; }
+.nav-island { box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08); border: 1px solid var(--studio-border); min-height: 80px; padding: 12px 28px; }
 .brand { white-space: nowrap; font-family: var(--font-display); color: var(--studio-ink); align-items: center; gap: 10px; font-size: 24px; font-weight: 600; display: flex; }
-.brand em { color: var(--primary); font-style: normal; } .brand-logo { height: 47px; width: auto; display: block; } .brand-logo-light { display: none; } .dark .brand-logo-dark { display: none; } .dark .brand-logo-light { display: block; } @media (max-width: 1150px) { .brand-logo { height: 39px; } } @media (max-width: 640px) { .brand-logo { height: 33px; } } 
+.brand em { color: var(--primary); font-style: normal; } .brand-logo { height: 68px !important; width: auto; display: block; transition: transform 0.2s; } .brand-logo-light { display: none; } .dark .brand-logo-dark { display: none; } .dark .brand-logo-light { display: block; } @media (max-width: 1150px) { .brand-logo { height: 58px !important; } } @media (max-width: 640px) { .brand-logo { height: 68px !important; width: auto; display: block; transition: transform 0.2s; } } 
 .brand-icon { background: var(--primary); color: var(--studio-white); border-radius: 12px; place-items: center; width: 36px; height: 36px; display: grid; }
 .desktop-nav { text-transform: uppercase; align-items: center; gap: 22px; font-size: 13.5px; font-weight: 600; letter-spacing: 0.5px; display: flex; }
 .desktop-nav > a:hover, .active { color: var(--primary); }
@@ -981,7 +981,7 @@ summary::-webkit-details-marker { display: none; }
 }
 @media (width <= 640px) {
   .site-header { top: 10px; left: 10px; right: 10px; }
-  .nav-island { min-height: 58px; padding: 8px 16px; }
+  .nav-island { min-height: 80px; padding: 8px 16px; }
   .brand { font-size: 22px; }
   .hero { height: 88vh; min-height: 650px; max-height: 780px; }
   .hero-inner { padding: 135px 25px 70px; }
@@ -1220,7 +1220,7 @@ summary::-webkit-details-marker { display: none; }
       justify-content: space-between;
       box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
       border: 1px solid var(--studio-border);
-      min-height: 72px;
+      min-height: 80px;
       padding: 10px 24px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
@@ -1234,12 +1234,7 @@ summary::-webkit-details-marker { display: none; }
       text-decoration: none;
       z-index: 2;
     }
-    .brand-logo {
-      height: 52px !important;
-      width: auto;
-      display: block;
-      transition: transform 0.2s;
-    }
+    .brand-logo { height: 68px !important; width: auto; display: block; transition: transform 0.2s; }
     .desktop-nav {
       display: flex;
       align-items: center;
@@ -1292,16 +1287,16 @@ summary::-webkit-details-marker { display: none; }
     }
     @media (max-width: 1150px) {
       .site-header { padding: 0 16px; }
-      .nav-island { padding: 8px 16px; min-height: 66px; }
-      .brand-logo { height: 46px !important; }
+      .nav-island { padding: 8px 16px; min-height: 80px; }
+      .brand-logo { height: 68px !important; width: auto; display: block; transition: transform 0.2s; }
       .nav-center-links { gap: 12px; font-size: 12.5px; }
       .nav-center-links a, .nav-center-links summary { padding: 5px 8px; }
       .nav-right-actions .studio-button { padding: 8px 16px; font-size: 12px; }
     }
     @media (max-width: 1024px) {
       .site-header { padding: 0 12px; }
-      .nav-island { padding: 8px 14px; min-height: 64px; }
-      .brand-logo { height: 44px !important; }
+      .nav-island { padding: 8px 14px; min-height: 80px; }
+      .brand-logo { height: 68px !important; width: auto; display: block; transition: transform 0.2s; }
       .nav-center-links { gap: 8px; font-size: 12px; }
       .nav-center-links a, .nav-center-links summary { padding: 4px 6px; }
       .nav-right-actions { gap: 6px; }
@@ -1336,6 +1331,270 @@ summary::-webkit-details-marker { display: none; }
     .dark .studio-button .arrow-disc {
       background: #0f2417 !important;
       color: #8ecba8 !important;
+    }
+
+
+    .footer-brand .brand-logo, .footer-grid .brand-logo, footer .brand-logo {
+      height: 64px !important;
+      width: auto;
+    }
+    
+
+    
+    /* --- Master Brand Logo Rules: Fix Unwanted Second Logo --- */
+    .brand-logo-light,
+    img.brand-logo-light {
+      display: none !important;
+    }
+    .brand-logo-dark,
+    img.brand-logo-dark {
+      display: block !important;
+    }
+    html.dark .brand-logo-dark,
+    html.dark img.brand-logo-dark,
+    .dark .brand-logo-dark,
+    .dark img.brand-logo-dark {
+      display: none !important;
+    }
+    html.dark .brand-logo-light,
+    html.dark img.brand-logo-light,
+    .dark .brand-logo-light,
+    .dark img.brand-logo-light {
+      display: block !important;
+    }
+    .brand-logo {
+      height: 52px !important;
+      max-height: 52px !important;
+      width: auto !important;
+      transition: transform 0.2s ease;
+    }
+    .brand-logo:hover {
+      transform: scale(1.02);
+    }
+    .footer-brand .brand-logo, .footer-grid .brand-logo, footer .brand-logo {
+      height: 56px !important;
+      max-height: 56px !important;
+      width: auto !important;
+    }
+    @media (max-width: 1150px) {
+      .brand-logo {
+        height: 48px !important;
+        max-height: 48px !important;
+      }
+    }
+    @media (max-width: 1024px) {
+      .brand-logo {
+        height: 44px !important;
+        max-height: 44px !important;
+      }
+    }
+    @media (max-width: 640px) {
+      .brand-logo {
+        height: 40px !important;
+        max-height: 40px !important;
+      }
+    }
+
+
+    /* =========================================================
+       MASTER RESPONSIVE NAVIGATION & MOBILE DRAWER STYLING
+       ========================================================= */
+
+    /* 1. Global hidden state - never display when hidden */
+    .mobile-nav[hidden],
+    [hidden].mobile-nav,
+    .mobile-toggle[hidden],
+    [hidden].mobile-toggle {
+      display: none !important;
+      visibility: hidden !important;
+      opacity: 0 !important;
+      pointer-events: none !important;
+    }
+
+    /* 2. Desktop and Large Screens (> 960px): Strictly hide mobile drawer & toggle */
+    @media (min-width: 961px) {
+      .mobile-toggle,
+      button.mobile-toggle {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+      .mobile-nav,
+      div.mobile-nav {
+        display: none !important;
+        visibility: hidden !important;
+        pointer-events: none !important;
+      }
+    }
+
+    /* 3. Tablet & Desktop Navbar Alignment (961px - 1200px) */
+    @media (max-width: 1200px) and (min-width: 961px) {
+      .site-header {
+        left: 16px !important;
+        right: 16px !important;
+      }
+      .nav-island {
+        padding: 8px 18px !important;
+        min-height: 72px !important;
+      }
+      .brand-logo {
+        height: 44px !important;
+        max-height: 44px !important;
+      }
+      .nav-center-links {
+        gap: 10px !important;
+        font-size: 12.5px !important;
+        white-space: nowrap !important;
+      }
+      .nav-center-links a,
+      .nav-center-links summary {
+        padding: 5px 8px !important;
+      }
+      .nav-right-actions {
+        gap: 8px !important;
+      }
+      .nav-right-actions .studio-button {
+        padding: 6px 14px !important;
+        font-size: 12.5px !important;
+      }
+    }
+
+    /* 4. Mobile & Small Tablet Drawer (<= 960px) */
+    @media (max-width: 960px) {
+      .desktop-nav {
+        display: none !important;
+      }
+      .mobile-toggle,
+      button.mobile-toggle {
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        border: 1px solid var(--studio-border) !important;
+        width: 42px !important;
+        height: 42px !important;
+        border-radius: 50% !important;
+        background: transparent !important;
+        color: var(--studio-ink) !important;
+        cursor: pointer !important;
+        padding: 0 !important;
+      }
+      .mobile-nav {
+        display: none !important;
+      }
+      .mobile-nav:not([hidden]) {
+        display: flex !important;
+        flex-direction: column !important;
+        position: absolute !important;
+        top: calc(100% + 10px) !important;
+        left: 16px !important;
+        right: 16px !important;
+        background: var(--background) !important;
+        border: 1px solid var(--studio-border) !important;
+        border-radius: 24px !important;
+        box-shadow: 0 16px 40px rgba(0, 0, 0, 0.16) !important;
+        padding: 20px !important;
+        max-height: 80vh !important;
+        overflow-y: auto !important;
+        z-index: 1000 !important;
+        backdrop-filter: blur(20px) !important;
+        -webkit-backdrop-filter: blur(20px) !important;
+      }
+      .mobile-nav .nav-center-links {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        justify-content: flex-start !important;
+        gap: 4px !important;
+        width: 100% !important;
+        margin: 0 !important;
+      }
+      .mobile-nav .nav-center-links > a,
+      .mobile-nav .nav-center-links summary {
+        display: flex !important;
+        align-items: center !important;
+        justify-content: space-between !important;
+        width: 100% !important;
+        padding: 12px 16px !important;
+        font-size: 15px !important;
+        font-weight: 600 !important;
+        color: var(--studio-ink) !important;
+        border-radius: 12px !important;
+        text-transform: uppercase !important;
+        text-decoration: none !important;
+        box-sizing: border-box !important;
+      }
+      .mobile-nav .nav-center-links a:hover,
+      .mobile-nav .nav-center-links summary:hover {
+        background: var(--studio-surface) !important;
+        color: var(--primary) !important;
+      }
+      .mobile-nav .nav-center-links a.active,
+      .mobile-nav .nav-center-links summary.active {
+        background: color-mix(in srgb, var(--primary) 12%, transparent) !important;
+        color: var(--primary) !important;
+      }
+      .mobile-nav details.nav-dropdown {
+        width: 100% !important;
+      }
+      .mobile-nav .dropdown-content {
+        position: static !important;
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 4px !important;
+        padding: 6px 0 6px 16px !important;
+        box-shadow: none !important;
+        background: transparent !important;
+        border: none !important;
+        border-left: 2px solid var(--studio-border) !important;
+        margin: 4px 0 8px 16px !important;
+        min-width: 0 !important;
+        width: auto !important;
+      }
+      .mobile-nav .dropdown-content a {
+        display: block !important;
+        padding: 8px 12px !important;
+        font-size: 14px !important;
+        color: var(--studio-ink) !important;
+        text-decoration: none !important;
+        border-radius: 8px !important;
+      }
+      .mobile-nav .dropdown-content a:hover {
+        background: var(--studio-surface) !important;
+        color: var(--primary) !important;
+      }
+      .mobile-nav .nav-right-actions {
+        display: flex !important;
+        flex-direction: column !important;
+        align-items: stretch !important;
+        gap: 14px !important;
+        width: 100% !important;
+        margin: 16px 0 0 0 !important;
+        padding-top: 16px !important;
+        border-top: 1px solid var(--studio-border) !important;
+      }
+      .mobile-nav .nav-toggles {
+        display: flex !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 16px !important;
+        width: 100% !important;
+      }
+      .mobile-nav .circle-button {
+        width: 44px !important;
+        height: 44px !important;
+        border-radius: 50% !important;
+        display: inline-flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+      }
+      .mobile-nav .studio-button {
+        width: 100% !important;
+        justify-content: center !important;
+        min-height: 46px !important;
+        font-size: 14px !important;
+        font-weight: 600 !important;
+        border-radius: 50px !important;
+      }
     }
 
 </style></head><body><!--$--><header class="site-header">
@@ -1530,13 +1789,77 @@ summary::-webkit-details-marker { display: none; }
   </div>
 </div></div></section><section class="contact-section" data-tsd-source="/src/components/studio-page.tsx:47:7" id="contact"><div class="page-container contact-inner" data-tsd-source="/src/components/studio-page.tsx:47:57"><span class="eyebrow" data-tsd-source="/src/components/studio-page.tsx:47:103">06 / MAKE SPACE FOR YOURSELF</span><svg aria-hidden="true" class="lucide lucide-flower2 lucide-flower-2 contact-flower" data-tsd-source="/src/components/studio-page.tsx:47:164" fill="none" height="48" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="1" viewbox="0 0 24 24" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1"></path><circle cx="12" cy="8" r="2"></circle><path d="M12 10v12"></path><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z"></path><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z"></path></svg><h2 data-tsd-source="/src/components/studio-page.tsx:47:227">Your next chapter<br data-tsd-source="/src/components/studio-page.tsx:47:248"/>starts with <em data-tsd-source="/src/components/studio-page.tsx:47:265">a breath.</em></h2><p data-tsd-source="/src/components/studio-page.tsx:47:288">Find your balance. Build your practice. Begin with us.</p><a class="inline-flex items-center justify-center gap-2 whitespace-nowrap rounded-md text-sm font-medium cursor-pointer transition-colors focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring disabled:pointer-events-none disabled:opacity-50 disabled:cursor-not-allowed [&amp;_svg]:pointer-events-none [&amp;_svg]:size-4 [&amp;_svg]:shrink-0 studio-button h-9 px-4 py-2" data-tsd-source="/src/components/studio-page.tsx:15:137" href="mailto:hello@yogameditationstudio.com?subject=Yoga%20%26%20Meditation%20Enquiry">Connect with the studio<span class="arrow-disc" data-tsd-source="/src/components/studio-page.tsx:15:162"><svg aria-hidden="true" class="lucide lucide-arrow-right" data-tsd-source="/src/components/studio-page.tsx:15:191" fill="none" height="16" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="16" xmlns="http://www.w3.org/2000/svg"><path d="M5 12h14"></path><path d="m12 5 7 7-7 7"></path></svg></span></a><a class="text-link" data-tsd-source="/src/components/studio-page.tsx:47:469" href="#practices">Explore our practices <svg aria-hidden="true" class="lucide lucide-arrow-up-right" data-tsd-source="/src/components/studio-page.tsx:47:534" fill="none" height="17" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="17" xmlns="http://www.w3.org/2000/svg"><path d="M7 7h10v10"></path><path d="M7 17 17 7"></path></svg></a></div></section></main><footer class="site-footer" data-tsd-source="/src/components/studio-page.tsx:49:5"><div class="page-container" data-tsd-source="/src/components/studio-page.tsx:49:37"><div class="footer-grid" data-tsd-source="/src/components/studio-page.tsx:49:69"><div data-tsd-source="/src/components/studio-page.tsx:49:98"><a class="brand" data-tsd-source="/src/components/studio-page.tsx:14:27" dir="ltr" href="#home" aria-label="Yoga &amp; Meditation Studio — home"><img class="brand-logo brand-logo-dark" src="images/logo-dark.png" alt="Yoga &amp; Meditation Studio"><img class="brand-logo brand-logo-light" src="images/logo-light.png" alt="Yoga &amp; Meditation Studio"></a><p data-tsd-source="/src/components/studio-page.tsx:49:111">Architectural sanctuary dedicated to mindful movement, breathwork, and deep nervous system restoration.</p><div class="social-links" data-tsd-source="/src/components/studio-page.tsx:49:224"><a aria-label="Instagram" data-tsd-source="/src/components/studio-page.tsx:49:254" href="https://www.instagram.com/" rel="noreferrer" target="_blank"><svg aria-hidden="true" class="lucide lucide-instagram" data-tsd-source="/src/components/studio-page.tsx:49:347" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><rect height="20" rx="5" ry="5" width="20" x="2" y="2"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"></line></svg></a><a aria-label="YouTube" data-tsd-source="/src/components/studio-page.tsx:49:363" href="https://www.youtube.com/" rel="noreferrer" target="_blank"><svg aria-hidden="true" class="lucide lucide-youtube" data-tsd-source="/src/components/studio-page.tsx:49:452" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M2.5 17a24.12 24.12 0 0 1 0-10 2 2 0 0 1 1.4-1.4 49.56 49.56 0 0 1 16.2 0A2 2 0 0 1 21.5 7a24.12 24.12 0 0 1 0 10 2 2 0 0 1-1.4 1.4 49.55 49.55 0 0 1-16.2 0A2 2 0 0 1 2.5 17"></path><path d="m10 15 5-3-5-3z"></path></svg></a><a aria-label="Facebook" data-tsd-source="/src/components/studio-page.tsx:49:466" href="https://www.facebook.com/" rel="noreferrer" target="_blank"><svg aria-hidden="true" class="lucide lucide-facebook" data-tsd-source="/src/components/studio-page.tsx:49:557" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"></path></svg></a></div></div><div data-tsd-source="/src/components/studio-page.tsx:49:584"><h3 data-tsd-source="/src/components/studio-page.tsx:49:589">Quick Navigation</h3><a data-tsd-source="/src/components/studio-page.tsx:49:614" href="index.html#home">Home 1</a><a href="home2.html">Home 2</a><a data-tsd-source="/src/components/studio-page.tsx:49:646" href="about.html">About</a><a data-tsd-source="/src/components/studio-page.tsx:49:676" href="services.html">Services</a><a data-tsd-source="/src/components/studio-page.tsx:49:709" href="portfolio.html">Portfolio</a><a data-tsd-source="/src/components/studio-page.tsx:49:740" href="contact.html">Contact &amp; Booking</a></div><div data-tsd-source="/src/components/studio-page.tsx:49:786"><h3 data-tsd-source="/src/components/studio-page.tsx:49:791">Studio Practices</h3><a href="services.html">Solar Heated Vinyasa</a><a href="services.html">Restorative Yin &amp; Sound</a><a href="services.html">432 Hz Sound Baths</a><a href="services.html">Private Somatic Therapy</a><a href="services.html">Corporate Mindfulness</a></div><div data-tsd-source="/src/components/studio-page.tsx:49:997"><h3 data-tsd-source="/src/components/studio-page.tsx:49:1002">Studio Location</h3><p data-tsd-source="/src/components/studio-page.tsx:49:1026"><svg aria-hidden="true" class="lucide lucide-map-pin" data-tsd-source="/src/components/studio-page.tsx:49:1029" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M20 10c0 4.993-5.539 10.193-7.399 11.799a1 1 0 0 1-1.202 0C9.539 20.193 4 14.993 4 10a8 8 0 0 1 16 0"></path><circle cx="12" cy="10" r="3"></circle></svg> <span data-tsd-source="/src/components/studio-page.tsx:49:1039" dir="ltr">5th Ave Luxury Tower, NYC 10001</span></p><p data-tsd-source="/src/components/studio-page.tsx:49:1097"><svg aria-hidden="true" class="lucide lucide-phone" data-tsd-source="/src/components/studio-page.tsx:49:1100" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M13.832 16.568a1 1 0 0 0 1.213-.303l.355-.465A2 2 0 0 1 17 15h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2A18 18 0 0 1 2 4a2 2 0 0 1 2-2h3a2 2 0 0 1 2 2v3a2 2 0 0 1-.8 1.6l-.468.351a1 1 0 0 0-.292 1.233 14 14 0 0 0 6.392 6.384"></path></svg> <span data-tsd-source="/src/components/studio-page.tsx:49:1109" dir="ltr">+1 (800) 555-0199</span></p><p data-tsd-source="/src/components/studio-page.tsx:49:1153"><svg aria-hidden="true" class="lucide lucide-mail" data-tsd-source="/src/components/studio-page.tsx:49:1156" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="m22 7-8.991 5.727a2 2 0 0 1-2.009 0L2 7"></path><rect height="16" rx="2" width="20" x="2" y="4"></rect></svg> <span data-tsd-source="/src/components/studio-page.tsx:49:1164" dir="ltr">hello@yogameditationstudio.com</span></p><p data-tsd-source="/src/components/studio-page.tsx:49:1214"><svg aria-hidden="true" class="lucide lucide-clock" data-tsd-source="/src/components/studio-page.tsx:49:1217" fill="none" height="24" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" viewbox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="10"></circle><path d="M12 6v6l4 2"></path></svg> <span data-tsd-source="/src/components/studio-page.tsx:49:1226" dir="ltr">Mon-Fri: 9AM - 6PM EST</span></p></div></div><div class="footer-bottom" data-tsd-source="/src/components/studio-page.tsx:49:1287"><p data-tsd-source="/src/components/studio-page.tsx:49:1318" dir="ltr">&copy; 2026 Yoga &amp; Meditation Studio. All rights reserved.</p><em data-tsd-source="/src/components/studio-page.tsx:49:1403">Mindful Movement &bull; Sacred Stillness &bull; Timeless Harmony</em></div></div></footer><!--/$--><script>
 const $=(s)=>document.querySelector(s);
-const mobile=$('.mobile-toggle');
-const desktop=$('.desktop-nav');
-const panel=document.createElement('div');panel.className='mobile-nav';panel.hidden=true;
-panel.innerHTML=desktop.innerHTML.replace('Dashboard','Portals').replace('Sign In','Client Portal Login');
-$('.site-header').append(panel);
-mobile.onclick=()=>{panel.hidden=!panel.hidden;mobile.setAttribute('aria-expanded',!panel.hidden);};
-panel.querySelectorAll('a[href^="#"]').forEach(a=>a.onclick=()=>{panel.hidden=true;mobile.setAttribute('aria-expanded','false')});
+
+function initMobileNavigation() {
+  const mobile = document.querySelector('.mobile-toggle');
+  const desktop = document.querySelector('.desktop-nav');
+  if (!desktop) return;
+
+  // Clean up any stale panels
+  document.querySelectorAll('.mobile-nav').forEach(el => el.remove());
+
+  const panel = document.createElement('div');
+  panel.className = 'mobile-nav';
+  panel.hidden = true;
+  panel.innerHTML = desktop.innerHTML.replace('Dashboard', 'Portals').replace('Sign In', 'Client Portal Login');
+
+  const siteHeader = document.querySelector('.site-header');
+  if (siteHeader) siteHeader.append(panel);
+
+  if (mobile) {
+    mobile.setAttribute('aria-expanded', 'false');
+    mobile.onclick = (e) => {
+      e.stopPropagation();
+      panel.hidden = !panel.hidden;
+      mobile.setAttribute('aria-expanded', String(!panel.hidden));
+    };
+  }
+
+  // Close when clicking any navigation link
+  panel.querySelectorAll('a').forEach(a => {
+    a.addEventListener('click', () => {
+      panel.hidden = true;
+      if (mobile) mobile.setAttribute('aria-expanded', 'false');
+    });
+  });
+
+  // Strict window resize: hide drawer immediately on desktop / tablet > 960px
+  window.addEventListener('resize', () => {
+    if (window.innerWidth > 960) {
+      panel.hidden = true;
+      if (mobile) mobile.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Outside click closes drawer
+  document.addEventListener('click', (e) => {
+    if (!panel.hidden && !panel.contains(e.target) && (!mobile || !mobile.contains(e.target))) {
+      panel.hidden = true;
+      if (mobile) mobile.setAttribute('aria-expanded', 'false');
+    }
+  });
+
+  // Wire buttons inside panel
+  panel.querySelectorAll('.studio-button').forEach(b => {
+    b.onclick = () => { window.location.href = 'login.html'; };
+  });
+
+  panel.querySelectorAll('[aria-label="Toggle Dark/Light Mode"]').forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      document.documentElement.classList.toggle('dark');
+    };
+  });
+
+  panel.querySelectorAll('[aria-label="Toggle RTL/LTR"]').forEach(b => {
+    b.onclick = (e) => {
+      e.stopPropagation();
+      document.documentElement.dir = document.documentElement.dir === 'rtl' ? 'ltr' : 'rtl';
+    };
+  });
+}
+initMobileNavigation();
+
 document.querySelectorAll('[aria-label="Toggle Dark/Light Mode"]').forEach(b=>b.onclick=()=>{document.documentElement.classList.toggle('dark');});
 document.querySelectorAll('[aria-label="Toggle RTL/LTR"]').forEach(b=>b.onclick=()=>{document.documentElement.dir=document.documentElement.dir==='rtl'?'ltr':'rtl';});
 document.querySelectorAll('.filter').forEach(b=>b.onclick=()=>{document.querySelectorAll('.filter').forEach(x=>{x.classList.toggle('active',x===b);x.setAttribute('aria-pressed',x===b)});const t=b.textContent.trim().toLowerCase();document.querySelectorAll('.practice-card').forEach(card=>{const cat=(card.getAttribute('data-category')||'').toLowerCase();if(t==='all practices'){card.hidden=false;}else if(t==='movement'){card.hidden=!cat.includes('movement');}else if(t==='stillness'){card.hidden=!cat.includes('stillness');}});});
